@@ -1112,6 +1112,7 @@
 				DEVELOPMENT_TEAM = TAM944NG3L;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/pi-brand/PrefixHeader.pch";
 				INFOPLIST_FILE = "pi-brand/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.harmay.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1126,6 +1127,7 @@
 				DEVELOPMENT_TEAM = TAM944NG3L;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/pi-brand/PrefixHeader.pch";
 				INFOPLIST_FILE = "pi-brand/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.harmay.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
