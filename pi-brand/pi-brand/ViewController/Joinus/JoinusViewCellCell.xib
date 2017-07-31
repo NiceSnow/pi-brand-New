@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="434" id="KGk-i7-Jjw" customClass="JoinusViewCellCell">
+            <rect key="frame" x="0.0" y="0.0" width="456" height="434"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="456" height="433.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGu-5u-I4p">
+                        <rect key="frame" x="18" y="8" width="420" height="417.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" image="ww_03" translatesAutoresizingMaskIntoConstraints="NO" id="Ov8-1l-7Td">
+                                <rect key="frame" x="15" y="15" width="146" height="17"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="recruitment_11" translatesAutoresizingMaskIntoConstraints="NO" id="jGB-Ce-OHu">
+                                <rect key="frame" x="134" y="57" width="153" height="50"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="254" ambiguous="YES" text="· 一段与HARMAY的神秘邂逅 ·" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fD0-xP-nOY">
+                                <rect key="frame" x="8" y="132" width="404" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.58431372549019611" green="0.58039215686274503" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" image="recruitment_backimage" translatesAutoresizingMaskIntoConstraints="NO" id="14V-5x-Tuw">
+                                <rect key="frame" x="89.5" y="171.5" width="240" height="154"/>
+                                <color key="backgroundColor" red="0.58431372550000005" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" ambiguous="YES" text="茫茫人海，漠然回首，你在哪里" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LH7-xh-RGy">
+                                <rect key="frame" x="23" y="350.5" width="374" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" red="0.16078431372549018" green="0.16078431372549018" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" ambiguous="YES" text="小清新，文艺范，女神男神，应有尽有，总有一款适合你！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gG8-ef-9JV">
+                                <rect key="frame" x="23" y="382.5" width="374" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LH7-xh-RGy" firstAttribute="leading" secondItem="YGu-5u-I4p" secondAttribute="leadingMargin" constant="15" id="0qK-bV-hlF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fD0-xP-nOY" secondAttribute="trailing" id="3kj-5y-liW"/>
+                            <constraint firstItem="LH7-xh-RGy" firstAttribute="top" secondItem="14V-5x-Tuw" secondAttribute="bottom" constant="25" id="6Ej-UJ-8eG"/>
+                            <constraint firstItem="Ov8-1l-7Td" firstAttribute="leading" secondItem="YGu-5u-I4p" secondAttribute="leading" constant="15" id="75U-Fk-poN"/>
+                            <constraint firstItem="fD0-xP-nOY" firstAttribute="top" secondItem="jGB-Ce-OHu" secondAttribute="bottom" constant="25" id="AN1-pR-j1o"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gG8-ef-9JV" secondAttribute="trailing" constant="15" id="Kvb-tV-rdy"/>
+                            <constraint firstItem="jGB-Ce-OHu" firstAttribute="centerX" secondItem="YGu-5u-I4p" secondAttribute="centerX" id="KwP-vP-R5o"/>
+                            <constraint firstItem="14V-5x-Tuw" firstAttribute="centerX" secondItem="YGu-5u-I4p" secondAttribute="centerX" id="NZd-di-nh0"/>
+                            <constraint firstItem="fD0-xP-nOY" firstAttribute="leading" secondItem="YGu-5u-I4p" secondAttribute="leadingMargin" id="UpM-PY-cbp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LH7-xh-RGy" secondAttribute="trailing" constant="15" id="gMk-eU-dRV"/>
+                            <constraint firstItem="gG8-ef-9JV" firstAttribute="top" secondItem="LH7-xh-RGy" secondAttribute="bottom" constant="15" id="i1a-0l-uze"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="gG8-ef-9JV" secondAttribute="bottom" constant="15" id="j7g-UC-fUs"/>
+                            <constraint firstItem="gG8-ef-9JV" firstAttribute="leading" secondItem="YGu-5u-I4p" secondAttribute="leadingMargin" constant="15" id="pqZ-Uq-own"/>
+                            <constraint firstItem="14V-5x-Tuw" firstAttribute="top" secondItem="fD0-xP-nOY" secondAttribute="bottom" constant="25" id="qHC-2V-Kco"/>
+                            <constraint firstItem="Ov8-1l-7Td" firstAttribute="top" secondItem="YGu-5u-I4p" secondAttribute="top" constant="15" id="u4q-Lp-kBR"/>
+                            <constraint firstItem="jGB-Ce-OHu" firstAttribute="top" secondItem="Ov8-1l-7Td" secondAttribute="bottom" constant="25" id="v3u-72-aFC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="YGu-5u-I4p" secondAttribute="bottom" id="Mvs-ay-bid"/>
+                    <constraint firstItem="YGu-5u-I4p" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="SI3-bf-V1S"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="YGu-5u-I4p" secondAttribute="trailing" constant="10" id="fwb-ua-GgA"/>
+                    <constraint firstItem="YGu-5u-I4p" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="yWN-k2-R4v"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="contentLabel" destination="gG8-ef-9JV" id="S2q-kO-uC0"/>
+                <outlet property="desLabel" destination="fD0-xP-nOY" id="PFf-sf-Zhq"/>
+                <outlet property="iconImageView" destination="jGB-Ce-OHu" id="e10-pF-FBl"/>
+                <outlet property="logoImageView" destination="Ov8-1l-7Td" id="tIP-oK-fMs"/>
+                <outlet property="mainImageView" destination="14V-5x-Tuw" id="4cP-iB-fL8"/>
+                <outlet property="titleLabel" destination="LH7-xh-RGy" id="t54-eR-6HD"/>
+            </connections>
+            <point key="canvasLocation" x="-23" y="-20"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="recruitment_11" width="153" height="50"/>
+        <image name="recruitment_backimage" width="240" height="154"/>
+        <image name="ww_03" width="146" height="17"/>
+    </resources>
+</document>
