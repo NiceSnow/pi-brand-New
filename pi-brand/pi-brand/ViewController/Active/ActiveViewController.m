@@ -14,6 +14,7 @@
 #import "companyContentTableViewCell.h"
 #import "SearchViewController.h"
 
+
 @interface ActiveViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
 @property (nonatomic, strong) companyHeaderModel* headModle;
 @property(nonatomic,strong)   companyContentModel* contentModel;
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) UIView* headerView;
 @property(nonatomic,strong) HUDView* HUD;
 @property (nonatomic, strong) UIView* titleView;
+@property(nonatomic,strong) shareModel* shareModel;
 
 @end
 
@@ -47,6 +49,7 @@
                          @"Description":@"description"
                          };
             }];
+            self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             _contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
             [self.tableView reloadData];
             [self.webView loadHTMLString:_contentModel.Description baseURL:nil];
@@ -141,9 +144,9 @@
     [witView addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(15);
-        make.left.offset(20);
+        make.left.offset(15);
         make.width.mas_equalTo(screenWidth*320/750);
-        make.height.mas_equalTo((screenWidth*320/750)*40/320);
+        make.height.mas_equalTo((screenWidth*320/750)*35/320);
     }];
     return view;
 }
@@ -159,6 +162,7 @@
         }
     }
     companyContentTableViewCell* cell = [companyContentTableViewCell createCellWithTableView:tableView];
+    cell.shareModel = self.shareModel;
     [cell ActiveaddDataWith:self.contentModel];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -190,7 +194,7 @@
     CGFloat documentHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
     
     self.webView.frame = CGRectMake(10, -1, screenWidth - 20, documentHeight);
-    self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight+screenWidth/10);
+    self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight+10);
     self.tableView.tableFooterView = self.footerView;
 }
 
@@ -213,7 +217,7 @@
 
 -(UIView *)headerView{
     if (!_headerView) {
-        _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 150)];
+        _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, screenHeight*2/7)];
         _headerView.backgroundColor = [UIColor clearColor];
     }
     return _headerView;

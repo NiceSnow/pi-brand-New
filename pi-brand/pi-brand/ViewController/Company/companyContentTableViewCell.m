@@ -19,11 +19,16 @@
 @end
 
 @implementation companyContentTableViewCell
+
+-(void)setShareModel:(shareModel *)shareModel{
+    _shareModel = shareModel;
+}
 - (IBAction)share:(UIButton *)sender {
     self.shareView.sharetype = @"course";
-    self.shareView.shareTitle = @"title";
-    self.shareView.shareDes = @"title";
-    self.shareView.shareURL = @"title";
+    self.shareView.shareTitle = _shareModel.title;
+    self.shareView.shareDes = _shareModel.context;
+    self.shareView.shareURL = _shareModel.url;
+    self.shareView.imageUrl = _shareModel.image;
 }
 
 -(void)addDataWith:(companyContentModel*)headerModle;{

@@ -10,4 +10,5 @@
 
 @interface WebViewController : UIViewController
 @property(nonatomic,strong) id MYURL;
+@property(nonatomic,assign) NSInteger LeftCount;
 @end

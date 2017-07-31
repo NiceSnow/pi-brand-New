@@ -50,6 +50,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     SearchTableViewCell* cell = [SearchTableViewCell createCellWithTableView:tableView];
     [cell addDataWithModel:self.dataArray[indexPath.row]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -57,6 +58,7 @@
     searchModel* modle = self.dataArray[indexPath.row];
     WebViewController* webVC = [[WebViewController alloc]init];
     webVC.MYURL = [modle.url safeUrlString];
+    webVC.LeftCount = 2;
     [self.navigationController pushViewController:webVC animated:YES];
 }
 

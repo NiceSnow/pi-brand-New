@@ -11,6 +11,7 @@
 #import "Product1Cell.h"
 #import <MapKit/MapKit.h>
 #import "ShareView.h"
+#import "shareModel.h"
 
 @interface Product1TableViewController ()
 {
@@ -25,7 +26,7 @@
 @property (nonatomic, strong)UILabel* nameLabel;
 @property (nonatomic, strong)NSDictionary *dict;
 @property (nonatomic, strong)ShareView               * shareView;
-
+@property(nonatomic,strong) shareModel* shareModel;
 @end
 
 @implementation Product1TableViewController
@@ -58,7 +59,7 @@
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
             [[NSNotificationCenter defaultCenter]postNotificationName:kGetImageURLKey object:nil userInfo:@{kGetImageURLKey:urlString}];
-            
+            self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             _dict = data;
             [self.tableView reloadData];
             
@@ -111,9 +112,9 @@
         [backView addSubview:logoImageView];
         [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(15);
-            make.left.offset(20);
+            make.left.offset(15);
             make.width.mas_offset(screenWidth*320/750);
-            make.height.mas_offset((screenWidth*320/750)*40/320);
+            make.height.mas_offset((screenWidth*320/750)*35/320);
         }];
         
         UILabel * titleLabel = [UILabel new];
@@ -261,12 +262,14 @@
         
     }
     cell.imageString = self.imageArray[indexPath.row];
+    if (indexPath.row == 2) {
+        cell.row.hidden = YES;
+    }
     if (indexPath.section == [_dict[@"pro"] count]-1) {
         if (indexPath.row == 2) {
             cell.lineView.hidden = YES;
         }else{
             cell.lineView.hidden = NO;
-            
         }
     }else{
         cell.lineView.hidden = NO;
@@ -295,9 +298,10 @@
 - (void)shareAction
 {
     self.shareView.sharetype = @"course";
-    self.shareView.shareTitle = @"title";
-    self.shareView.shareDes = @"title";
-    self.shareView.shareURL = @"title";
+    self.shareView.shareTitle = self.shareModel.title;
+    self.shareView.shareDes = self.shareModel.context;
+    self.shareView.shareURL = self.shareModel.url;
+    self.shareView.imageUrl = self.shareModel.image;
 }
 - (void)changeCityAction:(UIButton *)btn
 {

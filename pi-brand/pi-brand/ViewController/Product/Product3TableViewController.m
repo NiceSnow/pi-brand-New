@@ -68,7 +68,7 @@
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(15);
         make.width.mas_offset(screenWidth*320/750);
-        make.height.mas_offset((screenWidth*320/750)*40/320);
+        make.height.mas_offset((screenWidth*320/750)*35/320);
     }];
     
     UIImageView * backImageView = [[UIImageView alloc]init];
@@ -79,8 +79,10 @@
         make.centerX.equalTo(backView);
         make.top.equalTo(logoImageView.mas_bottom).offset(25);
         make.bottom.mas_equalTo(-5);
-        make.width.mas_equalTo(screenWidth*380/750);
+//        make.width.mas_equalTo(screenWidth*380/750);
 //        make.height.mas_equalTo((screenWidth*380/750)*165/380);
+        make.width.mas_equalTo((screenWidth-20)/2);
+        make.height.mas_equalTo((screenWidth-20)/2*77.53/180);
     }];
     
 

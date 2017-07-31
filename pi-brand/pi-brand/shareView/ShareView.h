@@ -15,8 +15,10 @@
 @property (nonatomic, copy)NSString * shareURL;
 @property (nonatomic, copy)NSString * shareTitle;
 @property (nonatomic, copy)NSString * shareDes;
+@property (nonatomic, copy)NSString * imageUrl;
 
 @property (nonatomic, copy)NSString * shareLogoUrl;
+
 
 
 @end

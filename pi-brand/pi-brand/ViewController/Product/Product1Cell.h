@@ -15,6 +15,7 @@
 @property (nonatomic, strong)NSString* contentString;
 
 @property (weak, nonatomic) IBOutlet UIView *lineView;
+@property (weak, nonatomic) IBOutlet UIImageView *row;
 
 
 @end
