@@ -12,17 +12,10 @@
 #import "BaseNavigationController.h"
 #import "RESideMenu.h"
 
-//#import "UMSocial.h"
-//#import "UMSocialWechatHandler.h"
-//#import "UMSocialQQHandler.h"
-//#import <TencentOpenAPI/TencentApiInterface.h>
-//#import <TencentOpenAPI/TencentOAuth.h>
-//#import <TencentOpenAPI/TencentOAuthObject.h>
-//#import <TencentOpenAPI/TencentMessageObject.h>
-//#import "WXApiObject.h"
-//#import "WXApi.h"
+#import <UMSocialCore/UMSocialCore.h>
 
-@interface AppDelegate ()//<WXApiDelegate>
+
+@interface AppDelegate ()
 
 @end
 
@@ -49,22 +42,25 @@
     self.window.rootViewController = sideMenuViewController;
     return YES;
 }
-//597c88d6717c197398001368 申请好的 友盟AppKey
 - (void)umengTrack {
-//    [MobClick setAppVersion:XcodeAppVersion];
-//    UMConfigInstance.appKey = UMAppKey;
-//    UMConfigInstance.channelId = @"App Store";
-//    [MobClick startWithConfigure:UMConfigInstance];
-//    
-//    //设置友盟社会化组件appkey
-//    [UMSocialData setAppKey:UMAppKey];
-//    
-//    //设置微信AppId、appSecret，分享url
-//    [UMSocialWechatHandler setWXAppId:WXAppId appSecret:WXAppSecret url:@"http://www.umeng.com/social"];
-//    //分享到QQ好友
-//    [UMSocialQQHandler setQQWithAppId:QQAppId appKey:QQAppKey url:@"http://www.umeng.com/social"];
-}
 
+    /* 设置友盟appkey */
+    [[UMSocialManager defaultManager] setUmSocialAppkey:UMAppKey];
+    /*
+     设置微信的appKey和appSecret
+     [微信平台从U-Share 4/5升级说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_1
+     */
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:WXAppId appSecret:WXAppSecret redirectURL:nil];
+}
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
