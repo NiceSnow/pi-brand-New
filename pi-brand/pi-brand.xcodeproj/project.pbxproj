@@ -501,6 +501,7 @@
 		2DB7733E1F2ECA7700F3FD6B /* Company */ = {
 			isa = PBXGroup;
 			children = (
+				2DB7734A1F2ECA7700F3FD6B /* model */,
 				2DB7733F1F2ECA7700F3FD6B /* ActiveTableViewCell.h */,
 				2DB773401F2ECA7700F3FD6B /* ActiveTableViewCell.m */,
 				2DB773411F2ECA7700F3FD6B /* ActiveTableViewCell.xib */,
@@ -512,7 +513,6 @@
 				2DB773471F2ECA7700F3FD6B /* CompanyHeaderTableViewCell.xib */,
 				2DB773481F2ECA7700F3FD6B /* CompanyViewController.h */,
 				2DB773491F2ECA7700F3FD6B /* CompanyViewController.m */,
-				2DB7734A1F2ECA7700F3FD6B /* model */,
 				2DB773511F2ECA7700F3FD6B /* SubCompanyViewController1.h */,
 				2DB773521F2ECA7700F3FD6B /* SubCompanyViewController1.m */,
 				2DB773531F2ECA7700F3FD6B /* SubCompanyViewController2.h */,

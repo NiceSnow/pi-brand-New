@@ -72,11 +72,11 @@
 {
     [super layoutSubviews];
     
-    for (NSInteger i = 0; i < 3; i++) {
+    for (NSInteger i = 0; i < 2; i++) {
         UIButton * button = (UIButton *)[self viewWithTag:i+10101];
-        button.frame = CGRectMake(((CGRectGetWidth(self.frame)/3)*i)+(CGRectGetWidth(self.frame)/3)/2-30, 45, 60, 60);
+        button.frame = CGRectMake(((CGRectGetWidth(self.frame)/2)*i)+(CGRectGetWidth(self.frame)/2)/2-30, 45, 60, 60);
         UILabel * label = (UILabel *)[self viewWithTag:i+100000];
-        label.frame = CGRectMake(CGRectGetWidth(self.frame)/3*i, CGRectGetMaxY(button.frame), CGRectGetWidth(self.frame)/3, 20);
+        label.frame = CGRectMake(CGRectGetWidth(self.frame)/2*i, CGRectGetMaxY(button.frame), CGRectGetWidth(self.frame)/2, 20);
     }
 
 }
@@ -126,56 +126,53 @@
 
 - (void)btnAction:(UIButton *)btn
 {
-//    NSInteger tag = btn.tag -10101;
-//    
-//    if (tag == 0){
-//        [self shareWithType:UMShareToWechatTimeline];
-//    }else if (tag == 1) {
-//        [self shareWithType:UMShareToWechatSession];
-//    }else if (tag == 2){
-//        [self shareWithType:UMShareToQQ ];
-//        
-//    }
+    NSInteger tag = btn.tag -10101;
+    
+    if (tag == 0){
+        [self shareWithType:UMSocialPlatformType_WechatSession];
+    }else if (tag == 1) {
+        [self shareWithType:UMSocialPlatformType_WechatTimeLine];
+    }
     
     [self dismissShareView];
 }
 
-- (void)shareWithType:(NSString *)type
+- (void)shareWithType:(UMSocialPlatformType)platformType
+
 {
-    if (self.sharetype) {
-        [self shareScore];
-    }
-    //分享到微信好友
-//    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.shareTitle;
-//    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.shareURL;
-//    //分享到微信朋友圈
-//    [UMSocialData defaultData].extConfig.wechatTimelineData.title = [NSString stringWithFormat:@"%@\n%@",self.shareTitle,self.shareDes];
-//    [UMSocialData defaultData].extConfig.wechatTimelineData.url = self.shareURL;
-//    //分享到qq好友
-//    [UMSocialData defaultData].extConfig.qqData.title = self.shareTitle;
-//    [UMSocialData defaultData].extConfig.qqData.url   = self.shareURL;
-//    //取消友盟提示
-//    [UMSocialConfig setFinishToastIsHidden:YES position:(UMSocialiToastPositionCenter) ];
-//    
-//    if (self.shareLogoUrl.length>0) {
-//        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[type] content:self.shareDes image:nil location:nil urlResource:[[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.shareLogoUrl] presentedController:nil completion:^(UMSocialResponseEntity *response){
-//            if (response.responseCode == UMSResponseCodeSuccess) {
-////                [ToolsHelper showSuccessMessage:@"分享成功！"];
-//            }else if(response.responseCode == UMSResponseCodeCancel){
-////                [ToolsHelper showInfoMessage:@"取消分享"];
-//            }
-//        }];
-//    }else{
-//        [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[type] content:self.shareDes image:[UIImage imageNamed:@"Icon1"] location:nil urlResource:nil presentedController:nil completion:^(UMSocialResponseEntity *response){
-//            if (response.responseCode == UMSResponseCodeSuccess) {
-////                [ToolsHelper showSuccessMessage:@"分享成功！"];
-//            }else if(response.responseCode == UMSResponseCodeCancel){
-////                [ToolsHelper showInfoMessage:@"取消分享"];
-//            }
-//        }];
+//    if (self.sharetype) {
+//        [self shareScore];
 //    }
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
-  
+    //创建网页内容对象
+    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用【友盟+】社会化组件U-Share" descr:@"欢迎使用【友盟+】社会化组件U-Share，SDK包最小，集成成本最低，助力您的产品开发、运营与推广！" thumImage:thumbURL];
+    //设置网页地址
+    shareObject.webpageUrl = @"http://mobile.umeng.com/social";
+    
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:[self ViewController] completion:^(id data, NSError *error) {
+        if (error) {
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+        }else{
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+        }
+        
+    }];
     
 }
 //分享积分统计
