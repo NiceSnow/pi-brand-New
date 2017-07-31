@@ -766,7 +766,7 @@
 				TargetAttributes = {
 					2DB772C91F2EC87200F3FD6B = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = UG6CKH24DA;
+						DevelopmentTeam = TAM944NG3L;
 						ProvisioningStyle = Automatic;
 					};
 					2DB772E21F2EC87200F3FD6B = {
@@ -1109,12 +1109,12 @@
 			baseConfigurationReference = E5FF3448825EFB25CB3C30EA /* Pods-pi-brand.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UG6CKH24DA;
+				DEVELOPMENT_TEAM = TAM944NG3L;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/pi-brand/PrefixHeader.pch";
 				INFOPLIST_FILE = "pi-brand/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harmay.ios-pi";
+				PRODUCT_BUNDLE_IDENTIFIER = com.harmay.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1124,12 +1124,12 @@
 			baseConfigurationReference = 43444C9FF1EBE1F22CC8AD7E /* Pods-pi-brand.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UG6CKH24DA;
+				DEVELOPMENT_TEAM = TAM944NG3L;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/pi-brand/PrefixHeader.pch";
 				INFOPLIST_FILE = "pi-brand/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harmay.ios-pi";
+				PRODUCT_BUNDLE_IDENTIFIER = com.harmay.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
