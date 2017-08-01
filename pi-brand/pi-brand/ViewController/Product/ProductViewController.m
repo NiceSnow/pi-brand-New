@@ -31,6 +31,8 @@
 
 @property (nonatomic, strong)NSMutableArray* backImageArray;
 
+@property(nonatomic ,assign) BOOL zoom;
+
 @end
 
 @implementation ProductViewController
@@ -81,9 +83,7 @@
     [self selectedIndex:0];
     _backImageView = [UIImageView new];
     [self.view insertSubview:_backImageView atIndex:0];
-    [_backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.left.right.offset(0);
-    }];
+    _backImageView.frame = CGRectMake(0, 0, screenHeight*BackImageRate, screenHeight);
     
     _backImageArray = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getImageURl:) name:kGetImageURLKey object:nil];
@@ -179,14 +179,21 @@
         }];
     }
     CGFloat offset = scroll.contentOffset.y;
-    if (offset>=35) {
-        [UIView animateWithDuration:0.5 animations:^{
-            _backImageView.frame = CGRectMake(-80, -80, screenWidth + 160, screenHeight + 160) ;
-        }];
+    if (offset>=BackZoomHeight) {
+        if (!_zoom) {
+            [UIView animateWithDuration:0.8 animations:^{
+                _backImageView.frame = CGRectMake(-BackZoomRate/2, -BackZoomRate/2, screenHeight*BackImageRate + BackZoomRate, screenHeight + BackZoomRate) ;
+            }];
+            _zoom = YES;
+        }
     }else{
-        [UIView animateWithDuration:0.5 animations:^{
-            _backImageView.frame = CGRectMake(0, 0, screenWidth, screenHeight);
-        }];
+        if (_zoom) {
+            [UIView animateWithDuration:0.8 animations:^{
+                _backImageView.frame = CGRectMake(0, 0, screenHeight*BackImageRate, screenHeight);
+                
+            }];
+            _zoom = NO;
+        }
     }
 }
 
@@ -197,6 +204,8 @@
         _contentView.delegate = self;
         _contentView.showsHorizontalScrollIndicator = NO;
         _contentView.pagingEnabled = YES;
+        _contentView.bouncesZoom = NO;
+        _contentView.bounces = NO;
         [self.view addSubview:_contentView];
     }
     return _contentView;

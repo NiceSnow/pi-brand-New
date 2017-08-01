@@ -12,5 +12,4 @@
 
 @property (nonatomic, strong) RESideMenu* sideMenuViewController;
 
-+(void)setFream;
 @end

@@ -81,7 +81,6 @@ static BOOL netAvailable;
               success(task, responseObject);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             failure(task,error);
-
         }];
     }else{
         netWork(NO);

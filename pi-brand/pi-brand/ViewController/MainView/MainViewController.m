@@ -21,7 +21,7 @@
 @property (nonatomic, strong) UIImageView* backImageView;
 @property (nonatomic, strong) NSMutableArray* dataArray;
 @property(nonatomic,strong) HUDView* HUD;
-
+@property(nonatomic ,assign) BOOL zoom;
 
 @end
 
@@ -49,9 +49,7 @@
     
     _backImageView = [UIImageView new];
     [self.view addSubview:_backImageView];
-    [_backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.left.right.offset(0);
-    }];
+    _backImageView.frame = CGRectMake(0, 0, screenHeight*BackImageRate, screenHeight);
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(10);
@@ -171,14 +169,22 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;{
     CGFloat offset = scrollView.contentOffset.y;
-    if (offset>=35) {
-        [UIView animateWithDuration:0.5 animations:^{
-            _backImageView.frame = CGRectMake(-80, -80, screenWidth + 160, screenHeight + 160) ;
-        }];
+    
+    if (offset>=BackZoomHeight) {
+        if (!_zoom) {
+            [UIView animateWithDuration:0.8 animations:^{
+                _backImageView.frame = CGRectMake(-BackZoomRate/2, -BackZoomRate/2, screenHeight*BackImageRate + BackZoomRate, screenHeight + BackZoomRate) ;
+            }];
+            _zoom = YES;
+        }
     }else{
-        [UIView animateWithDuration:0.5 animations:^{
-            _backImageView.frame = CGRectMake(0, 0, screenWidth, screenHeight);
-        }];
+        if (_zoom) {
+            [UIView animateWithDuration:0.8 animations:^{
+                _backImageView.frame = CGRectMake(0, 0, screenHeight*BackImageRate, screenHeight);
+                
+            }];
+            _zoom = NO;
+        }
     }
 }
 

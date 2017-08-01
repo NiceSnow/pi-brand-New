@@ -9,15 +9,17 @@
 #import "NewFeatureVIew.h"
 #import "BaseNavigationController.h"
 
+static NSInteger kCount = 3;
 @interface NewFeatureVIew () <UIScrollViewDelegate>
 {
     UIPageControl *_page;
     UIScrollView *_scroll;
     NSArray* dataArray;
-    NSInteger kCount;
     UIButton* _lastBtn;
     CGFloat width;
     CGFloat height;
+    BOOL haveNet;
+    
 }
 @end
 
@@ -43,24 +45,24 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    width = 1080;
-    height = 1920;
     [[HTTPRequest instance]PostRequestWithURL:@"http://www.pi-brand.cn/index.php/home/api/guide_list" Parameter:nil succeed:^(NSURLSessionDataTask *task, id responseObject) {
         BOOL succeed = [[responseObject objectForKey:@"status"]boolValue];
         if (succeed) {
             dataArray = [responseObject objectForKey:@"data"];
             kCount = dataArray.count;
-            
+            width = [[responseObject objectForKey:@"width"] floatValue];
+            height = [[responseObject objectForKey:@"height"] floatValue];;
             [self addScrollView];
             
             [self addScrollImages];
             
             [self addPageControl];
+            haveNet = YES;
         }else{
-            [UIApplication sharedApplication].keyWindow.rootViewController = self.sideMenuViewController;
+            haveNet = NO;
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
-        [UIApplication sharedApplication].keyWindow.rootViewController = self.sideMenuViewController;
+        haveNet = NO;
     } netWork:^(BOOL netWork) {
         
     }];
@@ -134,9 +136,15 @@
 
 -(void)pressBut:(id)sender
 {
-    [UIApplication sharedApplication].keyWindow.rootViewController = self.sideMenuViewController;
-    [UserDefault setObject:newVersion forKey:versionKey];
-    [UserDefault synchronize];
+    if (haveNet) {
+        [UIApplication sharedApplication].keyWindow.rootViewController = self.sideMenuViewController;
+        [UserDefault setObject:newVersion forKey:versionKey];
+        [UserDefault synchronize];
+    }else{
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请到设置里面检查网络" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+        [alert show];
+    }
+    
 }
 
 - (BOOL)prefersStatusBarHidden
