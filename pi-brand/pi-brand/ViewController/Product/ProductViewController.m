@@ -35,6 +35,10 @@
 
 @implementation ProductViewController
 
+-(void)setTitString:(NSString *)titString{
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
 -(void)setLeftCount:(NSInteger)leftCount{
     UIButton* leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
     [leftBtn setImage:[UIImage imageNamed:@"icon_nav"] forState:normal];

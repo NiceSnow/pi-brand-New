@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pi-brand/ViewController/Product/Product3TableViewController.m"
+            timestampString = "523208744.637886"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "-tableView:viewForHeaderInSection:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[Product3TableViewController tableView:viewForHeaderInSection:]"
+                  moduleName = "pi-brand"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MDD/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/Product/Product3TableViewController.m"
+                  timestampString = "523208752.927501"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "976">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__64-[Product3TableViewController tableView:viewForHeaderInSection:]_block_invoke_2"
+                  moduleName = "pi-brand"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MDD/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/Product/Product3TableViewController.m"
+                  timestampString = "523208752.930693"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

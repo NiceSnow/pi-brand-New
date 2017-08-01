@@ -11,7 +11,6 @@
 #import "SearchViewController.h"
 #import "mainModle.h"
 #import "HUDView.h"
-#import "ShareView.h"
 
 
 
@@ -23,7 +22,6 @@
 @property (nonatomic, strong) NSMutableArray* dataArray;
 @property(nonatomic,strong) HUDView* HUD;
 
-@property (nonatomic, strong)ShareView               * shareView;
 
 @end
 
@@ -31,7 +29,7 @@
 
 
 -(void)setTitString:(NSString *)titString{
-    DebugLog(@"%@",titString);
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 - (void)viewDidLoad {
@@ -168,11 +166,7 @@
 
 
 -(void)search:(UIButton*)btn{
-//    [self.navigationController pushViewController:[[SearchViewController alloc]init] animated:NO];
-    self.shareView.sharetype = @"course";
-    self.shareView.shareTitle = @"title";
-    self.shareView.shareDes = @"title";
-    self.shareView.shareURL = @"title";
+    [self.navigationController pushViewController:[[SearchViewController alloc]init] animated:NO];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;{
@@ -220,13 +214,5 @@
     return _HUD;
 }
 
-- (ShareView *)shareView
-{
-    if (!_shareView) {
-        _shareView  = [[ShareView alloc]init];
-        
-    }
-    return _shareView;
-}
 
 @end

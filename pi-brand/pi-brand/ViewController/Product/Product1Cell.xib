@@ -71,6 +71,7 @@
                 <outlet property="contentLabel" destination="kHD-8X-a7l" id="Uv3-Y1-cTe"/>
                 <outlet property="iconImanegView" destination="Ktv-22-Ite" id="n15-La-BG8"/>
                 <outlet property="lineView" destination="9vH-tV-qCO" id="ZiL-el-RU7"/>
+                <outlet property="row" destination="Feg-PD-aD3" id="WiF-Jh-1St"/>
             </connections>
             <point key="canvasLocation" x="-48" y="17.5"/>
         </tableViewCell>

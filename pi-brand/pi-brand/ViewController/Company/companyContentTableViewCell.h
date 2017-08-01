@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "companyContentModel.h"
+#import "shareModel.h"
 
 @interface companyContentTableViewCell : UITableViewCell
 + (instancetype)createCellWithTableView:(UITableView *)tableView;
 -(void)addDataWith:(companyContentModel*)headerModle;
 -(void)ActiveaddDataWith:(companyContentModel*)headerModle;
+@property(nonatomic,strong) shareModel* shareModel;
 @end

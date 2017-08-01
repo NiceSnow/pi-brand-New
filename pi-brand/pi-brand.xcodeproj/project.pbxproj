@@ -91,6 +91,7 @@
 		2DB773E81F2ECA7700F3FD6B /* shopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB7739B1F2ECA7700F3FD6B /* shopViewController.m */; };
 		2DB773E91F2ECA7700F3FD6B /* shopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB7739C1F2ECA7700F3FD6B /* shopViewController.xib */; };
 		2DB773EA1F2ECA7700F3FD6B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB7739F1F2ECA7700F3FD6B /* WebViewController.m */; };
+		60CCFE4F1F2F677300593335 /* shareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CCFE4E1F2F677300593335 /* shareModel.m */; };
 		9900CE6A89210B346DA5BACE /* libPods-pi-brand.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E605B0FD89D800C42EFCA0 /* libPods-pi-brand.a */; };
 /* End PBXBuildFile section */
 
@@ -265,6 +266,8 @@
 		2DB7739E1F2ECA7700F3FD6B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		2DB7739F1F2ECA7700F3FD6B /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		43444C9FF1EBE1F22CC8AD7E /* Pods-pi-brand.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pi-brand.release.xcconfig"; path = "Pods/Target Support Files/Pods-pi-brand/Pods-pi-brand.release.xcconfig"; sourceTree = "<group>"; };
+		60CCFE4D1F2F677300593335 /* shareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareModel.h; sourceTree = "<group>"; };
+		60CCFE4E1F2F677300593335 /* shareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareModel.m; sourceTree = "<group>"; };
 		91E605B0FD89D800C42EFCA0 /* libPods-pi-brand.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pi-brand.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5FF3448825EFB25CB3C30EA /* Pods-pi-brand.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pi-brand.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pi-brand/Pods-pi-brand.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -530,6 +533,8 @@
 				2DB7734E1F2ECA7700F3FD6B /* companyHeaderModel.m */,
 				2DB7734F1F2ECA7700F3FD6B /* subModel2.h */,
 				2DB773501F2ECA7700F3FD6B /* subModel2.m */,
+				60CCFE4D1F2F677300593335 /* shareModel.h */,
+				60CCFE4E1F2F677300593335 /* shareModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -766,7 +771,7 @@
 				TargetAttributes = {
 					2DB772C91F2EC87200F3FD6B = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = UG6CKH24DA;
+						DevelopmentTeam = TAM944NG3L;
 						ProvisioningStyle = Automatic;
 					};
 					2DB772E21F2EC87200F3FD6B = {
@@ -920,6 +925,7 @@
 				2DB773BA1F2ECA7700F3FD6B /* companyContentTableViewCell.m in Sources */,
 				2DB773B21F2ECA7700F3FD6B /* XLScrollView.m in Sources */,
 				2DB773BC1F2ECA7700F3FD6B /* CompanyHeaderTableViewCell.m in Sources */,
+				60CCFE4F1F2F677300593335 /* shareModel.m in Sources */,
 				2DB773A11F2ECA7700F3FD6B /* BaseTabBarController.m in Sources */,
 				2DB773D11F2ECA7700F3FD6B /* MenuTableViewCell.m in Sources */,
 				2DB773DF1F2ECA7700F3FD6B /* Product3Cell.m in Sources */,
@@ -1109,12 +1115,12 @@
 			baseConfigurationReference = E5FF3448825EFB25CB3C30EA /* Pods-pi-brand.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UG6CKH24DA;
+				DEVELOPMENT_TEAM = TAM944NG3L;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/pi-brand/PrefixHeader.pch";
 				INFOPLIST_FILE = "pi-brand/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harmay.ios-pi";
+				PRODUCT_BUNDLE_IDENTIFIER = com.harmay.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1124,12 +1130,12 @@
 			baseConfigurationReference = 43444C9FF1EBE1F22CC8AD7E /* Pods-pi-brand.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = UG6CKH24DA;
+				DEVELOPMENT_TEAM = TAM944NG3L;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/pi-brand/PrefixHeader.pch";
 				INFOPLIST_FILE = "pi-brand/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harmay.ios-pi";
+				PRODUCT_BUNDLE_IDENTIFIER = com.harmay.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

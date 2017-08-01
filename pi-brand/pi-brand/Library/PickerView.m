@@ -44,8 +44,8 @@
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 44)];
         _toolbar.barTintColor = [UIColor whiteColor];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"完成" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitle:@"确定" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:16];
         [button addTarget:self action:@selector(finishInput:) forControlEvents:UIControlEventTouchUpInside];
         button.frame = CGRectMake(0, 0, 44, 44);
@@ -59,7 +59,6 @@
         cancelButton.frame = CGRectMake(0, 0, 44, 44);
         UIBarButtonItem * leftBarItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
         UILabel * label = [[UILabel alloc]init];
-        label.text = @"职称选择";
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [UIColor blackColor];
         label.frame = CGRectMake(0, 0, 150, 44);
@@ -111,7 +110,6 @@
 }
 - (void)setDataArray:(NSArray *)dataArray{
     _dataArray = dataArray;
-    tempLabel.text = @"我是中间label";
     [self addSubview:self.myPickerView];
     [self show];
 }

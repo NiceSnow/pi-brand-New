@@ -37,10 +37,17 @@
 @property (nonatomic, strong) SubCompanyViewController2* sub2;
 
 @property(nonatomic,strong) HUDView* HUD;
+
 @end
 
 @implementation CompanyViewController
+
+-(void)setTitString:(NSString *)titString{
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
 -(void)setLeftCount:(NSInteger)leftCount{
+    
     UIButton* leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
     [leftBtn setImage:[UIImage imageNamed:@"icon_nav"] forState:normal];
     [leftBtn addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
@@ -187,6 +194,7 @@
         _contentView.showsHorizontalScrollIndicator = NO;
         _contentView.pagingEnabled = YES;
         [self.view addSubview:_contentView];
+        _contentView.bouncesZoom = NO;
     }
     return _contentView;
 }
@@ -239,7 +247,9 @@
             [companyContentModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
                 return @{@"ID" : @"id"};
             }];
+            self.sub1.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             self.sub1.contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
+            
 
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {

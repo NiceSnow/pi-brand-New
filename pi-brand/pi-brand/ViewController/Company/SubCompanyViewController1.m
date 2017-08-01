@@ -18,6 +18,10 @@
 
 @implementation SubCompanyViewController1
 
+-(void)setShareModel:(shareModel *)shareModel{
+    _shareModel = shareModel;
+}
+
 -(void)setHeadModel:(companyHeaderModel *)headModel{
     _headModel = headModel;
 }
@@ -83,9 +87,9 @@
     [witView addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(15);
-        make.left.offset(20);
+        make.left.offset(15);
         make.width.mas_equalTo(screenWidth*320/750);
-        make.height.mas_equalTo((screenWidth*320/750)*40/320);
+        make.height.mas_equalTo((screenWidth*320/750)*35/320);
     }];
     return view;
 }
@@ -108,6 +112,7 @@
         }
     }
     companyContentTableViewCell* cell = [companyContentTableViewCell createCellWithTableView:tableView];
+    cell.shareModel = _shareModel;
     [cell addDataWith:self.contentModel];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

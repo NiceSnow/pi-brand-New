@@ -11,13 +11,14 @@
 #import "Product2Cell.h"
 #import "PickerView.h"
 #import "ShareView.h"
+#import "shareModel.h"
 
 @interface Product2TableViewController ()<PickerViewDelegte>
 @property (nonatomic, strong)UILabel * titleLabel;
 @property (nonatomic, strong)NSDictionary *dict;
 @property (nonatomic, strong)PickerView * pickView;
 @property (nonatomic, strong)ShareView               * shareView;
-
+@property(nonatomic,strong) shareModel* shareModel;
 @end
 
 @implementation Product2TableViewController
@@ -46,6 +47,7 @@
             [[NSNotificationCenter defaultCenter]postNotificationName:kGetImageURLKey object:nil userInfo:@{kGetImageURLKey:urlString}];
             
             _dict = data;
+            self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             [self.tableView reloadData];
             
         }
@@ -78,7 +80,7 @@
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(15);
         make.width.mas_offset(screenWidth*320/750);
-        make.height.mas_offset((screenWidth*320/750)*40/320);
+        make.height.mas_offset((screenWidth*320/750)*35/320);
     }];
     
     
@@ -170,7 +172,11 @@
 
 - (void)storeAction
 {
-    self.pickView.dataArray = @[@"第一条",@"第二条",@"第三条"];
+    NSMutableArray* arr = [NSMutableArray new];
+    for (NSDictionary* dic in _dict[@"res"]) {
+        [arr addObject:[dic objectForKey:@"store_name"]];
+    }
+    self.pickView.dataArray = arr;
 }
 - (void)dateButtonAction:(UIButton *)btn
 {
@@ -179,9 +185,10 @@
 - (void)shareAction
 {
     self.shareView.sharetype = @"course";
-    self.shareView.shareTitle = @"title";
-    self.shareView.shareDes = @"title";
-    self.shareView.shareURL = @"title";
+    self.shareView.shareTitle = self.shareModel.title;
+    self.shareView.shareDes = self.shareModel.context;
+    self.shareView.shareURL = self.shareModel.url;
+    self.shareView.imageUrl = self.shareModel.image;
 }
 - (PickerView *)pickView
 {
@@ -193,6 +200,11 @@
 }
 - (void)pickerView:(PickerView *)pickerView index:(NSInteger)index{
     DebugLog(@"%@",@(index));
+    WebViewController* webVC = [[WebViewController alloc]init];
+    webVC.MYURL = [[_dict[@"res"][index]objectForKey:@"url" ] safeUrlString];
+    webVC.LeftCount = 2;
+    [self.navigationController pushViewController:webVC animated:YES];
+    
 }
 - (ShareView *)shareView
 {

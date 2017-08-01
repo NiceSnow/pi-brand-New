@@ -106,7 +106,7 @@
         case 1:
         {
             CompanyViewController* companyVC = [ChildViewController instance].companyVC;
-            companyVC.title = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
+            companyVC.titString = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
             companyVC.leftCount = 1;
             [self.sideMenuViewController setContentViewController:[ChildViewController instance].companyNavgation animated:YES];
         }
@@ -114,7 +114,7 @@
         case 2:
         {
             ProductViewController* productVC = [ChildViewController instance].productVC;
-            productVC.title = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
+            productVC.titString = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
             productVC.leftCount = 1;
             [self.sideMenuViewController setContentViewController:[ChildViewController instance].productNavgation animated:YES];
         }
@@ -122,7 +122,7 @@
         case 3:
         {
             JoinusViewController* joinVC = [ChildViewController instance].joinVC;
-            joinVC.title = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
+            joinVC.titString = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
             joinVC.leftCount = 1;
             [self.sideMenuViewController setContentViewController:[ChildViewController instance].joinNavgation animated:YES];
         }
@@ -133,7 +133,7 @@
 //            shopVC.title = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
 //            [self.sideMenuViewController setContentViewController:[ChildViewController instance].shopNavgation animated:YES];
             ProductViewController* productVC = [ChildViewController instance].productVC;
-            productVC.title = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
+            productVC.titString = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
             productVC.leftCount = 1;
             [self.sideMenuViewController setContentViewController:[ChildViewController instance].productNavgation animated:YES];
 

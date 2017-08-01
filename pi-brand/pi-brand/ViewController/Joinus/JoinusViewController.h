@@ -10,4 +10,5 @@
 
 @interface JoinusViewController : UIViewController
 @property (nonatomic, assign) NSInteger leftCount;
+@property(nonatomic,strong) NSString* titString;
 @end

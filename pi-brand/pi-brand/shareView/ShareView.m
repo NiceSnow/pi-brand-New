@@ -36,7 +36,7 @@
     self.backgroundColor = [UIColor whiteColor];
     self.frame = CGRectMake(0, screenHeight, screenWidth, screenHeight * .25);
     NSArray * titleArray = @[@"朋友圈",@"好友"];
-    NSArray * imageArray = @[@"WeChatFirend",@"WeChat"];
+    NSArray * imageArray = @[@"WeChat",@"WeChatFirend"];
     
     for (NSInteger i = 0; i <titleArray.count; i++) {
         UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -79,6 +79,10 @@
         label.frame = CGRectMake(CGRectGetWidth(self.frame)/2*i, CGRectGetMaxY(button.frame), CGRectGetWidth(self.frame)/2, 20);
     }
 
+}
+
+-(void)setImageUrl:(NSString *)imageUrl{
+    _imageUrl = imageUrl;
 }
 - (void)setShareDes:(NSString *)shareDes
 {
@@ -129,9 +133,9 @@
     NSInteger tag = btn.tag -10101;
     
     if (tag == 0){
-        [self shareWithType:UMSocialPlatformType_WechatSession];
+        [self shareWithType:UMSocialPlatformType_WechatTimeLine ];
     }else if (tag == 1) {
-        [self shareWithType:UMSocialPlatformType_WechatTimeLine];
+        [self shareWithType:UMSocialPlatformType_WechatSession];
     }
     
     [self dismissShareView];
@@ -147,10 +151,10 @@
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
     //创建网页内容对象
-    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用【友盟+】社会化组件U-Share" descr:@"欢迎使用【友盟+】社会化组件U-Share，SDK包最小，集成成本最低，助力您的产品开发、运营与推广！" thumImage:thumbURL];
+    
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.shareTitle descr:self.shareDes thumImage:self.imageUrl];
     //设置网页地址
-    shareObject.webpageUrl = @"http://mobile.umeng.com/social";
+    shareObject.webpageUrl = self.shareURL;
     
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
