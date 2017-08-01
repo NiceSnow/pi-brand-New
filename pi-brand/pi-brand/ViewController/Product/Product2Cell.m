@@ -35,8 +35,10 @@
     if (self) {
         self = [[[NSBundle mainBundle]loadNibNamed:@"Product2Cell" owner:self options:nil]lastObject];
         [_backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.width.mas_equalTo(screenWidth-50);
+//            make.height.mas_equalTo((screenWidth-50)*429/632);
             make.width.mas_equalTo(screenWidth-50);
-            make.height.mas_equalTo((screenWidth-50)*429/632);
+            make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
         }];
     }
     return self;

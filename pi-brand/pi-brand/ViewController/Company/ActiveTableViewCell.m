@@ -45,9 +45,8 @@
     if (self) {
         self = [[[NSBundle mainBundle]loadNibNamed:@"ActiveTableViewCell" owner:self options:nil]lastObject];
         [_headerIamgeView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.offset(10);
-            make.right.offset(-10);
-            make.height.mas_equalTo((screenWidth-20)*9/10*187/291);
+            make.width.mas_equalTo(screenWidth-50);
+            make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
         }];
     }
     return self;

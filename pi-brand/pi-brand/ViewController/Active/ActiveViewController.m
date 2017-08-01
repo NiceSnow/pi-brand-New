@@ -171,7 +171,7 @@
 
 -(UIWebView *)webView{
     if (!_webView) {
-        _webView = [[UIWebView alloc]initWithFrame:CGRectMake(10, 0, screenWidth-20, 1)];
+        _webView = [[UIWebView alloc]initWithFrame:CGRectMake(18, 0, screenWidth-36, 1)];
         _webView.backgroundColor = [UIColor whiteColor];
         _webView.delegate = self;
         _webView.scrollView.scrollEnabled = NO;
@@ -184,6 +184,14 @@
     if (!_footerView) {
         _footerView = [UIView new];
         _footerView.backgroundColor = [UIColor clearColor];
+        UIView* view = [UIView new];
+        view.backgroundColor = [UIColor whiteColor];
+        [_footerView addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.offset(-1);
+            make.left.offset(10);
+            make.bottom.right.offset(-10);
+        }];
         [_footerView addSubview:self.webView];
     }
     return _footerView;
@@ -193,8 +201,8 @@
 {
     CGFloat documentHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
     
-    self.webView.frame = CGRectMake(10, -1, screenWidth - 20, documentHeight);
-    self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight+10);
+    self.webView.frame = CGRectMake(18, -1, screenWidth - 36, documentHeight);
+    self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight + 10);
     self.tableView.tableFooterView = self.footerView;
 }
 

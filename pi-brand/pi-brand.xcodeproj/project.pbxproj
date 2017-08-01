@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D6063811F3019D400A2A7C1 /* NewFeatureVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6063801F3019D400A2A7C1 /* NewFeatureVIew.m */; };
 		2DB772CF1F2EC87200F3FD6B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB772CE1F2EC87200F3FD6B /* main.m */; };
 		2DB772D21F2EC87200F3FD6B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB772D11F2EC87200F3FD6B /* AppDelegate.m */; };
 		2DB772D51F2EC87200F3FD6B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB772D41F2EC87200F3FD6B /* ViewController.m */; };
@@ -113,6 +114,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D60637F1F3019D400A2A7C1 /* NewFeatureVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureVIew.h; sourceTree = "<group>"; };
+		2D6063801F3019D400A2A7C1 /* NewFeatureVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureVIew.m; sourceTree = "<group>"; };
 		2DB772CA1F2EC87200F3FD6B /* pi-brand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pi-brand.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DB772CE1F2EC87200F3FD6B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2DB772D01F2EC87200F3FD6B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -298,6 +301,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D60637E1F3019D400A2A7C1 /* Newfeature */ = {
+			isa = PBXGroup;
+			children = (
+				2D60637F1F3019D400A2A7C1 /* NewFeatureVIew.h */,
+				2D6063801F3019D400A2A7C1 /* NewFeatureVIew.m */,
+			);
+			path = Newfeature;
+			sourceTree = "<group>";
+		};
 		2DB772C11F2EC87200F3FD6B = {
 			isa = PBXGroup;
 			children = (
@@ -478,6 +490,7 @@
 		2DB773391F2ECA7700F3FD6B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2D60637E1F3019D400A2A7C1 /* Newfeature */,
 				2DB7733A1F2ECA7700F3FD6B /* Active */,
 				2DB7733E1F2ECA7700F3FD6B /* Company */,
 				2DB773551F2ECA7700F3FD6B /* Joinus */,
@@ -955,6 +968,7 @@
 				2DB773A91F2ECA7700F3FD6B /* UIImage+extension.m in Sources */,
 				2DB773B31F2ECA7700F3FD6B /* PickerView.m in Sources */,
 				2DB773D71F2ECA7700F3FD6B /* linkModel.m in Sources */,
+				2D6063811F3019D400A2A7C1 /* NewFeatureVIew.m in Sources */,
 				2DB773A31F2ECA7700F3FD6B /* NSArray+extension.m in Sources */,
 				2DB773C21F2ECA7700F3FD6B /* SubCompanyViewController1.m in Sources */,
 				2DB773B81F2ECA7700F3FD6B /* ActiveTableViewCell.m in Sources */,

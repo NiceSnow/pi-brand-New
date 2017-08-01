@@ -9,124 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "pi-brand/ViewController/MainView/MainViewController.m"
-            timestampString = "523166255.258823"
+            filePath = "pi-brand/ViewController/Newfeature/NewFeatureVIew.m"
+            timestampString = "523258671.417383"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "-getdata"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "pi-brand/ViewController/MainView/MainViewController.m"
-            timestampString = "523166726.537515"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-getdata"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "pi-brand/ViewController/MainView/MainViewController.m"
-            timestampString = "523166731.768951"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "pi-brand/ViewController/MainView/MainViewController.m"
-            timestampString = "523166750.51227"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-getdata"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__29-[MainViewController getdata]_block_invoke"
-                  moduleName = "pi-brand"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/MainView/MainViewController.m"
-                  timestampString = "523169993.879128"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "888">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.142"
-                  moduleName = "pi-brand"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/MainView/MainViewController.m"
-                  timestampString = "523169993.880279"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "64">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.143"
-                  moduleName = "pi-brand"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/MainView/MainViewController.m"
-                  timestampString = "523169993.881407"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "36">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__29-[MainViewController getdata]_block_invoke.146"
-                  moduleName = "pi-brand"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/MainView/MainViewController.m"
-                  timestampString = "523169993.882537"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "88">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

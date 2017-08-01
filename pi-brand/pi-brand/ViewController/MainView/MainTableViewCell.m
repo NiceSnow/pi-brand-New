@@ -44,10 +44,10 @@
             make.height.mas_equalTo((screenWidth-40)*4/5*105/232);
         }];
         [_mainImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.offset(10);
-            make.right.offset(-10);
-            make.height.mas_equalTo((screenWidth-20)*9/10*187/291);
+            make.width.mas_equalTo(screenWidth-50);
+            make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
         }];
+        
     }
     return self;
 }

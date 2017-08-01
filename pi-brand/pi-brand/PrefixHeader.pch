@@ -33,6 +33,11 @@ static NSString * const WXAppId       = @"wxb26db829fea64259";
 static NSString * const WXAppSecret   = @"8TLHFQaAEuxoVnhg3syyB3RmsbQXuMFT";
 static NSString * const QQAppId       = @"1104541426";
 static NSString * const QQAppKey      = @"dqhN5dWv1W0yhsk0";
+
+#define versionKey  (NSString *)kCFBundleVersionKey
+#define oldVersion [[NSUserDefaults standardUserDefaults] objectForKey:versionKey]
+#define newVersion [NSBundle mainBundle].infoDictionary[versionKey]
+#define showNewFeature  ![oldVersion isEqualToString:newVersion]
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

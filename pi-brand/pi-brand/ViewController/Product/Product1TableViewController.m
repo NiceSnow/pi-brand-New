@@ -180,8 +180,10 @@
         
         
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.width.mas_equalTo(screenWidth-50);
+//            make.height.mas_equalTo((screenWidth-50)*429/632);
             make.width.mas_equalTo(screenWidth-50);
-            make.height.mas_equalTo((screenWidth-50)*429/632);
+            make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
             make.centerX.equalTo(backView);
             make.top.equalTo(lastBtn.mas_bottom).offset(15);
         }];

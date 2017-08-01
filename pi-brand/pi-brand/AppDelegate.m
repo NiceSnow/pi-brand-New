@@ -11,6 +11,7 @@
 #import "MenuViewController.h"
 #import "BaseNavigationController.h"
 #import "RESideMenu.h"
+#import "NewFeatureVIew.h"
 
 #import <UMSocialCore/UMSocialCore.h>
 
@@ -26,6 +27,11 @@
     
     [self umengTrack];
     // Override point for customization after application launch.
+    [self newFeature];
+    return YES;
+}
+
+-(void)newFeature{
     MenuViewController *leftMenuViewController = [[MenuViewController alloc] init];
     RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:[ChildViewController instance].MainNavgation
                                                                     leftMenuViewController:leftMenuViewController
@@ -39,8 +45,14 @@
     sideMenuViewController.contentViewShadowRadius = 12;
     sideMenuViewController.contentViewShadowEnabled = YES;
     sideMenuViewController.animationDuration = 0.2;
-    self.window.rootViewController = sideMenuViewController;
-    return YES;
+//    if (showNewFeature) {
+        NewFeatureVIew * newFeature = [[NewFeatureVIew alloc]init];
+        newFeature.sideMenuViewController = sideMenuViewController;
+        self.window.rootViewController = newFeature;
+//    }else{
+//        self.window.rootViewController = sideMenuViewController;
+//    }
+    
 }
 - (void)umengTrack {
 
