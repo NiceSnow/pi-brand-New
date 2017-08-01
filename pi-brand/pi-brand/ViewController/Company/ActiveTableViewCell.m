@@ -23,7 +23,7 @@
     _timeTitle.text = modle.add_time;
     _secTitle.text = modle.vice_heading;
     _mainTitle.text = modle.title;
-    [_headerIamgeView sd_setImageWithURL:[modle.img safeUrlString] placeholderImage:[UIImage imageNamed:@"07"]];
+    [_headerIamgeView sd_setImageWithURL:[modle.img safeUrlString] placeholderImage:nil];
     
 }
 

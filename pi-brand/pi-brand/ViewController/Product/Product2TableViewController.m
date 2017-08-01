@@ -33,6 +33,7 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 5;
     self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.bounces = NO;
     [self getdata];
 }
 
@@ -75,7 +76,7 @@
     
     
     UIImageView * logoImageView = [[UIImageView alloc]init];
-    [logoImageView sd_setImageWithURL:[_dict[@"head"][@"img"] safeUrlString] placeholderImage:[UIImage imageNamed:@"11"]];
+    [logoImageView sd_setImageWithURL:[_dict[@"head"][@"img"] safeUrlString] placeholderImage:nil];
     [backView addSubview:logoImageView];
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(15);

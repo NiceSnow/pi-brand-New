@@ -24,6 +24,7 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 5;
     self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.bounces = NO;
     [self getdata];
 }
 -(instancetype)initWithStyle:(UITableViewStyle)style
@@ -62,7 +63,7 @@
     backView.backgroundColor = [UIColor whiteColor];
     
     UIImageView * logoImageView = [[UIImageView alloc]init];
-    [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] placeholderImage:[UIImage imageNamed:@"11"]];
+    [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] placeholderImage:nil];
 
     [backView addSubview:logoImageView];
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,7 +73,7 @@
     }];
     
     UIImageView * backImageView = [[UIImageView alloc]init];
-    [backImageView sd_setImageWithURL:[_dict[@"head"][@"image"] safeUrlString] placeholderImage:[UIImage imageNamed:@"03"]];
+    [backImageView sd_setImageWithURL:[_dict[@"head"][@"image"] safeUrlString] placeholderImage:nil];
 
     [backView addSubview:backImageView];
     [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {

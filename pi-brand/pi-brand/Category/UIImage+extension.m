@@ -84,4 +84,31 @@
     return newImage;
 }
 
++(UIImage*)AutorImage:(NSString*)imageName{
+    int height=(int) [UIScreen mainScreen].bounds.size.height;
+    
+    if(height==480){
+        
+        return [UIImage imageNamed:imageName];
+        
+    }else if (height==568){
+        
+        
+        return [UIImage imageNamed:[NSString stringWithFormat:@"%@5",imageName]];//[NSString stringWithFormat:@"%@5",imageName];
+        
+    }else if (height==667){
+        
+        return [UIImage imageNamed:[NSString stringWithFormat:@"%@6",imageName]];
+        
+        
+    }else if (height==736){
+        
+        return [UIImage imageNamed:[NSString stringWithFormat:@"%@6_",imageName]];
+        
+    }
+    
+    
+    return [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]];;//[NSString stringWithFormat:@"%@",imageName];
+}
+
 @end

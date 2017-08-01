@@ -94,7 +94,7 @@
     
     _backImageView = [UIImageView new];
     [self.view insertSubview:_backImageView atIndex:0];
-    _backImageView.frame = CGRectMake(0, 0, screenHeight*BackImageRate, screenHeight);
+    _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, -(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate, screenHeight);
     
     self.navigationItem.titleView = self.titleView;
     
@@ -176,14 +176,14 @@
     if (offset>=BackZoomHeight) {
         if (!_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(-BackZoomRate/2, -BackZoomRate/2, screenHeight*BackImageRate + BackZoomRate, screenHeight + BackZoomRate) ;
+                _backImageView.frame = CGRectMake(-BackZoomRate/2-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomRate/2-(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate + BackZoomRate, screenHeight + BackZoomRate) ;
             }];
             _zoom = YES;
         }
     }else{
         if (_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(0, 0, screenHeight*BackImageRate, screenHeight);
+                _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, -(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate, screenHeight);
                 
             }];
             _zoom = NO;

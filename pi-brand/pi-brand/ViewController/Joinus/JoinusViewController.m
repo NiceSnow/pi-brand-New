@@ -57,7 +57,7 @@
     
     _backImageView = [UIImageView new];
     [self.view insertSubview:_backImageView atIndex:0];
-    _backImageView.frame = CGRectMake(0, 0, screenHeight*BackImageRate, screenHeight);
+    _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, -(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate, screenHeight);
     _dataArray = [NSMutableArray array];
     UIView * headerView = [UIView new];
     headerView.backgroundColor = [UIColor clearColor];
@@ -67,6 +67,8 @@
     _tableview.estimatedRowHeight = 5;
     _tableview.backgroundColor = [UIColor clearColor];
     _tableview.rowHeight = UITableViewAutomaticDimension;
+    _tableview.showsVerticalScrollIndicator = NO;
+    _tableview.bounces = NO;
     self.navigationItem.titleView = self.titleView;
     [self.view addSubview:self.HUD];
     [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -80,14 +82,14 @@
     if (offset>=BackZoomHeight) {
         if (!_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(-BackZoomRate/2, -BackZoomRate/2, screenHeight*BackImageRate + BackZoomRate, screenHeight + BackZoomRate) ;
+                _backImageView.frame = CGRectMake(-BackZoomRate/2-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomRate/2-(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate + BackZoomRate, screenHeight + BackZoomRate) ;
             }];
             _zoom = YES;
         }
     }else{
         if (_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(0, 0, screenHeight*BackImageRate, screenHeight);
+                _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, -(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate, screenHeight);
                 
             }];
             _zoom = NO;

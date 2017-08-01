@@ -23,11 +23,19 @@
 /**
  debug版本输出查看信息
  */
+
+
 #ifdef DEBUG
-#define DebugLog( s, ... ) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#define DebugLog(format, ...) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 #else
-#define HKLog( s, ... )
+#define DebugLog(format, ...)
 #endif
+
+//#ifdef DEBUG
+//#define DebugLog( s, ... ) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+//#else
+//#define DebugLog( s, ... )
+//#endif
 
 /**
  版本号

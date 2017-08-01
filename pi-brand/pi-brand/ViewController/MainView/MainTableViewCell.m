@@ -19,8 +19,8 @@
 @implementation MainTableViewCell
 
 -(void)addDataWithModel:(mainModle*)model;{
-    [_titleImage sd_setImageWithURL:[model.vice_img safeUrlString]  placeholderImage:[UIImage imageNamed:@"recruitment_11"]];
-    [_mainImage sd_setImageWithURL:[model.img safeUrlString]  placeholderImage:[UIImage imageNamed:@"recruitment_backimage"]];
+    [_titleImage sd_setImageWithURL:[model.vice_img safeUrlString]  placeholderImage:nil];
+    [_mainImage sd_setImageWithURL:[model.img safeUrlString]  placeholderImage:nil];
     _mainTitle.text = model.title;
     _secTitle.text = model.vice_heading;
 }

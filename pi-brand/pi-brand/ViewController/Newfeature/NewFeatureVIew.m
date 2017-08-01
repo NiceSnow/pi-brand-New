@@ -8,6 +8,7 @@
 
 #import "NewFeatureVIew.h"
 #import "BaseNavigationController.h"
+#import "UIImage+extension.h"
 
 static NSInteger kCount = 3;
 @interface NewFeatureVIew () <UIScrollViewDelegate>
@@ -16,8 +17,8 @@ static NSInteger kCount = 3;
     UIScrollView *_scroll;
     NSArray* dataArray;
     UIButton* _lastBtn;
-    CGFloat width;
-    CGFloat height;
+//    CGFloat width;
+//    CGFloat height;
     BOOL haveNet;
     
 }
@@ -45,18 +46,23 @@ static NSInteger kCount = 3;
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self addScrollView];
+    
+    [self addScrollImages];
+    
+    [self addPageControl];
     [[HTTPRequest instance]PostRequestWithURL:@"http://www.pi-brand.cn/index.php/home/api/guide_list" Parameter:nil succeed:^(NSURLSessionDataTask *task, id responseObject) {
         BOOL succeed = [[responseObject objectForKey:@"status"]boolValue];
         if (succeed) {
             dataArray = [responseObject objectForKey:@"data"];
             kCount = dataArray.count;
-            width = [[responseObject objectForKey:@"width"] floatValue];
-            height = [[responseObject objectForKey:@"height"] floatValue];;
-            [self addScrollView];
-            
-            [self addScrollImages];
-            
-            [self addPageControl];
+//            width = [[responseObject objectForKey:@"width"] floatValue];
+//            height = [[responseObject objectForKey:@"height"] floatValue];;
+//            [self addScrollView];
+//            
+//            [self addScrollImages];
+//            
+//            [self addPageControl];
             haveNet = YES;
         }else{
             haveNet = NO;
@@ -88,16 +94,17 @@ static NSInteger kCount = 3;
     CGSize size = _scroll.frame.size;
     
     for (int i = 0; i<kCount; i++) {
+        NSString* imageString = [NSString stringWithFormat:@"new_features_%d",i+1];
         UIView* backView = [[UIView alloc]initWithFrame:CGRectMake(i * size.width, 0, size.width, size.height )];
         [_scroll addSubview:backView];
         UIImageView * backImageView = [UIImageView new];
         [backView addSubview:backImageView];
         [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(backView);
-            make.width.mas_equalTo(screenHeight*width/height);
+            make.width.mas_equalTo(screenWidth);
             make.height.mas_equalTo(screenHeight);
         }];
-        [backImageView sd_setImageWithURL:[[dataArray[i] objectForKey:@"img"] safeUrlString]placeholderImage:nil];
+        backImageView.image = [UIImage AutorImage:imageString];
         backImageView.userInteractionEnabled = YES;
         [_scroll addSubview:backView];
     }

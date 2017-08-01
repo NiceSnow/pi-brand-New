@@ -45,13 +45,13 @@
     sideMenuViewController.contentViewShadowRadius = 12;
     sideMenuViewController.contentViewShadowEnabled = YES;
     sideMenuViewController.animationDuration = 0.2;
-    if (showNewFeature) {
+//    if (showNewFeature) {
         NewFeatureVIew * newFeature = [[NewFeatureVIew alloc]init];
         newFeature.sideMenuViewController = sideMenuViewController;
         self.window.rootViewController = newFeature;
-    }else{
-        self.window.rootViewController = sideMenuViewController;
-    }
+//    }else{
+//        self.window.rootViewController = sideMenuViewController;
+//    }
 
 }
 - (void)umengTrack {

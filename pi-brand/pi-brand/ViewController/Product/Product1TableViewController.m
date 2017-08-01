@@ -42,6 +42,7 @@
 
     self.tableView.separatorStyle = 0;
     self.tableView.estimatedSectionHeaderHeight = 5;
+    self.tableView.bounces = NO;
     [self getdataWithCityID:10000];
 }
 
@@ -101,7 +102,7 @@
     }
     
     UIImageView * imageView = [[UIImageView alloc]init];
-    [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] placeholderImage:[UIImage imageNamed:@"15"]];
+    [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] placeholderImage:nil];
     [backView addSubview:imageView];
     _backImageView = imageView;
     

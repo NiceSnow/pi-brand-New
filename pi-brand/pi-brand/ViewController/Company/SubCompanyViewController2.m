@@ -43,6 +43,7 @@
     self.tableView.estimatedRowHeight = 5;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableFooterView = [UIView new];
+    self.tableView.bounces = NO;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
