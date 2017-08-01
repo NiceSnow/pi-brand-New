@@ -256,7 +256,7 @@
         if (indexPath.row == 0) {
             content = _dict[@"pro"][indexPath.section][@"address"];
         }else if (indexPath.row == 1){
-            content = [NSString stringWithFormat:@"商铺电话：%@",_dict[@"pro"][indexPath.section][@"tel"]];
+            content = [NSString stringWithFormat:@"电铺电话：%@",_dict[@"pro"][indexPath.section][@"tel"]];
         }else if (indexPath.row == 2){
             content = [NSString stringWithFormat:@"营业时间：%@",_dict[@"pro"][indexPath.section][@"business_hours"]];
         }

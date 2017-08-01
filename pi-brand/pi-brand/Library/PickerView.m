@@ -44,19 +44,19 @@
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 44)];
         _toolbar.barTintColor = [UIColor whiteColor];
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"确定" forState:UIControlStateNormal];
+        [button setTitle:@"确定    " forState:UIControlStateNormal];
         [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:16];
+        button.titleLabel.font = [UIFont systemFontOfSize:14];
         [button addTarget:self action:@selector(finishInput:) forControlEvents:UIControlEventTouchUpInside];
-        button.frame = CGRectMake(0, 0, 44, 44);
+        button.frame = CGRectMake(0, 0, 54, 44);
         UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
         UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         UIButton * cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        [cancelButton setTitle:@"    取消" forState:UIControlStateNormal];
         [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        cancelButton.titleLabel.font = [UIFont systemFontOfSize:16];
+        cancelButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-        cancelButton.frame = CGRectMake(0, 0, 44, 44);
+        cancelButton.frame = CGRectMake(0, 0, 54, 44);
         UIBarButtonItem * leftBarItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
         UILabel * label = [[UILabel alloc]init];
         label.textAlignment = NSTextAlignmentCenter;
@@ -134,6 +134,27 @@
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return 1;
+}
+
+-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
+    return 35;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel* pickerLabel = (UILabel*)view;
+    if (!pickerLabel){
+        pickerLabel = [[UILabel alloc] init];
+        // Setup label properties - frame, font, colors etc
+        //adjustsFontSizeToFitWidth property to YES
+        pickerLabel.minimumScaleFactor = 8.;
+        pickerLabel.adjustsFontSizeToFitWidth = YES;
+        [pickerLabel setTextAlignment:NSTextAlignmentCenter];
+        [pickerLabel setBackgroundColor:[UIColor clearColor]];
+        [pickerLabel setFont:[UIFont boldSystemFontOfSize:15]];
+    }
+    // Fill the label text here
+    pickerLabel.text=[self pickerView:pickerView titleForRow:row forComponent:component];
+    return pickerLabel;
 }
 
 @end
