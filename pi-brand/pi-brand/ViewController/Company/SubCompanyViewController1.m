@@ -36,8 +36,8 @@
 {
     CGFloat documentHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
     
-    self.webView.frame = CGRectMake(18, -1, screenWidth - 36, documentHeight);
-    self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight + 10);
+    self.webView.frame = CGRectMake(18, -1, screenWidth - 36, documentHeight + 10);
+    self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight + 26);
     self.tableView.tableFooterView = self.footerView;
 }
 
