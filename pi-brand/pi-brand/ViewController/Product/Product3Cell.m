@@ -46,7 +46,10 @@
 }
 - (void)setDict:(NSDictionary *)dict{
     _dict = dict;
-    [_backImageView sd_setImageWithURL:[dict[@"img"] safeUrlString]];
+    if ([dict[@"img"] length]>0) {
+        [_backImageView sd_setImageWithURL:[dict[@"img"] safeUrlString]];
+    }
+    
     _titleLabel.text = dict[@"title"];
     _contentLabel.text =  dict[@"vice_heading"];
 }

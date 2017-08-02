@@ -43,7 +43,9 @@
         if (succeed) {
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
-            [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+            if (urlString.length>0) {
+                [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+            }
             _headModle = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];
             [companyContentModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
                 return @{@"ID" : @"id",
@@ -129,10 +131,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (_headModle.icon.length>0&&_headModle.title.length>0&&_headModle.hid>0&&_headModle.image.length>0) {
+    if (_headModle.icon.length>0&&_headModle.title.length>0&&_headModle.hid>0&&_headModle.image.length>0 &&_contentModel) {
         return 2;
-    }
-    return 1;
+    }else if(_contentModel)
+        return 1;
+    else
+        return 0;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -147,7 +151,10 @@
         make.left.offset(10);
         make.right.offset(-10);
     }];
-    [imageview sd_setImageWithURL:[_headModle.icon safeUrlString] placeholderImage:nil];
+    if (_headModle.icon.length>0) {
+        [imageview sd_setImageWithURL:[_headModle.icon safeUrlString] placeholderImage:nil];
+    }
+    
     [witView addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(15);

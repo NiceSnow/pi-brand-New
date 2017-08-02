@@ -127,6 +127,7 @@
     _currentIndex = index;
     if (self.imageArray.count>=2) {
         [_backImageView sd_setImageWithURL:self.imageArray[index]];
+        
     }
 }
 
@@ -247,7 +248,9 @@
         if (succeed) {
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
-            [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+            if (urlString.length>0) {
+                [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+            }
             [self.imageArray addObject:[urlString safeUrlString]];
             self.sub1.headModel = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];
             [companyContentModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{

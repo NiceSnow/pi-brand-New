@@ -19,7 +19,10 @@
     if (name) {
         _headerImageView.image = [UIImage imageNamed:name];
     }else
-        [_headerImageView sd_setImageWithURL:[modle.nav_img safeUrlString] placeholderImage:nil];
+        if (modle.nav_img.length>0) {
+            [_headerImageView sd_setImageWithURL:[modle.nav_img safeUrlString] placeholderImage:nil];
+        }
+    
 }
 
 + (instancetype)createCellWithTableView:(UITableView *)tableView

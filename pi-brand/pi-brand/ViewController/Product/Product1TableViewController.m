@@ -102,14 +102,19 @@
     }
     
     UIImageView * imageView = [[UIImageView alloc]init];
-    [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] placeholderImage:nil];
+    if ([proArray[section][@"img"] length]>0) {
+        [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] placeholderImage:nil];
+    }
     [backView addSubview:imageView];
     _backImageView = imageView;
     
     
     if (section == 0) {
         UIImageView * logoImageView = [[UIImageView alloc]init];
-        [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString]];
+        if ([_dict[@"head"][@"icon"] length]>0) {
+            [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString]];
+        }
+        
         [backView addSubview:logoImageView];
         [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(15);

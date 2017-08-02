@@ -23,8 +23,9 @@
     _timeTitle.text = modle.add_time;
     _secTitle.text = modle.vice_heading;
     _mainTitle.text = modle.title;
-    [_headerIamgeView sd_setImageWithURL:[modle.img safeUrlString] placeholderImage:nil];
-    
+    if (modle.img.length>0) {
+        [_headerIamgeView sd_setImageWithURL:[modle.img safeUrlString] placeholderImage:nil];
+    }
 }
 
 + (instancetype)createCellWithTableView:(UITableView *)tableView

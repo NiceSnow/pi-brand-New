@@ -18,7 +18,10 @@
 @implementation SearchTableViewCell
 
 -(void)addDataWithModel:(searchModel*)modle;{
-    [_headerImage sd_setImageWithURL:[modle.img safeUrlString] placeholderImage:nil];
+    if (modle.img.length>0) {
+        [_headerImage sd_setImageWithURL:[modle.img safeUrlString] placeholderImage:nil];
+    }
+    
     _mainTitle.text = modle.title;
     _secTitle.text = modle.vice_heading;
 }

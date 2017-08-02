@@ -62,7 +62,9 @@
         make.left.offset(10);
         make.right.offset(-10);
     }];
-    [imageview sd_setImageWithURL:[_headModel.icon safeUrlString] placeholderImage:nil];
+    if (_headModel.icon.length>0) {
+        [imageview sd_setImageWithURL:[_headModel.icon safeUrlString] placeholderImage:nil];
+    }
     [witView addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(15);

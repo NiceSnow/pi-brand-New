@@ -76,7 +76,9 @@
     
     
     UIImageView * logoImageView = [[UIImageView alloc]init];
-    [logoImageView sd_setImageWithURL:[_dict[@"head"][@"img"] safeUrlString] placeholderImage:nil];
+    if ([_dict[@"head"][@"img"] length]>0) {
+        [logoImageView sd_setImageWithURL:[_dict[@"head"][@"img"] safeUrlString] placeholderImage:nil];
+    }
     [backView addSubview:logoImageView];
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(15);

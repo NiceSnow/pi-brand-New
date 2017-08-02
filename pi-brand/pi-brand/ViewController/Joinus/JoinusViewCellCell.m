@@ -70,11 +70,18 @@
     companyHeaderModel* model = dataArray[0];
     
     joinMainModel* mainModel = dataArray[1];
+    if (model.icon.length>0) {
+        [_logoImageView sd_setImageWithURL:[model.icon safeUrlString]];
+    }
+    if (model.image.length>0) {
+        [_iconImageView sd_setImageWithURL:[model.image safeUrlString]];
+    }
     
-    [_logoImageView sd_setImageWithURL:[model.icon safeUrlString]];
-    [_iconImageView sd_setImageWithURL:[model.image safeUrlString]];
     _desLabel.text = model.title;
-    [_mainImageView sd_setImageWithURL:[mainModel.img safeUrlString]];
+    if (mainModel.img.length>0) {
+        [_mainImageView sd_setImageWithURL:[mainModel.img safeUrlString]];
+    }
+    
     _titleLabel.text = mainModel.title;
     _contentLabel.text = mainModel.vice_heading;
     

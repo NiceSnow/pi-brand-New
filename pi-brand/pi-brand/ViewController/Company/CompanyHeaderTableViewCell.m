@@ -19,7 +19,9 @@
 @implementation CompanyHeaderTableViewCell
 
 -(void)addDataWith:(companyHeaderModel*)headerModle;{
-    [self.img sd_setImageWithURL:[headerModle.image safeUrlString] placeholderImage:nil];
+    if (headerModle.image.length>0) {
+        [self.img sd_setImageWithURL:[headerModle.image safeUrlString] placeholderImage:nil];
+    }
     self.secTitle.text = headerModle.title;
 }
 

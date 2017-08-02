@@ -28,16 +28,15 @@
     for (int i = 0; i < arr.count; i++) {
         linkModel* modle = arr[i];
         UIButton* btn = [self.contentView viewWithTag:1000+i];
-        [btn sd_setImageWithURL:[modle.img safeUrlString] forState:normal completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            CGSize size = image.size;
-//            CGRect rect = btn.frame;
-//            btn.frame = CGRectMake(rect.origin.x, rect.origin.y, size.width/4, size.height/4);
-//            [btn sizeToFit];
-            [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(size.width/2);
-                make.height.mas_equalTo(size.height/2);
+        if (modle.img.length>0) {
+            [btn sd_setImageWithURL:[modle.img safeUrlString] forState:normal completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                CGSize size = image.size;
+                [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(size.width/2);
+                    make.height.mas_equalTo(size.height/2);
+                }];
             }];
-        }];
+        }
     }
 }
 

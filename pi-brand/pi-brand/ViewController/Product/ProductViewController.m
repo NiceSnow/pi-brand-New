@@ -104,7 +104,10 @@
     if (_backImageArray.count<=3) {
         [_backImageArray addObject:imageURL];
     }
-    [_backImageView sd_setImageWithURL:[imageURL safeUrlString]];
+    if (imageURL.length>0) {
+        [_backImageView sd_setImageWithURL:[imageURL safeUrlString]];
+    }
+    
 }
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];

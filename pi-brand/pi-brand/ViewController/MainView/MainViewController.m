@@ -72,7 +72,9 @@
         if (succeed) {
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
-            [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+            if (urlString.length>0) {
+                [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+            }
             [mainModle mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
                 return @{@"ID" : @"id"};
             }];
