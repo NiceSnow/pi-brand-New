@@ -7,8 +7,7 @@
 //
 
 #import "ActiveViewController.h"
-#import "companyHeaderModel.h"
-#import "companyContentModel.h"
+
 
 #import "CompanyHeaderTableViewCell.h"
 #import "companyContentTableViewCell.h"
@@ -16,8 +15,7 @@
 
 
 @interface ActiveViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
-@property (nonatomic, strong) companyHeaderModel* headModle;
-@property(nonatomic,strong)   companyContentModel* contentModel;
+
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) UIImageView* backImageView;
 @property(nonatomic,strong)   UIWebView* webView;
@@ -25,7 +23,6 @@
 @property (nonatomic, strong) UIView* headerView;
 @property(nonatomic,strong) HUDView* HUD;
 @property (nonatomic, strong) UIView* titleView;
-@property(nonatomic,strong) shareModel* shareModel;
 @property(nonatomic,assign) BOOL zoom;
 
 @end
@@ -40,6 +37,21 @@
     _ID = ID;
 }
 
+-(void)setBackImageString:(NSString *)backImageString{
+    _backImageString = backImageString;
+}
+
+-(void)setHeadModle:(companyHeaderModel *)headModle{
+    _headModle = headModle;
+}
+
+-(void)setContentModel:(companyContentModel *)contentModel{
+    _contentModel = contentModel;
+}
+
+-(void)setShareModel:(shareModel *)shareModel{
+    _shareModel = shareModel;
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;{
     CGFloat offset = scrollView.contentOffset.y;
     if (offset>=BackZoomHeight) {
@@ -76,6 +88,10 @@
     
     _backImageView = [UIImageView new];
     [self.view addSubview:_backImageView];
+    if (_backImageString.length>0) {
+        [_backImageView sd_setImageWithURL:[_backImageString safeUrlString]];
+    }
+
     _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, -(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate, screenHeight);
     
     [self.view addSubview:self.tableView];
@@ -86,36 +102,16 @@
         make.bottom.offset(0);
         make.centerX.equalTo(self.view);
     }];
-    [self.view addSubview:self.HUD];
-    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
+//    [self.view addSubview:self.HUD];
+//    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.right.bottom.offset(0);
+//    }];
     
-    [[HTTPRequest instance]PostRequestWithURL:@"http://www.pi-brand.cn/index.php/home/api/activity_detail" Parameter:@{@"id":_ID} succeed:^(NSURLSessionDataTask *task, id responseObject) {
-        BOOL succeed = [[responseObject objectForKey:@"status"]boolValue];
-        if (succeed) {
-            NSDictionary* data = [responseObject objectForKey:@"data"];
-            NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
-            if (urlString.length>0) {
-                [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
-            }
-            _headModle = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];
-            [companyContentModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
-                return @{@"ID" : @"id",
-                         @"Description":@"description"
-                         };
-            }];
-            self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
-            _contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
-            [self.tableView reloadData];
-            [self.webView loadHTMLString:_contentModel.Description baseURL:nil];
-            [self.HUD removeFromSuperview];
-        }
-    } failed:^(NSURLSessionDataTask *task, NSError *error) {
-        
-    } netWork:^(BOOL netWork) {
-        
-    }];
+    [self.tableView reloadData];
+    [self.webView loadHTMLString:_contentModel.Description baseURL:nil];
+
+    
+    
     // Do any additional setup after loading the view from its nib.
 }
 

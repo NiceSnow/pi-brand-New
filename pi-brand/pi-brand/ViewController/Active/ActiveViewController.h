@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "companyHeaderModel.h"
+#import "companyContentModel.h"
+#import "shareModel.h"
 
 @interface ActiveViewController : UIViewController
 @property(nonatomic,copy) NSString* ID;
+@property (nonatomic, copy) NSString* backImageString;
+@property (nonatomic, strong) companyHeaderModel* headModle;
+@property(nonatomic,strong)   companyContentModel* contentModel;
+@property(nonatomic,strong) shareModel* shareModel;
 @end

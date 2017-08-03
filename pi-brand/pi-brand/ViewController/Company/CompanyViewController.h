@@ -10,5 +10,5 @@
 
 @interface CompanyViewController : UIViewController
 @property (nonatomic, assign) NSInteger leftCount;
-@property(nonatomic,strong) NSString* titString;
+@property(nonatomic,copy) NSString* titString;
 @end

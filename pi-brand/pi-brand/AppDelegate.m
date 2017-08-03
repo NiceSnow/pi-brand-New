@@ -33,7 +33,8 @@
 
 -(void)newFeature{
     MenuViewController *leftMenuViewController = [[MenuViewController alloc] init];
-    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:[ChildViewController instance].MainNavgation
+     MainViewController* manVC = [[MainViewController alloc]init];
+    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:[[BaseNavigationController alloc] initWithRootViewController:manVC]
                                                                     leftMenuViewController:leftMenuViewController
                                                                    rightMenuViewController:nil];
     sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
@@ -46,11 +47,11 @@
     sideMenuViewController.contentViewShadowEnabled = YES;
     sideMenuViewController.animationDuration = 0.2;
 //    if (showNewFeature) {
-        NewFeatureVIew * newFeature = [[NewFeatureVIew alloc]init];
-        newFeature.sideMenuViewController = sideMenuViewController;
-        self.window.rootViewController = newFeature;
+//        NewFeatureVIew * newFeature = [[NewFeatureVIew alloc]init];
+//        newFeature.sideMenuViewController = sideMenuViewController;
+//        self.window.rootViewController = newFeature;
 //    }else{
-//        self.window.rootViewController = sideMenuViewController;
+        self.window.rootViewController = sideMenuViewController;
 //    }
 
 }
