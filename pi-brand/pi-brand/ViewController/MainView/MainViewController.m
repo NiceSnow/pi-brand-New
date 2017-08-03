@@ -11,6 +11,9 @@
 #import "SearchViewController.h"
 #import "mainModle.h"
 #import "HUDView.h"
+#import "CompanyViewController.h"
+#import "ProductViewController.h"
+#import "JoinusViewController.h"
 
 
 
@@ -119,16 +122,14 @@
     switch (indexPath.section) {
         case 0:
         {
-            CompanyViewController* joinVC = [[CompanyViewController alloc]init];
-            joinVC.title = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.section];
-            joinVC.leftCount = 2;
-            [self.navigationController pushViewController:joinVC animated:YES];
+            CompanyViewController* companyVC = [[CompanyViewController alloc]init];
+            companyVC.leftCount = 2;
+            [self.navigationController pushViewController:companyVC animated:YES];
         }
             break;
         case 1:
         {
             ProductViewController* joinVC = [[ProductViewController alloc]init];
-            joinVC.title = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.section];
             joinVC.leftCount = 2;
             [self.navigationController pushViewController:joinVC animated:YES];
         }
@@ -136,7 +137,6 @@
         case 2:
         {
             JoinusViewController* joinVC = [[JoinusViewController alloc]init];
-            joinVC.title = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.section];
             joinVC.leftCount = 2;
             [self.navigationController pushViewController:joinVC animated:YES];
         }

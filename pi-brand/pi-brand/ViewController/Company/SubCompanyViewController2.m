@@ -89,30 +89,20 @@
     }
     subModel2* modle = self.res[indexPath.row - 1];
     ActiveViewController* ActiveVC = [[ActiveViewController alloc]init];
-//    ActiveVC.ID = modle.ID;
     [[HTTPRequest instance]PostRequestWithURL:@"http://www.pi-brand.cn/index.php/home/api/activity_detail" Parameter:@{@"id":modle.ID} succeed:^(NSURLSessionDataTask *task, id responseObject) {
         BOOL succeed = [[responseObject objectForKey:@"status"]boolValue];
         if (succeed) {
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
-//            if (urlString.length>0) {
-//                [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
-//            }
             ActiveVC.backImageString = urlString;
-//            _headModle = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];
             ActiveVC.headModle = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];
             [companyContentModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
                 return @{@"ID" : @"id",
                          @"Description":@"description"
                          };
             }];
-//            self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             ActiveVC.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
-//            _contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
             ActiveVC.contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
-//            [self.tableView reloadData];
-//            [self.webView loadHTMLString:_contentModel.Description baseURL:nil];
-//            [self.HUD removeFromSuperview];
             [self.navigationController pushViewController:ActiveVC animated:YES];
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {

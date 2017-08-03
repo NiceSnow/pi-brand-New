@@ -9,6 +9,7 @@
 #import "SearchViewController.h"
 #import "SearchTableViewCell.h"
 #import "searchModel.h"
+#import "WebViewController.h"
 
 @interface SearchViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

@@ -11,9 +11,7 @@
 
 #import "Masonry.h"
 #import "DefineClass.h"
-#import "RESideMenu.h"
 #import "UIView+ViewController.h"
-#import "ChildViewController.h"
 #import "HTTPRequest.h"
 #import "MJExtension.h"
 #import "AFNetworking.h"
@@ -24,6 +22,8 @@
 
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
+
+#import "RESideMenu.h"
 
 static NSString *const kGetImageURLKey = @"kGetImageURLKey";
 

@@ -8,7 +8,9 @@
 
 #import "MenuTableViewCell2.h"
 #import "linkModel.h"
+#import "WebViewController.h"
 #import <UIKit/UIKit.h>
+#import "BaseNavigationController.h"
 
 @interface MenuTableViewCell2 (){
     UIButton* lastBtn;
@@ -46,12 +48,12 @@
 
 - (IBAction)jumpToWebView:(UIButton *)sender {
     DebugLog(@"%ld",sender.tag);
-    WebViewController* VC = [ChildViewController instance].webVC;
+    WebViewController* VC = [[WebViewController alloc]init];
     NSInteger index = sender.tag - 1000;
     linkModel* modle = modleArray[index];
     VC.MYURL = [modle.url safeUrlString];
     VC.LeftCount = 1;
-    [self.ViewController.sideMenuViewController setContentViewController:[ChildViewController instance].WebNavgation animated:YES];
+    [self.ViewController.sideMenuViewController setContentViewController:[[BaseNavigationController alloc]initWithRootViewController:VC ] animated:YES];
     [self.ViewController.sideMenuViewController hideMenuViewController];
 }
 

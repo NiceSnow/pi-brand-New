@@ -38,7 +38,6 @@
 		2DB773B21F2ECA7700F3FD6B /* XLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB773301F2ECA7700F3FD6B /* XLScrollView.m */; };
 		2DB773B31F2ECA7700F3FD6B /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB773321F2ECA7700F3FD6B /* PickerView.m */; };
 		2DB773B41F2ECA7700F3FD6B /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB773351F2ECA7700F3FD6B /* ShareView.m */; };
-		2DB773B51F2ECA7700F3FD6B /* ChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB773381F2ECA7700F3FD6B /* ChildViewController.m */; };
 		2DB773B61F2ECA7700F3FD6B /* ActiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB7733C1F2ECA7700F3FD6B /* ActiveViewController.m */; };
 		2DB773B71F2ECA7700F3FD6B /* ActiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB7733D1F2ECA7700F3FD6B /* ActiveViewController.xib */; };
 		2DB773B81F2ECA7700F3FD6B /* ActiveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB773401F2ECA7700F3FD6B /* ActiveTableViewCell.m */; };
@@ -178,8 +177,6 @@
 		2DB773321F2ECA7700F3FD6B /* PickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerView.m; sourceTree = "<group>"; };
 		2DB773341F2ECA7700F3FD6B /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		2DB773351F2ECA7700F3FD6B /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
-		2DB773371F2ECA7700F3FD6B /* ChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildViewController.h; sourceTree = "<group>"; };
-		2DB773381F2ECA7700F3FD6B /* ChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildViewController.m; sourceTree = "<group>"; };
 		2DB7733B1F2ECA7700F3FD6B /* ActiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveViewController.h; sourceTree = "<group>"; };
 		2DB7733C1F2ECA7700F3FD6B /* ActiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveViewController.m; sourceTree = "<group>"; };
 		2DB7733D1F2ECA7700F3FD6B /* ActiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActiveViewController.xib; sourceTree = "<group>"; };
@@ -340,7 +337,6 @@
 				2DB7731E1F2ECA7700F3FD6B /* httpRequest */,
 				2DB773211F2ECA7700F3FD6B /* Library */,
 				2DB773331F2ECA7700F3FD6B /* shareView */,
-				2DB773361F2ECA7700F3FD6B /* Tools */,
 				2DB773391F2ECA7700F3FD6B /* ViewController */,
 				2DB773021F2ECA0800F3FD6B /* DefineClass.h */,
 				2DB773001F2EC9CC00F3FD6B /* loding.gif */,
@@ -476,15 +472,6 @@
 				2DB773351F2ECA7700F3FD6B /* ShareView.m */,
 			);
 			path = shareView;
-			sourceTree = "<group>";
-		};
-		2DB773361F2ECA7700F3FD6B /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				2DB773371F2ECA7700F3FD6B /* ChildViewController.h */,
-				2DB773381F2ECA7700F3FD6B /* ChildViewController.m */,
-			);
-			path = Tools;
 			sourceTree = "<group>";
 		};
 		2DB773391F2ECA7700F3FD6B /* ViewController */ = {
@@ -928,7 +915,6 @@
 				2DB773CC1F2ECA7700F3FD6B /* MainTableViewCell.m in Sources */,
 				2DB773B11F2ECA7700F3FD6B /* XLConst.m in Sources */,
 				2DB773D91F2ECA7700F3FD6B /* Product1Cell.m in Sources */,
-				2DB773B51F2ECA7700F3FD6B /* ChildViewController.m in Sources */,
 				2DB773B01F2ECA7700F3FD6B /* UIViewController+XLScroll.m in Sources */,
 				2DB773AC1F2ECA7700F3FD6B /* HTTPRequest.m in Sources */,
 				2DB773B41F2ECA7700F3FD6B /* ShareView.m in Sources */,

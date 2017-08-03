@@ -12,6 +12,7 @@
 #import "PickerView.h"
 #import "ShareView.h"
 #import "shareModel.h"
+#import "WebViewController.h"
 
 @interface Product2TableViewController ()<PickerViewDelegte>
 @property (nonatomic, strong)UILabel * titleLabel;
