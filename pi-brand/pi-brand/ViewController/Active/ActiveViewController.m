@@ -38,31 +38,6 @@
 
 -(void)setID:(NSString *)ID{
     _ID = ID;
-    [[HTTPRequest instance]PostRequestWithURL:@"http://www.pi-brand.cn/index.php/home/api/activity_detail" Parameter:@{@"id":ID} succeed:^(NSURLSessionDataTask *task, id responseObject) {
-        BOOL succeed = [[responseObject objectForKey:@"status"]boolValue];
-        if (succeed) {
-            NSDictionary* data = [responseObject objectForKey:@"data"];
-            NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
-            if (urlString.length>0) {
-                [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
-            }
-            _headModle = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];
-            [companyContentModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
-                return @{@"ID" : @"id",
-                         @"Description":@"description"
-                         };
-            }];
-            self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
-            _contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
-            [self.tableView reloadData];
-            [self.webView loadHTMLString:_contentModel.Description baseURL:nil];
-            [self.HUD removeFromSuperview];
-        }
-    } failed:^(NSURLSessionDataTask *task, NSError *error) {
-        
-    } netWork:^(BOOL netWork) {
-        
-    }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;{
@@ -114,6 +89,32 @@
     [self.view addSubview:self.HUD];
     [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.offset(0);
+    }];
+    
+    [[HTTPRequest instance]PostRequestWithURL:@"http://www.pi-brand.cn/index.php/home/api/activity_detail" Parameter:@{@"id":_ID} succeed:^(NSURLSessionDataTask *task, id responseObject) {
+        BOOL succeed = [[responseObject objectForKey:@"status"]boolValue];
+        if (succeed) {
+            NSDictionary* data = [responseObject objectForKey:@"data"];
+            NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
+            if (urlString.length>0) {
+                [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+            }
+            _headModle = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];
+            [companyContentModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+                return @{@"ID" : @"id",
+                         @"Description":@"description"
+                         };
+            }];
+            self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
+            _contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
+            [self.tableView reloadData];
+            [self.webView loadHTMLString:_contentModel.Description baseURL:nil];
+            [self.HUD removeFromSuperview];
+        }
+    } failed:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    } netWork:^(BOOL netWork) {
+        
     }];
     // Do any additional setup after loading the view from its nib.
 }

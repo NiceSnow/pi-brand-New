@@ -51,27 +51,7 @@ static NSInteger kCount = 3;
     [self addScrollImages];
     
     [self addPageControl];
-    [[HTTPRequest instance]PostRequestWithURL:@"http://www.pi-brand.cn/index.php/home/api/guide_list" Parameter:nil succeed:^(NSURLSessionDataTask *task, id responseObject) {
-        BOOL succeed = [[responseObject objectForKey:@"status"]boolValue];
-        if (succeed) {
-            dataArray = [responseObject objectForKey:@"data"];
-            kCount = dataArray.count;
-//            width = [[responseObject objectForKey:@"width"] floatValue];
-//            height = [[responseObject objectForKey:@"height"] floatValue];;
-//            [self addScrollView];
-//            
-//            [self addScrollImages];
-//            
-//            [self addPageControl];
-            haveNet = YES;
-        }else{
-            haveNet = NO;
-        }
-    } failed:^(NSURLSessionDataTask *task, NSError *error) {
-        haveNet = NO;
-    } netWork:^(BOOL netWork) {
-        
-    }];
+    
     
 }
 
@@ -143,14 +123,23 @@ static NSInteger kCount = 3;
 
 -(void)pressBut:(id)sender
 {
-    if (haveNet) {
-        [UIApplication sharedApplication].keyWindow.rootViewController = self.sideMenuViewController;
-        [UserDefault setObject:newVersion forKey:versionKey];
-        [UserDefault synchronize];
-    }else{
+    
+    [[HTTPRequest instance]PostRequestWithURL:@"http://www.pi-brand.cn/index.php/home/api/guide_list" Parameter:nil succeed:^(NSURLSessionDataTask *task, id responseObject) {
+        BOOL succeed = [[responseObject objectForKey:@"status"]boolValue];
+        if (succeed) {
+            [UIApplication sharedApplication].keyWindow.rootViewController = self.sideMenuViewController;
+            [UserDefault setObject:newVersion forKey:versionKey];
+            [UserDefault synchronize];
+        }else{
+            
+        }
+    } failed:^(NSURLSessionDataTask *task, NSError *error) {
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请到设置里面检查网络" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
         [alert show];
-    }
+    } netWork:^(BOOL netWork) {
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请到设置里面检查网络" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+        [alert show];
+    }];
     
 }
 
