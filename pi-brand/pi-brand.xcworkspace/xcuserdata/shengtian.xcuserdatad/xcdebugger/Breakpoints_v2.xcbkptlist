@@ -43,38 +43,6 @@
             endingLineNumber = "40"
             landmarkName = "-setID:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ActiveViewController setID:]"
-                  moduleName = "pi-brand"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/Active/ActiveViewController.m"
-                  timestampString = "523415867.981396"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "41"
-                  endingLineNumber = "41"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__30-[ActiveViewController setID:]_block_invoke"
-                  moduleName = "pi-brand"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/Active/ActiveViewController.m"
-                  timestampString = "523415867.982656"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

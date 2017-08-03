@@ -17,9 +17,6 @@ static NSInteger kCount = 3;
     UIScrollView *_scroll;
     NSArray* dataArray;
     UIButton* _lastBtn;
-//    CGFloat width;
-//    CGFloat height;
-    BOOL haveNet;
     
 }
 @end
@@ -131,14 +128,14 @@ static NSInteger kCount = 3;
             [UserDefault setObject:newVersion forKey:versionKey];
             [UserDefault synchronize];
         }else{
-            
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请到设置里面检查网络" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+            [alert show];
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
         UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请到设置里面检查网络" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
         [alert show];
     } netWork:^(BOOL netWork) {
-        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请到设置里面检查网络" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
-        [alert show];
+        
     }];
     
 }
