@@ -92,6 +92,10 @@
 		2DB773EA1F2ECA7700F3FD6B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB7739F1F2ECA7700F3FD6B /* WebViewController.m */; };
 		60CCFE4F1F2F677300593335 /* shareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 60CCFE4E1F2F677300593335 /* shareModel.m */; };
 		60D4FFB31F333DF1003FB479 /* Londing.gif in Resources */ = {isa = PBXBuildFile; fileRef = 60D4FFB21F333DF1003FB479 /* Londing.gif */; };
+		60D4FFB71F338FB6003FB479 /* HotTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D4FFB51F338FB6003FB479 /* HotTableViewCell.m */; };
+		60D4FFB81F338FB6003FB479 /* HotTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60D4FFB61F338FB6003FB479 /* HotTableViewCell.xib */; };
+		60D4FFBC1F338FD1003FB479 /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D4FFBA1F338FD1003FB479 /* HistoryTableViewCell.m */; };
+		60D4FFBD1F338FD1003FB479 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60D4FFBB1F338FD1003FB479 /* HistoryTableViewCell.xib */; };
 		9900CE6A89210B346DA5BACE /* libPods-pi-brand.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E605B0FD89D800C42EFCA0 /* libPods-pi-brand.a */; };
 /* End PBXBuildFile section */
 
@@ -268,6 +272,12 @@
 		60CCFE4D1F2F677300593335 /* shareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareModel.h; sourceTree = "<group>"; };
 		60CCFE4E1F2F677300593335 /* shareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareModel.m; sourceTree = "<group>"; };
 		60D4FFB21F333DF1003FB479 /* Londing.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Londing.gif; sourceTree = "<group>"; };
+		60D4FFB41F338FB6003FB479 /* HotTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTableViewCell.h; sourceTree = "<group>"; };
+		60D4FFB51F338FB6003FB479 /* HotTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTableViewCell.m; sourceTree = "<group>"; };
+		60D4FFB61F338FB6003FB479 /* HotTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotTableViewCell.xib; sourceTree = "<group>"; };
+		60D4FFB91F338FD1003FB479 /* HistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewCell.h; sourceTree = "<group>"; };
+		60D4FFBA1F338FD1003FB479 /* HistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewCell.m; sourceTree = "<group>"; };
+		60D4FFBB1F338FD1003FB479 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		91E605B0FD89D800C42EFCA0 /* libPods-pi-brand.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pi-brand.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5FF3448825EFB25CB3C30EA /* Pods-pi-brand.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pi-brand.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pi-brand/Pods-pi-brand.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -652,6 +662,12 @@
 				2DB773961F2ECA7700F3FD6B /* SearchViewController.h */,
 				2DB773971F2ECA7700F3FD6B /* SearchViewController.m */,
 				2DB773981F2ECA7700F3FD6B /* SearchViewController.xib */,
+				60D4FFB41F338FB6003FB479 /* HotTableViewCell.h */,
+				60D4FFB51F338FB6003FB479 /* HotTableViewCell.m */,
+				60D4FFB61F338FB6003FB479 /* HotTableViewCell.xib */,
+				60D4FFB91F338FD1003FB479 /* HistoryTableViewCell.h */,
+				60D4FFBA1F338FD1003FB479 /* HistoryTableViewCell.m */,
+				60D4FFBB1F338FD1003FB479 /* HistoryTableViewCell.xib */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -822,6 +838,7 @@
 				2DB773B71F2ECA7700F3FD6B /* ActiveViewController.xib in Resources */,
 				2DB772DA1F2EC87200F3FD6B /* Assets.xcassets in Resources */,
 				2DB773E51F2ECA7700F3FD6B /* SearchTableViewCell.xib in Resources */,
+				60D4FFB81F338FB6003FB479 /* HotTableViewCell.xib in Resources */,
 				2DB773D41F2ECA7700F3FD6B /* MenuTableViewCell2.xib in Resources */,
 				2DB773CD1F2ECA7700F3FD6B /* MainTableViewCell.xib in Resources */,
 				2DB773D21F2ECA7700F3FD6B /* MenuTableViewCell.xib in Resources */,
@@ -832,6 +849,7 @@
 				2DB773C71F2ECA7700F3FD6B /* JoinusViewCellCell.xib in Resources */,
 				2DB773C91F2ECA7700F3FD6B /* JoinusViewController.xib in Resources */,
 				2DB773BB1F2ECA7700F3FD6B /* companyContentTableViewCell.xib in Resources */,
+				60D4FFBD1F338FD1003FB479 /* HistoryTableViewCell.xib in Resources */,
 				2DB773E71F2ECA7700F3FD6B /* SearchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -916,8 +934,10 @@
 				2DB773B11F2ECA7700F3FD6B /* XLConst.m in Sources */,
 				2DB773D91F2ECA7700F3FD6B /* Product1Cell.m in Sources */,
 				2DB773B01F2ECA7700F3FD6B /* UIViewController+XLScroll.m in Sources */,
+				60D4FFBC1F338FD1003FB479 /* HistoryTableViewCell.m in Sources */,
 				2DB773AC1F2ECA7700F3FD6B /* HTTPRequest.m in Sources */,
 				2DB773B41F2ECA7700F3FD6B /* ShareView.m in Sources */,
+				60D4FFB71F338FB6003FB479 /* HotTableViewCell.m in Sources */,
 				2DB773AF1F2ECA7700F3FD6B /* XLSegmentBar.m in Sources */,
 				2DB773A41F2ECA7700F3FD6B /* NSData+extension.m in Sources */,
 				2DB773AE1F2ECA7700F3FD6B /* NSString+XLSegmentModelPrtol.m in Sources */,

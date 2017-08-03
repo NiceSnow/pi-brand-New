@@ -10,11 +10,13 @@
 #import "SearchTableViewCell.h"
 #import "searchModel.h"
 #import "WebViewController.h"
+#import "HotTableViewCell.h"
 
 @interface SearchViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *search;
 @property (nonatomic, strong) NSMutableArray* dataArray;
+@property (nonatomic, strong) NSMutableArray* hintArray;
 
 @end
 
@@ -46,13 +48,37 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.dataArray.count;
+    if (self.dataArray.count) {
+        return self.dataArray.count;
+    }else
+    return 1;
+}
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if (_hintArray.count>0) {
+        return 2;
+    }else
+        return 1;
+}
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (self.dataArray.count>0) {
+        return nil;
+    }else{
+        UIView* view = [UIView new];
+        return view;
+    }
+    return nil;
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    SearchTableViewCell* cell = [SearchTableViewCell createCellWithTableView:tableView];
-    [cell addDataWithModel:self.dataArray[indexPath.row]];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+    if (self.dataArray.count>0) {
+        SearchTableViewCell* cell = [SearchTableViewCell createCellWithTableView:tableView];
+        [cell addDataWithModel:self.dataArray[indexPath.row]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }else{
+        HotTableViewCell* cell = [HotTableViewCell createCellWithTableView:tableView];
+        return cell;
+    }
+    return nil;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,6 +104,24 @@
     _tableView.rowHeight = UITableViewAutomaticDimension;
     _tableView.tableFooterView = [UIView new];
     _search.backgroundColor = [UIColor whiteColor];
+    _hintArray = [@[@"hafou",@"hafou",@"hafou",@"hafou",@"hafou",@"hafou"]mutableCopy];
+    [[HTTPRequest instance]PostRequestWithURL:@"http://www.pi-brand.cn/index.php/home/api/search_key" Parameter:@{@"search":_search.text} succeed:^(NSURLSessionDataTask *task, id responseObject) {
+        BOOL succeed = [[responseObject objectForKey:@"status"]boolValue];
+        if (succeed) {
+            NSArray* dataArr = [responseObject objectForKey:@"data"];
+            [searchModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+                return @{@"ID" : @"id"};
+            }];
+            self.dataArray = [searchModel mj_objectArrayWithKeyValuesArray:dataArr];
+            if (self.dataArray) {
+                [self.tableView reloadData];
+            }
+        }
+    } failed:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    } netWork:^(BOOL netWork) {
+        
+    }];
     // Do any additional setup after loading the view from its nib.
 }
 
