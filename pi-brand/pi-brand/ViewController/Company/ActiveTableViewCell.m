@@ -24,7 +24,10 @@
     _secTitle.text = modle.vice_heading;
     _mainTitle.text = modle.title;
     if (modle.img.length>0) {
-        [_headerIamgeView sd_setImageWithURL:[modle.img safeUrlString] placeholderImage:nil];
+        [UIView transitionWithView:_headerIamgeView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [_headerIamgeView sd_setImageWithURL:[modle.img safeUrlString] placeholderImage:nil];
+            _headerIamgeView.alpha = 1;
+        } completion:nil];
     }
 }
 
@@ -49,6 +52,7 @@
             make.width.mas_equalTo(screenWidth-50);
             make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
         }];
+        _headerIamgeView.alpha = 0;
     }
     return self;
 }

@@ -52,7 +52,7 @@
     
     _backImageView = [UIImageView new];
     [self.view addSubview:_backImageView];
-    _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, -(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate, screenHeight);
+    _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(10);
@@ -76,7 +76,10 @@
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
             if (urlString.length>0) {
-                [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+                [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                    [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+                    _backImageView.alpha = 1;
+                } completion:nil];
             }
             [mainModle mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
                 return @{@"ID" : @"id"};
@@ -85,6 +88,9 @@
             if (self.dataArray.count) {
                 [self.tableView reloadData];
                 [self.HUD removeFromSuperview];
+                [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                    self.tableView.alpha = 1;
+                } completion:nil];
             }
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
@@ -161,6 +167,7 @@
         _tableView.tableFooterView = [UIView new];
         _tableView.tableHeaderView = self.headerView;
         _tableView.bounces = NO;
+        _tableView.alpha = 0;
     }
     return _tableView;
 }
@@ -176,14 +183,14 @@
     if (offset>=BackZoomHeight) {
         if (!_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(-BackZoomRate/2-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomRate/2-(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate + BackZoomRate, screenHeight + BackZoomRate) ;
+                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight) ;
             }];
             _zoom = YES;
         }
     }else{
         if (_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, -(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate, screenHeight);
+                _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
                 
             }];
             _zoom = NO;

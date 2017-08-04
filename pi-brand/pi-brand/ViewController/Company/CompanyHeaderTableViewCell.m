@@ -20,7 +20,11 @@
 
 -(void)addDataWith:(companyHeaderModel*)headerModle;{
     if (headerModle.image.length>0) {
-        [self.img sd_setImageWithURL:[headerModle.image safeUrlString] placeholderImage:nil];
+        [UIView transitionWithView:self.img duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [self.img sd_setImageWithURL:[headerModle.image safeUrlString] placeholderImage:nil];
+            self.img.alpha = 1;
+        } completion:nil];
+        
     }
     self.secTitle.text = headerModle.title;
 }
@@ -46,6 +50,7 @@
             make.width.mas_equalTo((screenWidth-20)/2);
             make.height.mas_equalTo((screenWidth-20)/2*77.53/180);
         }];
+        _img.alpha = 0;
     }
     return self;
 }

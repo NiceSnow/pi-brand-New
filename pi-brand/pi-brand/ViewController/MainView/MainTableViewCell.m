@@ -20,10 +20,16 @@
 
 -(void)addDataWithModel:(mainModle*)model;{
     if (model.vice_img.length>0) {
-        [_titleImage sd_setImageWithURL:[model.vice_img safeUrlString]  placeholderImage:nil];
+        [UIView transitionWithView:_titleImage duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [_titleImage sd_setImageWithURL:[model.vice_img safeUrlString]  placeholderImage:nil];
+            _titleImage.alpha = 1;
+        } completion:nil];
     }
     if (model.img.length>0) {
-        [_mainImage sd_setImageWithURL:[model.img safeUrlString]  placeholderImage:nil];
+        [UIView transitionWithView:_mainImage duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [_mainImage sd_setImageWithURL:[model.img safeUrlString]  placeholderImage:nil];
+            _mainImage.alpha = 1;
+        } completion:nil];
     }
     
     _mainTitle.text = model.title;
@@ -52,7 +58,8 @@
             make.width.mas_equalTo(screenWidth-50);
             make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
         }];
-        
+        _titleImage.alpha = 0;
+        _mainImage.alpha = 0;
     }
     return self;
 }

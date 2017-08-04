@@ -63,7 +63,11 @@
         make.right.offset(-10);
     }];
     if (_headModel.icon.length>0) {
-        [imageview sd_setImageWithURL:[_headModel.icon safeUrlString] placeholderImage:nil];
+        imageview.alpha = 0;
+        [UIView transitionWithView:imageview duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [imageview sd_setImageWithURL:[_headModel.icon safeUrlString] placeholderImage:nil];
+            imageview.alpha = 1;
+        } completion:nil];
     }
     [witView addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {

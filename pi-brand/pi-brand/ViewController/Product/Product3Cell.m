@@ -40,6 +40,7 @@
             make.width.mas_equalTo(screenWidth-50);
             make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
         }];
+        _backImageView.alpha = 0;
         _contentLabel.numberOfLines = 2;
     }
     return self;
@@ -47,7 +48,10 @@
 - (void)setDict:(NSDictionary *)dict{
     _dict = dict;
     if ([dict[@"img"] length]>0) {
-        [_backImageView sd_setImageWithURL:[dict[@"img"] safeUrlString]];
+        [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [_backImageView sd_setImageWithURL:[dict[@"img"] safeUrlString]];
+            _backImageView.alpha = 1;
+        } completion:nil];
     }
     
     _titleLabel.text = dict[@"title"];

@@ -22,6 +22,7 @@
 @property (nonatomic, strong)NSDictionary * jobDict;
 @property(nonatomic,strong) HUDView* HUD;
 @property(nonatomic ,assign) BOOL zoom;
+@property(nonatomic ,assign)BOOL first;
 
 @end
 
@@ -57,7 +58,7 @@
     
     _backImageView = [UIImageView new];
     [self.view insertSubview:_backImageView atIndex:0];
-    _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, -(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate, screenHeight);
+    _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
     _dataArray = [NSMutableArray array];
     UIView * headerView = [UIView new];
     headerView.backgroundColor = [UIColor clearColor];
@@ -69,6 +70,7 @@
     _tableview.rowHeight = UITableViewAutomaticDimension;
     _tableview.showsVerticalScrollIndicator = NO;
     _tableview.bounces = NO;
+    _tableview.alpha = 0;
     self.navigationItem.titleView = self.titleView;
     [self.view addSubview:self.HUD];
     [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -82,14 +84,14 @@
     if (offset>=BackZoomHeight) {
         if (!_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(-BackZoomRate/2-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomRate/2-(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate + BackZoomRate, screenHeight + BackZoomRate) ;
+                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight) ;
             }];
             _zoom = YES;
         }
     }else{
         if (_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, -(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate, screenHeight);
+                _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
                 
             }];
             _zoom = NO;
@@ -104,7 +106,11 @@
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
             if (urlString.length>0) {
-                [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+                
+                [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                    [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+                    _backImageView.alpha = 1;
+                } completion:nil];
             }
             
             [joinMainModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
@@ -121,7 +127,9 @@
             [self getmessageWithJobID:model1.m_id];
             [_tableview reloadData];
             [self.HUD removeFromSuperview];
-            
+            [UIView transitionWithView:self.tableview duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                self.tableview.alpha = 1;
+            } completion:nil];
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -138,7 +146,13 @@
         if (succeed) {
             
             _jobDict = [responseObject objectForKey:@"data"];
-            [self.tableview reloadData];
+            
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+            [self.tableview reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            if (_first) {
+                [self.tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]  atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            }
+            _first = YES;
             
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
@@ -174,6 +188,7 @@
         cell.block = ^(NSInteger index) {
             joinSubModel *model = weakSelf.dataArray[1][index];
             [weakSelf getmessageWithJobID:model.m_id];
+            
         };
         return cell;
     }

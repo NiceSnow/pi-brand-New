@@ -27,6 +27,7 @@
 @property (nonatomic, strong)NSDictionary *dict;
 @property (nonatomic, strong)ShareView               * shareView;
 @property(nonatomic,strong) shareModel* shareModel;
+@property(nonatomic,strong) HUDView* HUD;
 @end
 
 @implementation Product1TableViewController
@@ -43,7 +44,9 @@
     self.tableView.separatorStyle = 0;
     self.tableView.estimatedSectionHeaderHeight = 5;
     self.tableView.bounces = NO;
+    self.tableView.alpha = 0;
     [self getdataWithCityID:10000];
+    [self.view addSubview:self.HUD];
 }
 
 
@@ -63,7 +66,10 @@
             self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             _dict = data;
             [self.tableView reloadData];
-            
+            [self.HUD removeFromSuperview];
+            [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                self.tableView.alpha = 1;
+            } completion:nil];
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -103,7 +109,10 @@
     
     UIImageView * imageView = [[UIImageView alloc]init];
     if ([proArray[section][@"img"] length]>0) {
-        [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] placeholderImage:nil];
+        [UIView transitionWithView:imageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] placeholderImage:nil];
+            imageView.alpha = 1;
+        } completion:nil];
     }
     [backView addSubview:imageView];
     _backImageView = imageView;
@@ -112,7 +121,11 @@
     if (section == 0) {
         UIImageView * logoImageView = [[UIImageView alloc]init];
         if ([_dict[@"head"][@"icon"] length]>0) {
-            [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString]];
+            logoImageView.alpha = 0;
+            [UIView transitionWithView:logoImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString]];
+                logoImageView.alpha = 1;
+            } completion:nil];
         }
         
         [backView addSubview:logoImageView];
@@ -327,5 +340,13 @@
         
     }
     return _shareView;
+}
+
+-(HUDView *)HUD{
+    if (!_HUD) {
+        _HUD = [HUDView new];
+        
+    }
+    return _HUD;
 }
 @end

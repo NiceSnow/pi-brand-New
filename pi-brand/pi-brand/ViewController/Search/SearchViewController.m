@@ -26,6 +26,7 @@
     [self.historyArray removeAllObjects];
     [UserDefault setObject:self.historyArray forKey:@"history"];
     [UserDefault synchronize];
+    [self.tableView reloadData];
 }
 
 - (IBAction)searchPress:(id)sender {

@@ -40,13 +40,17 @@
             make.width.mas_equalTo(screenWidth-50);
             make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
         }];
+        _backImageView.alpha = 0;
     }
     return self;
 }
 - (void)setDict:(NSDictionary *)dict{
     _dict = dict;
     if ([dict[@"store_img"] length]>0) {
-        [_backImageView sd_setImageWithURL:[dict[@"store_img"] safeUrlString]];
+        [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [_backImageView sd_setImageWithURL:[dict[@"store_img"] safeUrlString]];
+            _backImageView.alpha = 1;
+        } completion:nil];
     }
     
     _titleLabel.text = dict[@"store_name"];

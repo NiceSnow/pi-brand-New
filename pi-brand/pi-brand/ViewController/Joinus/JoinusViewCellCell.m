@@ -52,13 +52,12 @@
         }];
     
         [_mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.offset(10);
-//            make.right.offset(-10);
-//            make.height.mas_equalTo((screenWidth-20)*9/10*187/291);
             make.width.mas_equalTo(screenWidth-50);
             make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
         }];
-        
+        _logoImageView.alpha = 0;
+        _iconImageView.alpha = 0;
+        _mainImageView.hidden = 0;
         
     }
     return self;
@@ -71,15 +70,25 @@
     
     joinMainModel* mainModel = dataArray[1];
     if (model.icon.length>0) {
-        [_logoImageView sd_setImageWithURL:[model.icon safeUrlString]];
+        [UIView transitionWithView:_logoImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [_logoImageView sd_setImageWithURL:[model.icon safeUrlString]];
+            _logoImageView.alpha = 1;
+        } completion:nil];
     }
     if (model.image.length>0) {
-        [_iconImageView sd_setImageWithURL:[model.image safeUrlString]];
+        [UIView transitionWithView:_iconImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [_iconImageView sd_setImageWithURL:[model.image safeUrlString]];
+            _iconImageView.alpha = 1;
+        } completion:nil];
     }
     
     _desLabel.text = model.title;
     if (mainModel.img.length>0) {
-        [_mainImageView sd_setImageWithURL:[mainModel.img safeUrlString]];
+        
+        [UIView transitionWithView:_mainImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [_mainImageView sd_setImageWithURL:[mainModel.img safeUrlString]];
+            _mainImageView.alpha = 1;
+        } completion:nil];
     }
     
     _titleLabel.text = mainModel.title;

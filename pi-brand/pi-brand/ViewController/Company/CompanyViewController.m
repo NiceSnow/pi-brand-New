@@ -90,11 +90,13 @@
     self.bar.frame = CGRectMake(0, navBarH + headerImgH, self.view.bounds.size.width, barH);
     
     // 选中第0个VC
+    [self selectedIndex:1];
     [self selectedIndex:0];
     
     _backImageView = [UIImageView new];
+//    _backImageView.alpha = 0;
     [self.view insertSubview:_backImageView atIndex:0];
-    _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, -(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate, screenHeight);
+    _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
     
     self.navigationItem.titleView = self.titleView;
     
@@ -126,8 +128,10 @@
     [self.contentView setContentOffset:CGPointMake(index * self.contentView.frame.size.width, 0) animated:NO];
     _currentIndex = index;
     if (self.imageArray.count>=2) {
-        [_backImageView sd_setImageWithURL:self.imageArray[index]];
-        
+        [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [_backImageView sd_setImageWithURL:self.imageArray[index]];
+            _backImageView.alpha = 1;
+        } completion:nil];
     }
 }
 
@@ -177,14 +181,14 @@
     if (offset>=BackZoomHeight) {
         if (!_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(-BackZoomRate/2-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomRate/2-(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate + BackZoomRate, screenHeight + BackZoomRate) ;
+                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight) ;
             }];
             _zoom = YES;
         }
     }else{
         if (_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, -(screenHeight*BackImageRate - screenWidth)/2, screenHeight*BackImageRate, screenHeight);
+                _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
                 
             }];
             _zoom = NO;
@@ -249,7 +253,11 @@
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
             if (urlString.length>0) {
-                [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+//                _backImageView.alpha = 0;
+                [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                    [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+                    _backImageView.alpha = 1;
+                } completion:nil];
             }
             [self.imageArray addObject:[urlString safeUrlString]];
             self.sub1.headModel = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];

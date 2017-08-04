@@ -25,6 +25,7 @@
     self.tableView.estimatedRowHeight = 5;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.bounces = NO;
+    self.tableView.alpha = 0;
     [self getdata];
 }
 -(instancetype)initWithStyle:(UITableViewStyle)style
@@ -43,7 +44,9 @@
             
             _dict = data;
             [self.tableView reloadData];
-            
+            [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                self.tableView.alpha = 1;
+            } completion:nil];
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -64,7 +67,10 @@
     
     UIImageView * logoImageView = [[UIImageView alloc]init];
     if ([_dict[@"head"][@"icon"] length]>0) {
-        [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] placeholderImage:nil];
+        [UIView transitionWithView:logoImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] placeholderImage:nil];
+            logoImageView.alpha = 1;
+        } completion:nil];
     }
     
     [backView addSubview:logoImageView];
@@ -76,7 +82,10 @@
     
     UIImageView * backImageView = [[UIImageView alloc]init];
     if ([_dict[@"head"][@"image"] length]>0) {
-        [backImageView sd_setImageWithURL:[_dict[@"head"][@"image"] safeUrlString] placeholderImage:nil];
+        [UIView transitionWithView:backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [backImageView sd_setImageWithURL:[_dict[@"head"][@"image"] safeUrlString] placeholderImage:nil];
+            backImageView.alpha = 1;
+        } completion:nil];
     }
 
     [backView addSubview:backImageView];

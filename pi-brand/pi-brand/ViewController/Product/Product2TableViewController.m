@@ -35,6 +35,7 @@
     self.tableView.estimatedRowHeight = 5;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.bounces = NO;
+    self.tableView.alpha = 0;
     [self getdata];
 }
 
@@ -51,6 +52,9 @@
             _dict = data;
             self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             [self.tableView reloadData];
+            [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                self.tableView.alpha = 1;
+            } completion:nil];
             
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
@@ -78,7 +82,10 @@
     
     UIImageView * logoImageView = [[UIImageView alloc]init];
     if ([_dict[@"head"][@"icon"] length]>0) {
-        [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] placeholderImage:nil];
+        [UIView transitionWithView:logoImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] placeholderImage:nil];
+            logoImageView.alpha = 1;
+        } completion:nil];
     }
     [backView addSubview:logoImageView];
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
