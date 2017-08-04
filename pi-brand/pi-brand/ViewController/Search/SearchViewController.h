@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchViewController : UIViewController
-
+- (IBAction)searchPress:(id)sender;
 @end

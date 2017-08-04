@@ -4,7 +4,6 @@
 //
 //  Created by Madodg on 2017/7/29.
 //  Copyright © 2017年 Madodg. All rights reserved.
-//
 
 #import "HUDView.h"
 
@@ -16,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        NSString  *filePath = [[NSBundle bundleWithPath:[[NSBundle mainBundle] bundlePath]] pathForResource:@"loding.gif" ofType:nil];
+        NSString  *filePath = [[NSBundle bundleWithPath:[[NSBundle mainBundle] bundlePath]] pathForResource:@"Londing.gif" ofType:nil];
         
         NSData  *imageData = [NSData dataWithContentsOfFile:filePath];
         UIImageView* imageView = [UIImageView new];

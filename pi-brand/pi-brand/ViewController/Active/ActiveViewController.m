@@ -102,10 +102,6 @@
         make.bottom.offset(0);
         make.centerX.equalTo(self.view);
     }];
-    [self.view addSubview:self.HUD];
-    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
     
     [self.tableView reloadData];
     [self.webView loadHTMLString:_contentModel.Description baseURL:nil];
