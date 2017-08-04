@@ -84,6 +84,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    
     return [_dict[@"pro"] count];
 }
 
@@ -108,13 +109,14 @@
     }
     
     UIImageView * imageView = [[UIImageView alloc]init];
-    if ([proArray[section][@"img"] length]>0) {
-        [UIView transitionWithView:imageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] placeholderImage:nil];
-            imageView.alpha = 1;
-        } completion:nil];
-    }
+    if (section == 0) {
+        imageView.alpha = 1;
+    }else
+        imageView.alpha = 0.7;
     [backView addSubview:imageView];
+    if ([proArray[section][@"img"] length]>0) {
+        [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] placeholderImage:nil];
+    }
     _backImageView = imageView;
     
     
@@ -269,6 +271,9 @@
     return UITableViewAutomaticDimension;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        _backImageView.alpha = 1;
+    } completion:nil];
     Product1Cell *cell = [Product1Cell createCellWithTableView:tableView];
     if (_dict) {
         NSString * content = nil;

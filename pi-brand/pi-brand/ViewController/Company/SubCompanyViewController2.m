@@ -30,6 +30,9 @@
 -(void)setRes:(NSArray<subModel2 *> *)res{
     _res = res;
     [self.tableView reloadData];
+    [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.tableView.alpha = 1;
+    } completion:nil];
 }
 
 - (void)viewDidLoad {
@@ -44,6 +47,7 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.bounces = NO;
+    self.tableView.alpha = 0;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

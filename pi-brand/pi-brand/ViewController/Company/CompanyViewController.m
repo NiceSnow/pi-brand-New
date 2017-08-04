@@ -94,7 +94,6 @@
     [self selectedIndex:0];
     
     _backImageView = [UIImageView new];
-//    _backImageView.alpha = 0;
     [self.view insertSubview:_backImageView atIndex:0];
     _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
     
@@ -253,7 +252,6 @@
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
             if (urlString.length>0) {
-//                _backImageView.alpha = 0;
                 [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                     [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
                     _backImageView.alpha = 1;
