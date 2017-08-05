@@ -36,7 +36,6 @@
 @property (nonatomic, strong) SubCompanyViewController1* sub1;
 @property (nonatomic, strong) SubCompanyViewController2* sub2;
 
-@property(nonatomic,strong) HUDView* HUD;
 @property(nonatomic,assign) BOOL zoom;
 
 @end
@@ -94,15 +93,13 @@
     [self selectedIndex:0];
     
     _backImageView = [UIImageView new];
+    _backImageView.alpha = 0;
     [self.view insertSubview:_backImageView atIndex:0];
     _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
     
     self.navigationItem.titleView = self.titleView;
     
-    [self.view addSubview:self.HUD];
-    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
+    [HUDView showHUD:self];
     [self getdata];
     UISwipeGestureRecognizer * recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
@@ -158,10 +155,22 @@
     [self.contentView setContentOffset:CGPointMake(index * self.contentView.frame.size.width, 0) animated:NO];
     _currentIndex = index;
     if (self.imageArray.count>=2) {
-        [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [_backImageView sd_setImageWithURL:self.imageArray[index]];
-            _backImageView.alpha = 1;
-        } completion:nil];
+        UIImageView* newbackImageView = [UIImageView new];
+        newbackImageView.alpha = 0;
+        [self.view insertSubview:newbackImageView atIndex:0];
+        newbackImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
+        [UIView transitionWithView:newbackImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            _backImageView.alpha = 0;
+            [newbackImageView sd_setImageWithURL:self.imageArray[index]];
+            newbackImageView.alpha = 1;
+            
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [_backImageView removeFromSuperview];
+                _backImageView = nil;
+                _backImageView = newbackImageView;
+            }
+        }];
     }
 }
 
@@ -283,12 +292,7 @@
         if (succeed) {
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
-            if (urlString.length>0) {
-                [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-                    [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
-                    _backImageView.alpha = 1;
-                } completion:nil];
-            }
+            
             [self.imageArray addObject:[urlString safeUrlString]];
             self.sub1.headModel = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];
             [companyContentModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
@@ -297,7 +301,12 @@
             self.sub1.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             self.sub1.contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
             [self getdata2];
-            
+            if (urlString.length>0) {
+                [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                    [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+                    _backImageView.alpha = 1;
+                } completion:nil];
+            }
 
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
@@ -320,7 +329,7 @@
                          };
             }];
             self.sub2.res = [subModel2 mj_objectArrayWithKeyValuesArray:[data objectForKey:@"res"]];
-            [self.HUD removeFromSuperview];
+            [HUDView hiddenHUD];
             
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
@@ -372,13 +381,7 @@
     return _titleView;
 }
 
--(HUDView *)HUD{
-    if (!_HUD) {
-        _HUD = [HUDView new];
-        
-    }
-    return _HUD;
-}
+
 /*
 #pragma mark - Navigation
 

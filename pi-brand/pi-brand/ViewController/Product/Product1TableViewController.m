@@ -46,7 +46,6 @@
     self.tableView.bounces = NO;
     self.tableView.alpha = 0;
     [self getdataWithCityID:10000];
-    [self.view addSubview:self.HUD];
 }
 
 
@@ -66,10 +65,10 @@
             self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             _dict = data;
             [self.tableView reloadData];
-            [self.HUD removeFromSuperview];
-            [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 self.tableView.alpha = 1;
             } completion:nil];
+            [HUDView hiddenHUD];
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -124,7 +123,7 @@
         UIImageView * logoImageView = [[UIImageView alloc]init];
         if ([_dict[@"head"][@"icon"] length]>0) {
             logoImageView.alpha = 0;
-            [UIView transitionWithView:logoImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [UIView transitionWithView:logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString]];
                 logoImageView.alpha = 1;
             } completion:nil];
@@ -271,7 +270,7 @@
     return UITableViewAutomaticDimension;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         _backImageView.alpha = 1;
     } completion:nil];
     Product1Cell *cell = [Product1Cell createCellWithTableView:tableView];
@@ -347,11 +346,4 @@
     return _shareView;
 }
 
--(HUDView *)HUD{
-    if (!_HUD) {
-        _HUD = [HUDView new];
-        
-    }
-    return _HUD;
-}
 @end

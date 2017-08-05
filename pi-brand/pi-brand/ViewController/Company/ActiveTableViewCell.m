@@ -24,7 +24,7 @@
     _secTitle.text = modle.vice_heading;
     _mainTitle.text = modle.title;
     if (modle.img.length>0) {
-        [UIView transitionWithView:_headerIamgeView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:_headerIamgeView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [_headerIamgeView sd_setImageWithURL:[modle.img safeUrlString] placeholderImage:nil];
             _headerIamgeView.alpha = 1;
         } completion:nil];

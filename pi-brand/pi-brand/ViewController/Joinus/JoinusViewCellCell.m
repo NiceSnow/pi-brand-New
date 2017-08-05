@@ -70,13 +70,13 @@
     
     joinMainModel* mainModel = dataArray[1];
     if (model.icon.length>0) {
-        [UIView transitionWithView:_logoImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:_logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [_logoImageView sd_setImageWithURL:[model.icon safeUrlString]];
             _logoImageView.alpha = 1;
         } completion:nil];
     }
     if (model.image.length>0) {
-        [UIView transitionWithView:_iconImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:_iconImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [_iconImageView sd_setImageWithURL:[model.image safeUrlString]];
             _iconImageView.alpha = 1;
         } completion:nil];
@@ -85,7 +85,7 @@
     _desLabel.text = model.title;
     if (mainModel.img.length>0) {
         
-        [UIView transitionWithView:_mainImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:_mainImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [_mainImageView sd_setImageWithURL:[mainModel.img safeUrlString]];
             _mainImageView.alpha = 1;
         } completion:nil];

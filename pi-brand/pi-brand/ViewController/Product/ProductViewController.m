@@ -21,7 +21,7 @@
 {
     NSInteger _currentIndex;
 }
-@property(nonatomic,strong) HUDView* HUD;
+
 @property (nonatomic, strong) UIView* titleView;
 @property (nonatomic,strong) XLScrollView *contentView;
 @property (nonatomic,weak) UIImageView *header;
@@ -80,8 +80,8 @@
     self.bar.frame = CGRectMake(0, navBarH + headerImgH, self.view.bounds.size.width, barH);
     
     // 选中第0个VC
-//    [self selectedIndex:2];
-//    [self selectedIndex:1];
+    [self selectedIndex:2];
+    [self selectedIndex:1];
     [self selectedIndex:0];
     _backImageView = [UIImageView new];
     _backImageView.alpha = 0;
@@ -91,16 +91,13 @@
     _backImageArray = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getImageURl:) name:kGetImageURLKey object:nil];
     self.navigationItem.titleView = self.titleView;
-    [self.view addSubview:self.HUD];
-    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
     UISwipeGestureRecognizer * recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self.view addGestureRecognizer:recognizer];
     UISwipeGestureRecognizer * Rightrecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
     [Rightrecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [self.view addGestureRecognizer:Rightrecognizer];
+    [HUDView showHUD:self];
 }
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
     if(recognizer.direction == UISwipeGestureRecognizerDirectionDown) {
@@ -132,16 +129,28 @@
 }
 - (void)getImageURl:(NSNotification *)not
 {
-    [self.HUD removeFromSuperview];
+    
     NSString * imageURL = [not.userInfo objectForKey:kGetImageURLKey];
     if (_backImageArray.count<=3) {
         [_backImageArray addObject:imageURL];
     }
     if (imageURL.length>0) {
-        [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [_backImageView sd_setImageWithURL:[imageURL safeUrlString]];
-            _backImageView.alpha = 1;
-        } completion:nil];
+        UIImageView* newbackImageView = [UIImageView new];
+        newbackImageView.alpha = 0;
+        [self.view insertSubview:newbackImageView atIndex:0];
+        newbackImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
+        [UIView transitionWithView:newbackImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            _backImageView.alpha = 0;
+            [newbackImageView sd_setImageWithURL:[imageURL safeUrlString]];
+            newbackImageView.alpha = 1;
+            
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [_backImageView removeFromSuperview];
+                _backImageView = nil;
+                _backImageView = newbackImageView;
+            }
+        }];
     }
     
 }
@@ -179,7 +188,7 @@
     self.bar.changeIndex = i;
     _pageControl.currentPage = i;
     if (_backImageArray.count>i) {
-        [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [_backImageView sd_setImageWithURL:[_backImageArray[i] safeUrlString]];
             _backImageView.alpha = 1;
         } completion:nil];
@@ -306,12 +315,5 @@
     return _titleView;
 }
 
--(HUDView *)HUD{
-    if (!_HUD) {
-        _HUD = [HUDView new];
-        
-    }
-    return _HUD;
-}
 
 @end

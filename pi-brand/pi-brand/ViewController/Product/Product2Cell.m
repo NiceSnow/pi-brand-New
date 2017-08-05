@@ -47,7 +47,7 @@
 - (void)setDict:(NSDictionary *)dict{
     _dict = dict;
     if ([dict[@"store_img"] length]>0) {
-        [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [_backImageView sd_setImageWithURL:[dict[@"store_img"] safeUrlString]];
             _backImageView.alpha = 1;
         } completion:nil];

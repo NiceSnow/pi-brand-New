@@ -12,6 +12,7 @@
 
 @interface Product3TableViewController ()
 @property (nonatomic, strong)NSDictionary * dict;
+
 @end
 
 @implementation Product3TableViewController
@@ -44,7 +45,7 @@
             
             _dict = data;
             [self.tableView reloadData];
-            [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 self.tableView.alpha = 1;
             } completion:nil];
         }
@@ -67,7 +68,7 @@
     
     UIImageView * logoImageView = [[UIImageView alloc]init];
     if ([_dict[@"head"][@"icon"] length]>0) {
-        [UIView transitionWithView:logoImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] placeholderImage:nil];
             logoImageView.alpha = 1;
         } completion:nil];
@@ -82,7 +83,7 @@
     
     UIImageView * backImageView = [[UIImageView alloc]init];
     if ([_dict[@"head"][@"image"] length]>0) {
-        [UIView transitionWithView:backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [backImageView sd_setImageWithURL:[_dict[@"head"][@"image"] safeUrlString] placeholderImage:nil];
             backImageView.alpha = 1;
         } completion:nil];

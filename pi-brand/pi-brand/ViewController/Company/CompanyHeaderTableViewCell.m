@@ -20,7 +20,7 @@
 
 -(void)addDataWith:(companyHeaderModel*)headerModle;{
     if (headerModle.image.length>0) {
-        [UIView transitionWithView:self.img duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:self.img duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [self.img sd_setImageWithURL:[headerModle.image safeUrlString] placeholderImage:nil];
             self.img.alpha = 1;
         } completion:nil];

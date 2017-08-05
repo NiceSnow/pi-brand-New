@@ -21,7 +21,6 @@
 @property(nonatomic,strong)   UIWebView* webView;
 @property (nonatomic, strong) UIView* footerView;
 @property (nonatomic, strong) UIView* headerView;
-@property(nonatomic,strong) HUDView* HUD;
 @property (nonatomic, strong) UIView* titleView;
 @property(nonatomic,assign) BOOL zoom;
 
@@ -90,7 +89,7 @@
     _backImageView.alpha = 0;
     [self.view addSubview:_backImageView];
     if (_backImageString.length>0) {
-        [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [_backImageView sd_setImageWithURL:[_backImageString safeUrlString]];
             _backImageView.alpha = 1;
         } completion:nil];
@@ -107,10 +106,7 @@
         make.centerX.equalTo(self.view);
     }];
     
-    [self.view addSubview:self.HUD];
-    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
+    [HUDView showHUD:self];
     [self.tableView reloadData];
     [self.webView loadHTMLString:_contentModel.Description baseURL:nil];
 
@@ -219,9 +215,9 @@
     self.webView.frame = CGRectMake(18, -1, screenWidth - 36, documentHeight);
     self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight + 10);
     self.tableView.tableFooterView = self.footerView;
-    [self.HUD removeFromSuperview];
+    [HUDView hiddenHUD];
     self.tableView.alpha = 0;
-    [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         self.tableView.alpha = 1;
     } completion:nil];
 }
@@ -255,14 +251,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(HUDView *)HUD{
-    if (!_HUD) {
-        _HUD = [HUDView new];
-        
-    }
-    return _HUD;
 }
 
 -(UIView *)titleView{

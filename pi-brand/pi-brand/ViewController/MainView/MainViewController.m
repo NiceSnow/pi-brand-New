@@ -10,7 +10,6 @@
 #import "MainTableViewCell.h"
 #import "SearchViewController.h"
 #import "mainModle.h"
-#import "HUDView.h"
 #import "CompanyViewController.h"
 #import "ProductViewController.h"
 #import "JoinusViewController.h"
@@ -23,7 +22,6 @@
 @property (nonatomic, strong) UIView* headerView;
 @property (nonatomic, strong) UIImageView* backImageView;
 @property (nonatomic, strong) NSMutableArray* dataArray;
-@property(nonatomic,strong) HUDView* HUD;
 @property(nonatomic ,assign) BOOL zoom;
 
 @end
@@ -52,6 +50,7 @@
     
     _backImageView = [UIImageView new];
     [self.view addSubview:_backImageView];
+    _backImageView.alpha = 0;
     _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -61,10 +60,7 @@
         make.bottom.offset(0);
         make.centerX.equalTo(self.view);
     }];
-    [self.view addSubview:self.HUD];
-    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
+    [HUDView showHUD:self];
     [self getdata];
     // Do any additional setup after loading the view from its nib.
 }
@@ -76,7 +72,7 @@
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
             if (urlString.length>0) {
-                [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                     [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
                     _backImageView.alpha = 1;
                 } completion:nil];
@@ -87,8 +83,8 @@
             self.dataArray = (NSMutableArray*)[mainModle mj_objectArrayWithKeyValuesArray:[data objectForKey:@"res"]];
             if (self.dataArray.count) {
                 [self.tableView reloadData];
-                [self.HUD removeFromSuperview];
-                [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                [HUDView hiddenHUD];
+                [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                     self.tableView.alpha = 1;
                 } completion:nil];
             }
@@ -222,13 +218,6 @@
     return _headerView;
 }
 
--(HUDView *)HUD{
-    if (!_HUD) {
-        _HUD = [HUDView new];
-        
-    }
-    return _HUD;
-}
 
 
 @end

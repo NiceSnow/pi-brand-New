@@ -30,7 +30,7 @@
 -(void)setRes:(NSArray<subModel2 *> *)res{
     _res = res;
     [self.tableView reloadData];
-    [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         self.tableView.alpha = 1;
     } completion:nil];
 }
@@ -68,7 +68,7 @@
     }];
     if (_headModel.icon.length>0) {
         imageview.alpha = 0;
-        [UIView transitionWithView:imageview duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:imageview duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [imageview sd_setImageWithURL:[_headModel.icon safeUrlString] placeholderImage:nil];
             imageview.alpha = 1;
         } completion:nil];

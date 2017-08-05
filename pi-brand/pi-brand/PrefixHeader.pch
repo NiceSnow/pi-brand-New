@@ -44,6 +44,8 @@ static NSString * const QQAppKey      = @"dqhN5dWv1W0yhsk0";
 //#define BackZoomRate  160
 #define BackZoomHeight 80
 #define BackZoomWith BackZoomHeight*BackImageRate
+#define during 1
+#define tableViewDuring 0.3
 
 #define UserDefault [NSUserDefaults standardUserDefaults]
 // Include any system framework and library headers here that should be included in all compilation units.

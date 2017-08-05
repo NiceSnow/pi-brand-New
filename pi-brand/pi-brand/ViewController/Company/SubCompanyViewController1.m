@@ -15,7 +15,6 @@
 @interface SubCompanyViewController1 ()<UIWebViewDelegate>
 @property(nonatomic,strong) UIWebView* webView;
 @property (nonatomic, strong) UIView* footerView;
-@property(nonatomic,strong) HUDView* HUD;
 @end
 
 @implementation SubCompanyViewController1
@@ -30,11 +29,6 @@
 
 -(void)setContentModel:(companyContentModel *)contentModel{
     _contentModel = contentModel;
-    [self.view addSubview:self.HUD];
-    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
-    [self.tableView reloadData];
     [self.webView loadHTMLString:_contentModel.content baseURL:nil];
 }
 
@@ -45,8 +39,8 @@
     self.webView.frame = CGRectMake(18, -1, screenWidth - 36, documentHeight + 10);
     self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight + 26);
     self.tableView.tableFooterView = self.footerView;
-    [self.HUD removeFromSuperview];
-    [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    [self.tableView reloadData];
+    [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         self.tableView.alpha = 1;
     } completion:nil];
 }
@@ -162,11 +156,4 @@
     return _footerView;
 }
 
--(HUDView *)HUD{
-    if (!_HUD) {
-        _HUD = [HUDView new];
-        
-    }
-    return _HUD;
-}
 @end

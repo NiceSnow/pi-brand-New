@@ -20,7 +20,6 @@
 @property (nonatomic, strong) UIImageView* backImageView;
 @property (nonatomic, strong)NSMutableArray * dataArray;
 @property (nonatomic, strong)NSDictionary * jobDict;
-@property(nonatomic,strong) HUDView* HUD;
 @property(nonatomic ,assign) BOOL zoom;
 @property(nonatomic ,assign)BOOL first;
 
@@ -72,10 +71,7 @@
     _tableview.bounces = NO;
     _tableview.alpha = 0;
     self.navigationItem.titleView = self.titleView;
-    [self.view addSubview:self.HUD];
-    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
+    [HUDView showHUD:self];
     [self getdata];
 }
 
@@ -107,7 +103,7 @@
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
             if (urlString.length>0) {
                 
-                [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                     [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
                     _backImageView.alpha = 1;
                 } completion:nil];
@@ -126,8 +122,8 @@
             joinSubModel * model1 = _dataArray[1][0];
             [self getmessageWithJobID:model1.m_id];
             [_tableview reloadData];
-            [self.HUD removeFromSuperview];
-            [UIView transitionWithView:self.tableview duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [HUDView hiddenHUD];
+            [UIView transitionWithView:self.tableview duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 self.tableview.alpha = 1;
             } completion:nil];
         }
@@ -218,13 +214,7 @@
     return 10;
 }
 
--(HUDView *)HUD{
-    if (!_HUD) {
-        _HUD = [HUDView new];
-        
-    }
-    return _HUD;
-}
+
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 //{
 //    return 0.0001;

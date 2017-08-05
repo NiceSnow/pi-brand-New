@@ -10,6 +10,26 @@
 #import "UIImage+GIF.h"
 
 @implementation HUDView
++ (HUDView *)Instance
+{
+    static HUDView *instance = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        instance = [[self alloc] init];
+    });
+    return instance;
+}
+
++(void)showHUD:(UIViewController*)VC;{
+    [VC.view addSubview:[HUDView Instance]];
+    [[HUDView Instance] mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.offset(0);
+    }];
+}
+
++(void)hiddenHUD;{
+    [[HUDView Instance] removeFromSuperview];
+}
 
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -32,7 +52,6 @@
         [doubleTap setNumberOfTapsRequired:2];
         
         [self addGestureRecognizer:doubleTap];
-//        [singleTap requireGestureRecognizerToFail:doubleTap];
     }
     return self;
 }
