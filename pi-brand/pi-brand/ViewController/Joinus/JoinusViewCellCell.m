@@ -70,25 +70,28 @@
     
     joinMainModel* mainModel = dataArray[1];
     if (model.icon.length>0) {
-        [UIView transitionWithView:_logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [_logoImageView sd_setImageWithURL:[model.icon safeUrlString]];
-            _logoImageView.alpha = 1;
-        } completion:nil];
+        [_logoImageView sd_setImageWithURL:[model.icon safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _logoImageView.alpha = 1;
+            } completion:nil];
+        }];
     }
     if (model.image.length>0) {
-        [UIView transitionWithView:_iconImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [_iconImageView sd_setImageWithURL:[model.image safeUrlString]];
-            _iconImageView.alpha = 1;
-        } completion:nil];
+        [_iconImageView sd_setImageWithURL:[model.image safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_iconImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _iconImageView.alpha = 1;
+            } completion:nil];
+        }];
     }
     
     _desLabel.text = model.title;
     if (mainModel.img.length>0) {
         
-        [UIView transitionWithView:_mainImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [_mainImageView sd_setImageWithURL:[mainModel.img safeUrlString]];
-            _mainImageView.alpha = 1;
-        } completion:nil];
+        [_mainImageView sd_setImageWithURL:[mainModel.img safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_mainImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _mainImageView.alpha = 1;
+            } completion:nil];
+        }];
     }
     
     _titleLabel.text = mainModel.title;

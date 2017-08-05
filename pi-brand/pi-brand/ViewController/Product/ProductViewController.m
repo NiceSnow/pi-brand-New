@@ -152,17 +152,17 @@
         newbackImageView.alpha = 0;
         [self.view insertSubview:newbackImageView atIndex:0];
         newbackImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
-        [UIView transitionWithView:newbackImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            _backImageView.alpha = 0;
-            [newbackImageView sd_setImageWithURL:[imageURL safeUrlString]];
-            newbackImageView.alpha = 1;
-            
-        } completion:^(BOOL finished) {
-            if (finished) {
-                [_backImageView removeFromSuperview];
-                _backImageView = nil;
-                _backImageView = newbackImageView;
-            }
+        [newbackImageView sd_setImageWithURL:[imageURL safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _backImageView.alpha = 0;
+                newbackImageView.alpha = 1;
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    [_backImageView removeFromSuperview];
+                    _backImageView = nil;
+                    _backImageView = newbackImageView;
+                }
+            }];
         }];
     }
     
@@ -195,17 +195,17 @@
 #pragma mark - UIScrollViewDelegate
 // 滚动完成调用
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    CGFloat offsetX = scrollView.contentOffset.x;
-    NSInteger i = offsetX / scrollView.frame.size.width;
-    [self selectedIndex:i];
-    self.bar.changeIndex = i;
-    _pageControl.currentPage = i;
-    if (_backImageArray.count>i) {
-        [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [_backImageView sd_setImageWithURL:[_backImageArray[i] safeUrlString]];
-            _backImageView.alpha = 1;
-        } completion:nil];
-    }
+//    CGFloat offsetX = scrollView.contentOffset.x;
+//    NSInteger i = offsetX / scrollView.frame.size.width;
+//    [self selectedIndex:i];
+//    self.bar.changeIndex = i;
+//    _pageControl.currentPage = i;
+//    if (_backImageArray.count>i) {
+//        [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+//            [_backImageView sd_setImageWithURL:[_backImageArray[i] safeUrlString]];
+//            _backImageView.alpha = 1;
+//        } completion:nil];
+//    }
     
 }
 

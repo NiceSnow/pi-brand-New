@@ -68,10 +68,11 @@
     
     UIImageView * logoImageView = [[UIImageView alloc]init];
     if ([_dict[@"head"][@"icon"] length]>0) {
-        [UIView transitionWithView:logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] placeholderImage:nil];
-            logoImageView.alpha = 1;
-        } completion:nil];
+        [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                logoImageView.alpha = 1;
+            } completion:nil];
+        }];
     }
     
     [backView addSubview:logoImageView];
@@ -83,10 +84,11 @@
     
     UIImageView * backImageView = [[UIImageView alloc]init];
     if ([_dict[@"head"][@"image"] length]>0) {
-        [UIView transitionWithView:backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [backImageView sd_setImageWithURL:[_dict[@"head"][@"image"] safeUrlString] placeholderImage:nil];
-            backImageView.alpha = 1;
-        } completion:nil];
+        [backImageView sd_setImageWithURL:[_dict[@"head"][@"image"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                backImageView.alpha = 1;
+            } completion:nil];
+        }];
     }
 
     [backView addSubview:backImageView];

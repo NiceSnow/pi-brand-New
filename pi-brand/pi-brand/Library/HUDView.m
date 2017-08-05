@@ -28,7 +28,12 @@
 }
 
 +(void)hiddenHUD;{
-    [[HUDView Instance] removeFromSuperview];
+    [UIView transitionWithView:[HUDView Instance] duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [HUDView Instance].alpha = 0;
+    } completion:^(BOOL finished) {
+        [[HUDView Instance] removeFromSuperview];
+        [HUDView Instance].alpha = 1;
+    }];
 }
 
 -(instancetype)initWithFrame:(CGRect)frame{

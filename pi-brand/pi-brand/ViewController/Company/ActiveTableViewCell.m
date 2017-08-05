@@ -24,10 +24,11 @@
     _secTitle.text = modle.vice_heading;
     _mainTitle.text = modle.title;
     if (modle.img.length>0) {
-        [UIView transitionWithView:_headerIamgeView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [_headerIamgeView sd_setImageWithURL:[modle.img safeUrlString] placeholderImage:nil];
-            _headerIamgeView.alpha = 1;
-        } completion:nil];
+        [_headerIamgeView sd_setImageWithURL:[modle.img safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_headerIamgeView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _headerIamgeView.alpha = 1;
+            } completion:nil];
+        }];
     }
 }
 

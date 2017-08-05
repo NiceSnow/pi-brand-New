@@ -20,16 +20,18 @@
 
 -(void)addDataWithModel:(mainModle*)model;{
     if (model.vice_img.length>0) {
-        [UIView transitionWithView:_titleImage duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [_titleImage sd_setImageWithURL:[model.vice_img safeUrlString]  placeholderImage:nil];
-            _titleImage.alpha = 1;
-        } completion:nil];
+        [_titleImage sd_setImageWithURL:[model.vice_img safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_titleImage duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _titleImage.alpha = 1;
+            } completion:nil];
+        }];
     }
     if (model.img.length>0) {
-        [UIView transitionWithView:_mainImage duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [_mainImage sd_setImageWithURL:[model.img safeUrlString]  placeholderImage:nil];
-            _mainImage.alpha = 1;
-        } completion:nil];
+        [_mainImage sd_setImageWithURL:[model.img safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_mainImage duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _mainImage.alpha = 1;
+            } completion:nil];
+        }];
     }
     
     _mainTitle.text = model.title;

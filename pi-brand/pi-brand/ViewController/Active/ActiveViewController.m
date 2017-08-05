@@ -88,12 +88,7 @@
     _backImageView = [UIImageView new];
     _backImageView.alpha = 0;
     [self.view addSubview:_backImageView];
-    if (_backImageString.length>0) {
-        [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [_backImageView sd_setImageWithURL:[_backImageString safeUrlString]];
-            _backImageView.alpha = 1;
-        } completion:nil];
-    }
+    
 
     _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
     
@@ -107,10 +102,7 @@
     }];
     
     [HUDView showHUD:self];
-    [self.tableView reloadData];
     [self.webView loadHTMLString:_contentModel.Description baseURL:nil];
-
-    
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -217,6 +209,14 @@
     self.tableView.tableFooterView = self.footerView;
     [HUDView hiddenHUD];
     self.tableView.alpha = 0;
+    [self.tableView reloadData];
+    if (_backImageString.length>0) {
+        [_backImageView sd_setImageWithURL:[_backImageString safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _backImageView.alpha = 1;
+            } completion:nil];
+        }];
+    }
     [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         self.tableView.alpha = 1;
     } completion:nil];

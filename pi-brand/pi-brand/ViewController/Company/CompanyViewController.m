@@ -170,17 +170,17 @@
         newbackImageView.alpha = 0;
         [self.view insertSubview:newbackImageView atIndex:0];
         newbackImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
-        [UIView transitionWithView:newbackImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            _backImageView.alpha = 0;
-            [newbackImageView sd_setImageWithURL:self.imageArray[index]];
-            newbackImageView.alpha = 1;
-            
-        } completion:^(BOOL finished) {
-            if (finished) {
-                [_backImageView removeFromSuperview];
-                _backImageView = nil;
-                _backImageView = newbackImageView;
-            }
+        [newbackImageView sd_setImageWithURL:self.imageArray[index] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _backImageView.alpha = 0;
+                newbackImageView.alpha = 1;
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    [_backImageView removeFromSuperview];
+                    _backImageView = nil;
+                    _backImageView = newbackImageView;
+                }
+            }];
         }];
     }
 }
@@ -313,10 +313,11 @@
             self.sub1.contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
             [self getdata2];
             if (urlString.length>0) {
-                [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-                    [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
-                    _backImageView.alpha = 1;
-                } completion:nil];
+                [_backImageView sd_setImageWithURL:[urlString safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                        _backImageView.alpha = 1;
+                    } completion:nil];
+                }];
             }
 
         }

@@ -65,10 +65,10 @@
             self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             _dict = data;
             [self.tableView reloadData];
+            [HUDView hiddenHUD];
             [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 self.tableView.alpha = 1;
             } completion:nil];
-            [HUDView hiddenHUD];
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -115,6 +115,11 @@
     [backView addSubview:imageView];
     if ([proArray[section][@"img"] length]>0) {
         [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] placeholderImage:nil];
+        [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:imageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                imageView.alpha = 1;
+            } completion:nil];
+        }];
     }
     _backImageView = imageView;
     
@@ -122,11 +127,11 @@
     if (section == 0) {
         UIImageView * logoImageView = [[UIImageView alloc]init];
         if ([_dict[@"head"][@"icon"] length]>0) {
-            logoImageView.alpha = 0;
-            [UIView transitionWithView:logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-                [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString]];
-                logoImageView.alpha = 1;
-            } completion:nil];
+            [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [UIView transitionWithView:logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                    logoImageView.alpha = 1;
+                } completion:nil];
+            }];
         }
         
         [backView addSubview:logoImageView];

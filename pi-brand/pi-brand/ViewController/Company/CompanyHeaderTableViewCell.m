@@ -20,11 +20,11 @@
 
 -(void)addDataWith:(companyHeaderModel*)headerModle;{
     if (headerModle.image.length>0) {
-        [UIView transitionWithView:self.img duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [self.img sd_setImageWithURL:[headerModle.image safeUrlString] placeholderImage:nil];
-            self.img.alpha = 1;
-        } completion:nil];
-        
+        [self.img sd_setImageWithURL:[headerModle.image safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:self.img duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                self.img.alpha = 1;
+            } completion:nil];
+        }];
     }
     self.secTitle.text = headerModle.title;
 }

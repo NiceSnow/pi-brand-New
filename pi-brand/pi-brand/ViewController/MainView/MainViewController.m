@@ -71,19 +71,22 @@
         if (succeed) {
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
-            if (urlString.length>0) {
-                [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-                    [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
-                    _backImageView.alpha = 1;
-                } completion:nil];
-            }
             [mainModle mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
                 return @{@"ID" : @"id"};
             }];
             self.dataArray = (NSMutableArray*)[mainModle mj_objectArrayWithKeyValuesArray:[data objectForKey:@"res"]];
             if (self.dataArray.count) {
+                self.tableView.alpha = 0;
                 [self.tableView reloadData];
                 [HUDView hiddenHUD];
+                if (urlString.length>0) {
+                    [_backImageView sd_setImageWithURL:[urlString safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                            _backImageView.alpha = 1;
+                        } completion:nil];
+                    }];
+                    
+                }
                 [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                     self.tableView.alpha = 1;
                 } completion:nil];

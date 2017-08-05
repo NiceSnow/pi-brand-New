@@ -81,19 +81,20 @@
     
     
     UIImageView * logoImageView = [[UIImageView alloc]init];
-    if ([_dict[@"head"][@"icon"] length]>0) {
-        [UIView transitionWithView:logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] placeholderImage:nil];
-            logoImageView.alpha = 1;
-        } completion:nil];
-    }
+    
     [backView addSubview:logoImageView];
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(15);
         make.width.mas_offset(screenWidth*320/750);
         make.height.mas_offset((screenWidth*320/750)*35/320);
     }];
-    
+    if ([_dict[@"head"][@"icon"] length]>0) {
+        [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                logoImageView.alpha = 1;
+            } completion:nil];
+        }];
+    }
     
     UILabel * titleLabel = [UILabel new];
     titleLabel.text = _dict[@"head"][@"title"];

@@ -47,10 +47,12 @@
 - (void)setDict:(NSDictionary *)dict{
     _dict = dict;
     if ([dict[@"store_img"] length]>0) {
-        [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            [_backImageView sd_setImageWithURL:[dict[@"store_img"] safeUrlString]];
-            _backImageView.alpha = 1;
-        } completion:nil];
+        
+        [_backImageView sd_setImageWithURL:[dict[@"store_img"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _backImageView.alpha = 1;
+            } completion:nil];
+        }];
     }
     
     _titleLabel.text = dict[@"store_name"];
