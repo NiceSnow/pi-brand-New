@@ -19,7 +19,7 @@
 #import "SubCompanyViewController2.h"
 #import "SearchViewController.h"
 
-@interface CompanyViewController ()<UIScrollViewDelegate,XLSegmentBarDelegate,XLStudyChildVCDelegate>
+@interface CompanyViewController ()<UIScrollViewDelegate,XLSegmentBarDelegate,XLStudyChildVCDelegate,UIGestureRecognizerDelegate>
 {
     NSInteger _currentIndex;
 }
@@ -101,38 +101,49 @@
     
     [HUDView showHUD:self];
     [self getdata];
-    UISwipeGestureRecognizer * recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    UIPanGestureRecognizer * recognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    recognizer.delegate = self;
     [self.view addGestureRecognizer:recognizer];
-    UISwipeGestureRecognizer * Rightrecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [Rightrecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [self.view addGestureRecognizer:Rightrecognizer];
     
 }
 
-- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionDown) {
-        NSLog(@"swipe down");
+- (void)handleSwipeFrom:(UIPanGestureRecognizer *)recognizer{
+    CGPoint startLocation;CGPoint stopLocation;
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        
+        startLocation = [recognizer translationInView:self.view];
+        
     }
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionUp) {
-        NSLog(@"swipe up");
-    }
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-        if (_currentIndex<1) {
-            _currentIndex++;
-            [self selectedIndex:_currentIndex];
-            self.bar.changeIndex = _currentIndex;
-            _pageControl.currentPage = _currentIndex;
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        
+        stopLocation = [recognizer translationInView:self.view];
+        CGFloat dx = stopLocation.x - startLocation.x;
+        if(dx>85) {
+            if (_currentIndex>0) {
+                _currentIndex--;
+                [self selectedIndex:_currentIndex];
+                self.bar.changeIndex = _currentIndex;
+                _pageControl.currentPage = _currentIndex;
+            }
         }
-    }
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionRight) {
-        if (_currentIndex>0) {
-            _currentIndex--;
-            [self selectedIndex:_currentIndex];
-            self.bar.changeIndex = _currentIndex;
-            _pageControl.currentPage = _currentIndex;
+        if(dx<-85) {
+            if (_currentIndex<1) {
+                _currentIndex++;
+                [self selectedIndex:_currentIndex];
+                self.bar.changeIndex = _currentIndex;
+                _pageControl.currentPage = _currentIndex;
+            }
         }
+
     }
+
+//    CGFloat dx = stopLocation.x - startLocation.x;
+//    
+//    CGFloat dy = stopLocation.y - startLocation.y;
+//    
+//    CGFloat distance = sqrt(dx*dx + dy*dy );
+//    
+//    NSLog(@"Distance: %f", distance);
 }
 
 #pragma mark - private
@@ -152,7 +163,7 @@
         VC.view.frame = CGRectMake(index * self.contentView.frame.size.width, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
         [self.contentView addSubview:VC.view];
     }
-    [self.contentView setContentOffset:CGPointMake(index * self.contentView.frame.size.width, 0) animated:NO];
+    [self.contentView setContentOffset:CGPointMake(index * self.contentView.frame.size.width, 0) animated:YES];
     _currentIndex = index;
     if (self.imageArray.count>=2) {
         UIImageView* newbackImageView = [UIImageView new];

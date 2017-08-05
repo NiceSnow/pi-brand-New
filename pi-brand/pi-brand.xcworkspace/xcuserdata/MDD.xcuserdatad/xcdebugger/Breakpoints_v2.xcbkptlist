@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "pi-brand/ViewController/Company/CompanyViewController.m"
-            timestampString = "523599209.74957"
+            filePath = "pi-brand/ViewController/Product/Product1TableViewController.m"
+            timestampString = "523599395.819165"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "-selectedIndex:"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "-getdataWithCityID:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "pi-brand/ViewController/Product/Product1TableViewController.m"
-            timestampString = "523599395.819165"
+            filePath = "pi-brand/ViewController/Company/CompanyViewController.m"
+            timestampString = "523607554.802544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-getdataWithCityID:"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "-handleSwipeFrom:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pi-brand/ViewController/Company/CompanyViewController.m"
+            timestampString = "523607546.96637"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "-handleSwipeFrom:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pi-brand/ViewController/MainView/MainViewController.m"
+            timestampString = "523607708.004946"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "-getdata"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
