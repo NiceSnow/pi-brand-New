@@ -84,7 +84,7 @@
     if (offset>=BackZoomHeight) {
         if (!_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight) ;
+                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight*2) ;
             }];
             _zoom = YES;
         }

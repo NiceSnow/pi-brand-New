@@ -42,7 +42,7 @@ static NSString * const QQAppKey      = @"dqhN5dWv1W0yhsk0";
 
 #define BackImageRate 525/842
 //#define BackZoomRate  160
-#define BackZoomHeight 40
+#define BackZoomHeight 80
 #define BackZoomWith BackZoomHeight*BackImageRate
 
 #define UserDefault [NSUserDefaults standardUserDefaults]

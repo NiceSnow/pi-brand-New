@@ -90,7 +90,7 @@
     self.bar.frame = CGRectMake(0, navBarH + headerImgH, self.view.bounds.size.width, barH);
     
     // 选中第0个VC
-    [self selectedIndex:1];
+//    [self selectedIndex:1];
     [self selectedIndex:0];
     
     _backImageView = [UIImageView new];
@@ -104,7 +104,38 @@
         make.top.left.right.bottom.offset(0);
     }];
     [self getdata];
+    UISwipeGestureRecognizer * recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self.view addGestureRecognizer:recognizer];
+    UISwipeGestureRecognizer * Rightrecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [Rightrecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:Rightrecognizer];
     
+}
+
+- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    if(recognizer.direction == UISwipeGestureRecognizerDirectionDown) {
+        NSLog(@"swipe down");
+    }
+    if(recognizer.direction == UISwipeGestureRecognizerDirectionUp) {
+        NSLog(@"swipe up");
+    }
+    if(recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+        if (_currentIndex<1) {
+            _currentIndex++;
+            [self selectedIndex:_currentIndex];
+            self.bar.changeIndex = _currentIndex;
+            _pageControl.currentPage = _currentIndex;
+        }
+    }
+    if(recognizer.direction == UISwipeGestureRecognizerDirectionRight) {
+        if (_currentIndex>0) {
+            _currentIndex--;
+            [self selectedIndex:_currentIndex];
+            self.bar.changeIndex = _currentIndex;
+            _pageControl.currentPage = _currentIndex;
+        }
+    }
 }
 
 #pragma mark - private
@@ -137,11 +168,11 @@
 #pragma mark - UIScrollViewDelegate
 // 滚动完成调用
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    CGFloat offsetX = scrollView.contentOffset.x;
-    NSInteger i = offsetX / scrollView.frame.size.width;
-    [self selectedIndex:i];
-    self.bar.changeIndex = i;
-    _pageControl.currentPage = i;
+//    CGFloat offsetX = scrollView.contentOffset.x;
+//    NSInteger i = offsetX / scrollView.frame.size.width;
+//    [self selectedIndex:i];
+//    self.bar.changeIndex = i;
+//    _pageControl.currentPage = i;
 }
 #pragma mark - XLSegmentBarDelegate
 - (void)segmentBar:(XLSegmentBar *)segmentBar tapIndex:(NSInteger)index {
@@ -180,7 +211,7 @@
     if (offset>=BackZoomHeight) {
         if (!_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight) ;
+                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight*2) ;
             }];
             _zoom = YES;
         }
@@ -205,6 +236,7 @@
         [self.view addSubview:_contentView];
         _contentView.bouncesZoom = NO;
         _contentView.bounces = NO;
+        _contentView.scrollEnabled = NO;
     }
     return _contentView;
 }

@@ -57,7 +57,7 @@
     if (offset>=BackZoomHeight) {
         if (!_zoom) {
             [UIView animateWithDuration:0.8 animations:^{
-                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight) ;
+                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight*2) ;
             }];
             _zoom = YES;
         }
@@ -90,7 +90,7 @@
     _backImageView.alpha = 0;
     [self.view addSubview:_backImageView];
     if (_backImageString.length>0) {
-        [UIView transitionWithView:self.tableView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:_backImageView duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             [_backImageView sd_setImageWithURL:[_backImageString safeUrlString]];
             _backImageView.alpha = 1;
         } completion:nil];
