@@ -11,13 +11,13 @@
 #import "UIImage+extension.h"
 
 static NSInteger kCount = 3;
-@interface NewFeatureVIew () <UIScrollViewDelegate>
+@interface NewFeatureVIew () <UIScrollViewDelegate,UIGestureRecognizerDelegate>
 {
     UIPageControl *_page;
     UIScrollView *_scroll;
     NSArray* dataArray;
     UIButton* _lastBtn;
-    
+    NSInteger _currentIndex;
 }
 @end
 
@@ -49,6 +49,45 @@ static NSInteger kCount = 3;
     
     [self addPageControl];
     
+    UIPanGestureRecognizer * recognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    recognizer.delegate = self;
+    [self.view addGestureRecognizer:recognizer];
+}
+
+- (void)handleSwipeFrom:(UIPanGestureRecognizer *)recognizer{
+    CGPoint startLocation;CGPoint stopLocation;
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        
+        startLocation = [recognizer translationInView:self.view];
+        
+    }
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        
+        stopLocation = [recognizer translationInView:self.view];
+        CGFloat dx = stopLocation.x - startLocation.x;
+        if(dx>85) {
+            if (_currentIndex>0) {
+                _currentIndex--;
+                [UIView transitionWithView:_scroll duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                    _scroll.alpha = 1;
+                } completion:^(BOOL finished) {
+                    
+                }];
+                [_scroll setContentOffset:CGPointMake(_currentIndex * screenWidth, 0) animated:NO];
+            }
+        }
+        if(dx<-85) {
+            if (_currentIndex<kCount-1) {
+                _currentIndex++;
+                [UIView transitionWithView:_scroll duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                    _scroll.alpha = 1;
+                } completion:^(BOOL finished) {
+                    
+                }];
+                [_scroll setContentOffset:CGPointMake(_currentIndex * screenWidth, 0) animated:NO];
+            }
+        }
+    }
     
 }
 
@@ -62,6 +101,7 @@ static NSInteger kCount = 3;
     scroll.contentSize = CGSizeMake(size.width * kCount, 0);
     scroll.pagingEnabled = YES;
     scroll.delegate = self;
+    scroll.scrollEnabled = NO;
     [self.view addSubview:scroll];
     _scroll = scroll;
 }
@@ -83,7 +123,7 @@ static NSInteger kCount = 3;
         }];
         backImageView.image = [UIImage AutorImage:imageString];
         backImageView.userInteractionEnabled = YES;
-        [_scroll addSubview:backView];
+        backView.tag = i;
     }
 }
 
