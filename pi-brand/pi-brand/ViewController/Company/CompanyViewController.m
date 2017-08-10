@@ -19,7 +19,7 @@
 #import "SubCompanyViewController2.h"
 #import "SearchViewController.h"
 
-@interface CompanyViewController ()<UIScrollViewDelegate,XLSegmentBarDelegate,XLStudyChildVCDelegate>
+@interface CompanyViewController ()<UIScrollViewDelegate,XLSegmentBarDelegate,XLStudyChildVCDelegate,UIGestureRecognizerDelegate>
 {
     NSInteger _currentIndex;
 }
@@ -36,7 +36,7 @@
 @property (nonatomic, strong) SubCompanyViewController1* sub1;
 @property (nonatomic, strong) SubCompanyViewController2* sub2;
 
-@property(nonatomic,strong) HUDView* HUD;
+@property(nonatomic,assign) BOOL zoom;
 
 @end
 
@@ -89,23 +89,61 @@
     self.bar.frame = CGRectMake(0, navBarH + headerImgH, self.view.bounds.size.width, barH);
     
     // 选中第0个VC
+//    [self selectedIndex:1];
     [self selectedIndex:0];
     
     _backImageView = [UIImageView new];
+    _backImageView.alpha = 0;
     [self.view insertSubview:_backImageView atIndex:0];
-    [_backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.left.right.offset(0);
-    }];
+    _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
     
     self.navigationItem.titleView = self.titleView;
     
-    [self.view addSubview:self.HUD];
-    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
+    [HUDView showHUD:self];
     [self getdata];
-    [self getdata2];
+    UIPanGestureRecognizer * recognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    recognizer.delegate = self;
+    [self.view addGestureRecognizer:recognizer];
     
+}
+
+- (void)handleSwipeFrom:(UIPanGestureRecognizer *)recognizer{
+    CGPoint startLocation;CGPoint stopLocation;
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        
+        startLocation = [recognizer translationInView:self.view];
+        
+    }
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        
+        stopLocation = [recognizer translationInView:self.view];
+        CGFloat dx = stopLocation.x - startLocation.x;
+        if(dx>85) {
+            if (_currentIndex>0) {
+                _currentIndex--;
+                [self selectedIndex:_currentIndex];
+                self.bar.changeIndex = _currentIndex;
+                _pageControl.currentPage = _currentIndex;
+            }
+        }
+        if(dx<-85) {
+            if (_currentIndex<1) {
+                _currentIndex++;
+                [self selectedIndex:_currentIndex];
+                self.bar.changeIndex = _currentIndex;
+                _pageControl.currentPage = _currentIndex;
+            }
+        }
+
+    }
+
+//    CGFloat dx = stopLocation.x - startLocation.x;
+//    
+//    CGFloat dy = stopLocation.y - startLocation.y;
+//    
+//    CGFloat distance = sqrt(dx*dx + dy*dy );
+//    
+//    NSLog(@"Distance: %f", distance);
 }
 
 #pragma mark - private
@@ -125,21 +163,36 @@
         VC.view.frame = CGRectMake(index * self.contentView.frame.size.width, 0, self.contentView.frame.size.width, self.contentView.frame.size.height);
         [self.contentView addSubview:VC.view];
     }
-    [self.contentView setContentOffset:CGPointMake(index * self.contentView.frame.size.width, 0) animated:NO];
+    [self.contentView setContentOffset:CGPointMake(index * self.contentView.frame.size.width, 0) animated:YES];
     _currentIndex = index;
     if (self.imageArray.count>=2) {
-        [_backImageView sd_setImageWithURL:self.imageArray[index]];
+        UIImageView* newbackImageView = [UIImageView new];
+        newbackImageView.alpha = 0;
+        [self.view insertSubview:newbackImageView atIndex:0];
+        newbackImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
+        [newbackImageView sd_setImageWithURL:self.imageArray[index] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _backImageView.alpha = 0;
+                newbackImageView.alpha = 1;
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    [_backImageView removeFromSuperview];
+                    _backImageView = nil;
+                    _backImageView = newbackImageView;
+                }
+            }];
+        }];
     }
 }
 
 #pragma mark - UIScrollViewDelegate
 // 滚动完成调用
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    CGFloat offsetX = scrollView.contentOffset.x;
-    NSInteger i = offsetX / scrollView.frame.size.width;
-    [self selectedIndex:i];
-    self.bar.changeIndex = i;
-    _pageControl.currentPage = i;
+//    CGFloat offsetX = scrollView.contentOffset.x;
+//    NSInteger i = offsetX / scrollView.frame.size.width;
+//    [self selectedIndex:i];
+//    self.bar.changeIndex = i;
+//    _pageControl.currentPage = i;
 }
 #pragma mark - XLSegmentBarDelegate
 - (void)segmentBar:(XLSegmentBar *)segmentBar tapIndex:(NSInteger)index {
@@ -175,14 +228,21 @@
     }
     
     CGFloat offset = scroll.contentOffset.y;
-    if (offset>=35) {
-        [UIView animateWithDuration:0.5 animations:^{
-            _backImageView.frame = CGRectMake(-80, -80, screenWidth + 160, screenHeight + 160) ;
-        }];
+    if (offset>=BackZoomHeight) {
+        if (!_zoom) {
+            [UIView animateWithDuration:0.8 animations:^{
+                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight*2) ;
+            }];
+            _zoom = YES;
+        }
     }else{
-        [UIView animateWithDuration:0.5 animations:^{
-            _backImageView.frame = CGRectMake(0, 0, screenWidth, screenHeight);
-        }];
+        if (_zoom) {
+            [UIView animateWithDuration:0.8 animations:^{
+                _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
+                
+            }];
+            _zoom = NO;
+        }
     }
     
 }
@@ -195,6 +255,8 @@
         _contentView.pagingEnabled = YES;
         [self.view addSubview:_contentView];
         _contentView.bouncesZoom = NO;
+        _contentView.bounces = NO;
+        _contentView.scrollEnabled = NO;
     }
     return _contentView;
 }
@@ -241,7 +303,7 @@
         if (succeed) {
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
-            [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+            
             [self.imageArray addObject:[urlString safeUrlString]];
             self.sub1.headModel = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];
             [companyContentModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
@@ -249,7 +311,14 @@
             }];
             self.sub1.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             self.sub1.contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
-            
+            [self getdata2];
+            if (urlString.length>0) {
+                [_backImageView sd_setImageWithURL:[urlString safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                        _backImageView.alpha = 1;
+                    } completion:nil];
+                }];
+            }
 
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
@@ -272,7 +341,7 @@
                          };
             }];
             self.sub2.res = [subModel2 mj_objectArrayWithKeyValuesArray:[data objectForKey:@"res"]];
-            [self.HUD removeFromSuperview];
+            [HUDView hiddenHUD];
             
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
@@ -324,13 +393,7 @@
     return _titleView;
 }
 
--(HUDView *)HUD{
-    if (!_HUD) {
-        _HUD = [HUDView new];
-        
-    }
-    return _HUD;
-}
+
 /*
 #pragma mark - Navigation
 

@@ -4,19 +4,43 @@
 //
 //  Created by Madodg on 2017/7/29.
 //  Copyright © 2017年 Madodg. All rights reserved.
-//
 
 #import "HUDView.h"
 
 #import "UIImage+GIF.h"
 
 @implementation HUDView
++ (HUDView *)Instance
+{
+    static HUDView *instance = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        instance = [[self alloc] init];
+    });
+    return instance;
+}
+
++(void)showHUD:(UIViewController*)VC;{
+    [VC.view addSubview:[HUDView Instance]];
+    [[HUDView Instance] mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.offset(0);
+    }];
+}
+
++(void)hiddenHUD;{
+    [UIView transitionWithView:[HUDView Instance] duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [HUDView Instance].alpha = 0;
+    } completion:^(BOOL finished) {
+        [[HUDView Instance] removeFromSuperview];
+        [HUDView Instance].alpha = 1;
+    }];
+}
 
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        NSString  *filePath = [[NSBundle bundleWithPath:[[NSBundle mainBundle] bundlePath]] pathForResource:@"loding.gif" ofType:nil];
+        NSString  *filePath = [[NSBundle bundleWithPath:[[NSBundle mainBundle] bundlePath]] pathForResource:@"Londing.gif" ofType:nil];
         
         NSData  *imageData = [NSData dataWithContentsOfFile:filePath];
         UIImageView* imageView = [UIImageView new];
@@ -33,7 +57,6 @@
         [doubleTap setNumberOfTapsRequired:2];
         
         [self addGestureRecognizer:doubleTap];
-//        [singleTap requireGestureRecognizerToFail:doubleTap];
     }
     return self;
 }

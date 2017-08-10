@@ -35,15 +35,26 @@
     if (self) {
         self = [[[NSBundle mainBundle]loadNibNamed:@"Product2Cell" owner:self options:nil]lastObject];
         [_backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.width.mas_equalTo(screenWidth-50);
+//            make.height.mas_equalTo((screenWidth-50)*429/632);
             make.width.mas_equalTo(screenWidth-50);
-            make.height.mas_equalTo((screenWidth-50)*429/632);
+            make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
         }];
+        _backImageView.alpha = 0;
     }
     return self;
 }
 - (void)setDict:(NSDictionary *)dict{
     _dict = dict;
-    [_backImageView sd_setImageWithURL:[dict[@"store_img"] safeUrlString]];
+    if ([dict[@"store_img"] length]>0) {
+        
+        [_backImageView sd_setImageWithURL:[dict[@"store_img"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _backImageView.alpha = 1;
+            } completion:nil];
+        }];
+    }
+    
     _titleLabel.text = dict[@"store_name"];
 }
 

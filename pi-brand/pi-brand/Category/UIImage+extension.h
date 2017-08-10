@@ -41,6 +41,6 @@
  */
 - (UIImage *)imageInRect:(CGRect)rect;
 
-
++(UIImage*)AutorImage:(NSString*)imageName;
 
 @end

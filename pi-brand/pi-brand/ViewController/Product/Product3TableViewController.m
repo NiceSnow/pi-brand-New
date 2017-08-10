@@ -12,6 +12,7 @@
 
 @interface Product3TableViewController ()
 @property (nonatomic, strong)NSDictionary * dict;
+
 @end
 
 @implementation Product3TableViewController
@@ -24,6 +25,8 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 5;
     self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.bounces = NO;
+    self.tableView.alpha = 0;
     [self getdata];
 }
 -(instancetype)initWithStyle:(UITableViewStyle)style
@@ -42,7 +45,9 @@
             
             _dict = data;
             [self.tableView reloadData];
-            
+            [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                self.tableView.alpha = 1;
+            } completion:nil];
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -62,8 +67,14 @@
     backView.backgroundColor = [UIColor whiteColor];
     
     UIImageView * logoImageView = [[UIImageView alloc]init];
-    [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] placeholderImage:[UIImage imageNamed:@"11"]];
-
+    if ([_dict[@"head"][@"icon"] length]>0) {
+        [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                logoImageView.alpha = 1;
+            } completion:nil];
+        }];
+    }
+    
     [backView addSubview:logoImageView];
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(15);
@@ -72,7 +83,13 @@
     }];
     
     UIImageView * backImageView = [[UIImageView alloc]init];
-    [backImageView sd_setImageWithURL:[_dict[@"head"][@"image"] safeUrlString] placeholderImage:[UIImage imageNamed:@"03"]];
+    if ([_dict[@"head"][@"image"] length]>0) {
+        [backImageView sd_setImageWithURL:[_dict[@"head"][@"image"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                backImageView.alpha = 1;
+            } completion:nil];
+        }];
+    }
 
     [backView addSubview:backImageView];
     [backImageView mas_makeConstraints:^(MASConstraintMaker *make) {

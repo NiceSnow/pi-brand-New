@@ -27,6 +27,7 @@
 @property (nonatomic, strong)NSDictionary *dict;
 @property (nonatomic, strong)ShareView               * shareView;
 @property(nonatomic,strong) shareModel* shareModel;
+@property(nonatomic,strong) HUDView* HUD;
 @end
 
 @implementation Product1TableViewController
@@ -42,6 +43,8 @@
 
     self.tableView.separatorStyle = 0;
     self.tableView.estimatedSectionHeaderHeight = 5;
+    self.tableView.bounces = NO;
+    self.tableView.alpha = 0;
     [self getdataWithCityID:10000];
 }
 
@@ -62,7 +65,10 @@
             self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             _dict = data;
             [self.tableView reloadData];
-            
+            [HUDView hiddenHUD];
+            [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                self.tableView.alpha = 1;
+            } completion:nil];
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -77,6 +83,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    
     return [_dict[@"pro"] count];
 }
 
@@ -101,14 +108,32 @@
     }
     
     UIImageView * imageView = [[UIImageView alloc]init];
-    [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] placeholderImage:[UIImage imageNamed:@"15"]];
+    if (section == 0) {
+        imageView.alpha = 1;
+    }else
+        imageView.alpha = 0.7;
     [backView addSubview:imageView];
+    if ([proArray[section][@"img"] length]>0) {
+        [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] placeholderImage:nil];
+        [imageView sd_setImageWithURL:[proArray[section][@"img"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:imageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                imageView.alpha = 1;
+            } completion:nil];
+        }];
+    }
     _backImageView = imageView;
     
     
     if (section == 0) {
         UIImageView * logoImageView = [[UIImageView alloc]init];
-        [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString]];
+        if ([_dict[@"head"][@"icon"] length]>0) {
+            [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [UIView transitionWithView:logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                    logoImageView.alpha = 1;
+                } completion:nil];
+            }];
+        }
+        
         [backView addSubview:logoImageView];
         [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(15);
@@ -180,8 +205,10 @@
         
         
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.width.mas_equalTo(screenWidth-50);
+//            make.height.mas_equalTo((screenWidth-50)*429/632);
             make.width.mas_equalTo(screenWidth-50);
-            make.height.mas_equalTo((screenWidth-50)*429/632);
+            make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
             make.centerX.equalTo(backView);
             make.top.equalTo(lastBtn.mas_bottom).offset(15);
         }];
@@ -248,13 +275,16 @@
     return UITableViewAutomaticDimension;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        _backImageView.alpha = 1;
+    } completion:nil];
     Product1Cell *cell = [Product1Cell createCellWithTableView:tableView];
     if (_dict) {
         NSString * content = nil;
         if (indexPath.row == 0) {
             content = _dict[@"pro"][indexPath.section][@"address"];
         }else if (indexPath.row == 1){
-            content = [NSString stringWithFormat:@"商铺电话：%@",_dict[@"pro"][indexPath.section][@"tel"]];
+            content = [NSString stringWithFormat:@"电铺电话：%@",_dict[@"pro"][indexPath.section][@"tel"]];
         }else if (indexPath.row == 2){
             content = [NSString stringWithFormat:@"营业时间：%@",_dict[@"pro"][indexPath.section][@"business_hours"]];
         }
@@ -320,4 +350,5 @@
     }
     return _shareView;
 }
+
 @end

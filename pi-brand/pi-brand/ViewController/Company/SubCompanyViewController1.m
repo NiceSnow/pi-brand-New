@@ -11,6 +11,7 @@
 #import "CompanyHeaderTableViewCell.h"
 #import "companyContentTableViewCell.h"
 
+
 @interface SubCompanyViewController1 ()<UIWebViewDelegate>
 @property(nonatomic,strong) UIWebView* webView;
 @property (nonatomic, strong) UIView* footerView;
@@ -28,7 +29,6 @@
 
 -(void)setContentModel:(companyContentModel *)contentModel{
     _contentModel = contentModel;
-    [self.tableView reloadData];
     [self.webView loadHTMLString:_contentModel.content baseURL:nil];
 }
 
@@ -36,9 +36,13 @@
 {
     CGFloat documentHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
     
-    self.webView.frame = CGRectMake(10, -1, screenWidth - 20, documentHeight);
-    self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight + 10);
+    self.webView.frame = CGRectMake(18, -1, screenWidth - 36, documentHeight + 10);
+    self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight + 26);
     self.tableView.tableFooterView = self.footerView;
+    [self.tableView reloadData];
+    [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.tableView.alpha = 1;
+    } completion:nil];
 }
 
 -(instancetype)initWithStyle:(UITableViewStyle)style
@@ -57,6 +61,8 @@
     self.tableView.estimatedRowHeight = 5;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableFooterView = [UIView new];
+    self.tableView.bounces = NO;
+    self.tableView.alpha = 0;
 }
 
 
@@ -83,7 +89,10 @@
         make.left.offset(10);
         make.right.offset(-10);
     }];
-    [imageview sd_setImageWithURL:[_headModel.icon safeUrlString] placeholderImage:nil];
+    if ([_headModel.icon length]>0) {
+        [imageview sd_setImageWithURL:[_headModel.icon safeUrlString] placeholderImage:nil];
+    }
+    
     [witView addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(15);
@@ -121,7 +130,7 @@
 
 -(UIWebView *)webView{
     if (!_webView) {
-        _webView = [[UIWebView alloc]initWithFrame:CGRectMake(10, 0, screenWidth-20, 1)];
+        _webView = [[UIWebView alloc]initWithFrame:CGRectMake(18, 0, screenWidth - 36, 1)];
         _webView.backgroundColor = [UIColor whiteColor];
         _webView.delegate = self;
         _webView.scrollView.scrollEnabled = NO;
@@ -134,8 +143,17 @@
     if (!_footerView) {
         _footerView = [UIView new];
         _footerView.backgroundColor = [UIColor clearColor];
+        UIView* view = [UIView new];
+        view.backgroundColor = [UIColor whiteColor];
+        [_footerView addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.offset(-1);
+            make.left.offset(10);
+            make.bottom.right.offset(-10);
+        }];
         [_footerView addSubview:self.webView];
     }
     return _footerView;
 }
+
 @end

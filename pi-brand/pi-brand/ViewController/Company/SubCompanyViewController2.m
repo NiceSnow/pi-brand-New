@@ -30,6 +30,9 @@
 -(void)setRes:(NSArray<subModel2 *> *)res{
     _res = res;
     [self.tableView reloadData];
+    [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.tableView.alpha = 1;
+    } completion:nil];
 }
 
 - (void)viewDidLoad {
@@ -43,6 +46,8 @@
     self.tableView.estimatedRowHeight = 5;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableFooterView = [UIView new];
+    self.tableView.bounces = NO;
+    self.tableView.alpha = 0;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -61,7 +66,14 @@
         make.left.offset(10);
         make.right.offset(-10);
     }];
-    [imageview sd_setImageWithURL:[_headModel.icon safeUrlString] placeholderImage:nil];
+    if (_headModel.icon.length>0) {
+        imageview.alpha = 0;
+        [imageview sd_setImageWithURL:[_headModel.icon safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:imageview duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                imageview.alpha = 1;
+            } completion:nil];
+        }];
+    }
     [witView addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(15);
@@ -86,8 +98,27 @@
     }
     subModel2* modle = self.res[indexPath.row - 1];
     ActiveViewController* ActiveVC = [[ActiveViewController alloc]init];
-    ActiveVC.ID = modle.ID;
-    [self.navigationController pushViewController:ActiveVC animated:YES];
+    [[HTTPRequest instance]PostRequestWithURL:@"http://www.pi-brand.cn/index.php/home/api/activity_detail" Parameter:@{@"id":modle.ID} succeed:^(NSURLSessionDataTask *task, id responseObject) {
+        BOOL succeed = [[responseObject objectForKey:@"status"]boolValue];
+        if (succeed) {
+            NSDictionary* data = [responseObject objectForKey:@"data"];
+            NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
+            ActiveVC.backImageString = urlString;
+            ActiveVC.headModle = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];
+            [companyContentModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+                return @{@"ID" : @"id",
+                         @"Description":@"description"
+                         };
+            }];
+            ActiveVC.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
+            ActiveVC.contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
+            [self.navigationController pushViewController:ActiveVC animated:YES];
+        }
+    } failed:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    } netWork:^(BOOL netWork) {
+        
+    }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

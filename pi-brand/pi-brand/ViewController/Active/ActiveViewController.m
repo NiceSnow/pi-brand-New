@@ -7,8 +7,7 @@
 //
 
 #import "ActiveViewController.h"
-#import "companyHeaderModel.h"
-#import "companyContentModel.h"
+
 
 #import "CompanyHeaderTableViewCell.h"
 #import "companyContentTableViewCell.h"
@@ -16,16 +15,14 @@
 
 
 @interface ActiveViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
-@property (nonatomic, strong) companyHeaderModel* headModle;
-@property(nonatomic,strong)   companyContentModel* contentModel;
+
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) UIImageView* backImageView;
 @property(nonatomic,strong)   UIWebView* webView;
 @property (nonatomic, strong) UIView* footerView;
 @property (nonatomic, strong) UIView* headerView;
-@property(nonatomic,strong) HUDView* HUD;
 @property (nonatomic, strong) UIView* titleView;
-@property(nonatomic,strong) shareModel* shareModel;
+@property(nonatomic,assign) BOOL zoom;
 
 @end
 
@@ -37,41 +34,40 @@
 
 -(void)setID:(NSString *)ID{
     _ID = ID;
-    [[HTTPRequest instance]PostRequestWithURL:@"http://www.pi-brand.cn/index.php/home/api/activity_detail" Parameter:@{@"id":ID} succeed:^(NSURLSessionDataTask *task, id responseObject) {
-        BOOL succeed = [[responseObject objectForKey:@"status"]boolValue];
-        if (succeed) {
-            NSDictionary* data = [responseObject objectForKey:@"data"];
-            NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
-            [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
-            _headModle = [companyHeaderModel mj_objectWithKeyValues:[data objectForKey:@"head"]];
-            [companyContentModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
-                return @{@"ID" : @"id",
-                         @"Description":@"description"
-                         };
-            }];
-            self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
-            _contentModel = [companyContentModel mj_objectWithKeyValues:[data objectForKey:@"res"]];
-            [self.tableView reloadData];
-            [self.webView loadHTMLString:_contentModel.Description baseURL:nil];
-            [self.HUD removeFromSuperview];
-        }
-    } failed:^(NSURLSessionDataTask *task, NSError *error) {
-        
-    } netWork:^(BOOL netWork) {
-        
-    }];
 }
 
+-(void)setBackImageString:(NSString *)backImageString{
+    _backImageString = backImageString;
+}
+
+-(void)setHeadModle:(companyHeaderModel *)headModle{
+    _headModle = headModle;
+}
+
+-(void)setContentModel:(companyContentModel *)contentModel{
+    _contentModel = contentModel;
+}
+
+-(void)setShareModel:(shareModel *)shareModel{
+    _shareModel = shareModel;
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;{
     CGFloat offset = scrollView.contentOffset.y;
-    if (offset>=35) {
-        [UIView animateWithDuration:0.5 animations:^{
-            _backImageView.frame = CGRectMake(-80, -80, screenWidth + 160, screenHeight + 160) ;
-        }];
+    if (offset>=BackZoomHeight) {
+        if (!_zoom) {
+            [UIView animateWithDuration:0.8 animations:^{
+                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight*2) ;
+            }];
+            _zoom = YES;
+        }
     }else{
-        [UIView animateWithDuration:0.5 animations:^{
-            _backImageView.frame = CGRectMake(0, 0, screenWidth, screenHeight);
-        }];
+        if (_zoom) {
+            [UIView animateWithDuration:0.8 animations:^{
+                _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
+                
+            }];
+            _zoom = NO;
+        }
     }
 }
 
@@ -90,10 +86,12 @@
     self.navigationItem.leftBarButtonItems = @[[[UIBarButtonItem alloc]initWithCustomView:leftBtn],[[UIBarButtonItem alloc]initWithCustomView:leftBtn2]];
     
     _backImageView = [UIImageView new];
+    _backImageView.alpha = 0;
     [self.view addSubview:_backImageView];
-    [_backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.left.right.offset(0);
-    }];
+    
+
+    _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
+    
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(0);
@@ -102,10 +100,10 @@
         make.bottom.offset(0);
         make.centerX.equalTo(self.view);
     }];
-    [self.view addSubview:self.HUD];
-    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
+    
+    [HUDView showHUD:self];
+    [self.webView loadHTMLString:_contentModel.Description baseURL:nil];
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -122,10 +120,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (_headModle.icon.length>0&&_headModle.title.length>0&&_headModle.hid>0&&_headModle.image.length>0) {
+    if (_headModle.icon.length>0&&_headModle.title.length>0&&_headModle.hid>0&&_headModle.image.length>0 &&_contentModel) {
         return 2;
-    }
-    return 1;
+    }else if(_contentModel)
+        return 1;
+    else
+        return 0;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -140,7 +140,10 @@
         make.left.offset(10);
         make.right.offset(-10);
     }];
-    [imageview sd_setImageWithURL:[_headModle.icon safeUrlString] placeholderImage:nil];
+    if (_headModle.icon.length>0) {
+        [imageview sd_setImageWithURL:[_headModle.icon safeUrlString] placeholderImage:nil];
+    }
+    
     [witView addSubview:imageview];
     [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(15);
@@ -171,7 +174,7 @@
 
 -(UIWebView *)webView{
     if (!_webView) {
-        _webView = [[UIWebView alloc]initWithFrame:CGRectMake(10, 0, screenWidth-20, 1)];
+        _webView = [[UIWebView alloc]initWithFrame:CGRectMake(18, 0, screenWidth-36, 1)];
         _webView.backgroundColor = [UIColor whiteColor];
         _webView.delegate = self;
         _webView.scrollView.scrollEnabled = NO;
@@ -184,6 +187,14 @@
     if (!_footerView) {
         _footerView = [UIView new];
         _footerView.backgroundColor = [UIColor clearColor];
+        UIView* view = [UIView new];
+        view.backgroundColor = [UIColor whiteColor];
+        [_footerView addSubview:view];
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.offset(-1);
+            make.left.offset(10);
+            make.bottom.right.offset(-10);
+        }];
         [_footerView addSubview:self.webView];
     }
     return _footerView;
@@ -193,9 +204,22 @@
 {
     CGFloat documentHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
     
-    self.webView.frame = CGRectMake(10, -1, screenWidth - 20, documentHeight);
-    self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight+10);
+    self.webView.frame = CGRectMake(18, -1, screenWidth - 36, documentHeight);
+    self.footerView.frame = CGRectMake(0, 0, screenWidth, documentHeight + 10);
     self.tableView.tableFooterView = self.footerView;
+    [HUDView hiddenHUD];
+    self.tableView.alpha = 0;
+    [self.tableView reloadData];
+    if (_backImageString.length>0) {
+        [_backImageView sd_setImageWithURL:[_backImageString safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _backImageView.alpha = 1;
+            } completion:nil];
+        }];
+    }
+    [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.tableView.alpha = 1;
+    } completion:nil];
 }
 
 -(UITableView *)tableView{
@@ -211,6 +235,7 @@
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.tableFooterView = [UIView new];
         _tableView.tableHeaderView = self.headerView;
+        _tableView.alpha = 0;
     }
     return _tableView;
 }
@@ -226,14 +251,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(HUDView *)HUD{
-    if (!_HUD) {
-        _HUD = [HUDView new];
-        
-    }
-    return _HUD;
 }
 
 -(UIView *)titleView{

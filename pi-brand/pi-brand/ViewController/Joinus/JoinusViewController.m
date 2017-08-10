@@ -20,7 +20,8 @@
 @property (nonatomic, strong) UIImageView* backImageView;
 @property (nonatomic, strong)NSMutableArray * dataArray;
 @property (nonatomic, strong)NSDictionary * jobDict;
-@property(nonatomic,strong) HUDView* HUD;
+@property(nonatomic ,assign) BOOL zoom;
+@property(nonatomic ,assign)BOOL first;
 
 @end
 
@@ -56,9 +57,7 @@
     
     _backImageView = [UIImageView new];
     [self.view insertSubview:_backImageView atIndex:0];
-    [_backImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.left.right.offset(0);
-    }];
+    _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
     _dataArray = [NSMutableArray array];
     UIView * headerView = [UIView new];
     headerView.backgroundColor = [UIColor clearColor];
@@ -68,24 +67,31 @@
     _tableview.estimatedRowHeight = 5;
     _tableview.backgroundColor = [UIColor clearColor];
     _tableview.rowHeight = UITableViewAutomaticDimension;
+    _tableview.showsVerticalScrollIndicator = NO;
+    _tableview.bounces = NO;
+    _tableview.alpha = 0;
     self.navigationItem.titleView = self.titleView;
-    [self.view addSubview:self.HUD];
-    [self.HUD mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.offset(0);
-    }];
+    [HUDView showHUD:self];
     [self getdata];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;{
     CGFloat offset = scrollView.contentOffset.y;
-    if (offset>=35) {
-        [UIView animateWithDuration:0.5 animations:^{
-            _backImageView.frame = CGRectMake(-80, -80, screenWidth + 160, screenHeight + 160) ;
-        }];
+    if (offset>=BackZoomHeight) {
+        if (!_zoom) {
+            [UIView animateWithDuration:0.8 animations:^{
+                _backImageView.frame = CGRectMake(-BackZoomWith-(screenHeight*BackImageRate - screenWidth)/2, -BackZoomHeight, screenHeight*BackImageRate + BackZoomWith*2, screenHeight + BackZoomHeight*2) ;
+            }];
+            _zoom = YES;
+        }
     }else{
-        [UIView animateWithDuration:0.5 animations:^{
-            _backImageView.frame = CGRectMake(0, 0, screenWidth, screenHeight);
-        }];
+        if (_zoom) {
+            [UIView animateWithDuration:0.8 animations:^{
+                _backImageView.frame = CGRectMake(-(screenHeight*BackImageRate - screenWidth)/2, 0, screenHeight*BackImageRate, screenHeight);
+                
+            }];
+            _zoom = NO;
+        }
     }
 }
 
@@ -95,7 +101,7 @@
         if (succeed) {
             NSDictionary* data = [responseObject objectForKey:@"data"];
             NSString* urlString = [[data objectForKey:@"back_img"] objectForKey:@"bg_img"];
-            [_backImageView sd_setImageWithURL:[urlString safeUrlString]];
+            
             [joinMainModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
                 return @{@"ID" : @"id"};
             }];
@@ -109,8 +115,18 @@
             joinSubModel * model1 = _dataArray[1][0];
             [self getmessageWithJobID:model1.m_id];
             [_tableview reloadData];
-            [self.HUD removeFromSuperview];
-            
+            [HUDView hiddenHUD];
+            if (urlString.length>0) {
+                
+                [_backImageView sd_setImageWithURL:[urlString safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    [UIView transitionWithView:_backImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                        _backImageView.alpha = 1;
+                    } completion:nil];
+                }];
+            }
+            [UIView transitionWithView:self.tableview duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                self.tableview.alpha = 1;
+            } completion:nil];
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -127,7 +143,13 @@
         if (succeed) {
             
             _jobDict = [responseObject objectForKey:@"data"];
-            [self.tableview reloadData];
+            
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+            [self.tableview reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            if (_first) {
+                [self.tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]  atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            }
+            _first = YES;
             
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
@@ -163,6 +185,7 @@
         cell.block = ^(NSInteger index) {
             joinSubModel *model = weakSelf.dataArray[1][index];
             [weakSelf getmessageWithJobID:model.m_id];
+            
         };
         return cell;
     }
@@ -192,13 +215,7 @@
     return 10;
 }
 
--(HUDView *)HUD{
-    if (!_HUD) {
-        _HUD = [HUDView new];
-        
-    }
-    return _HUD;
-}
+
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 //{
 //    return 0.0001;

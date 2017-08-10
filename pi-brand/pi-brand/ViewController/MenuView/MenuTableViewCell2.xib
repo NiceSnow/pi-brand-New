@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -30,85 +30,73 @@
                         <rect key="frame" x="23" y="32" width="14" height="18"/>
                     </imageView>
                     <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEE-XQ-k7J">
-                        <rect key="frame" x="52" y="30" width="16" height="22"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="52" y="24" width="30" height="34"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FIb-nj-bOl"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CWO-AW-TKr">
-                        <rect key="frame" x="83" y="30" width="16" height="22"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="97" y="24" width="30" height="34"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zzI-5C-pEH"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Bx-BD-Hzd">
-                        <rect key="frame" x="114" y="30" width="16" height="22"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="142" y="24" width="30" height="34"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CFd-Gt-Nl2"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCg-jM-mSU">
-                        <rect key="frame" x="52" y="62" width="16" height="54.5"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="52" y="68" width="30" height="24.5"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="83I-8B-NRc"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UP2-XT-0ZU">
-                        <rect key="frame" x="83" y="78.5" width="16" height="22"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="97" y="63.5" width="30" height="34"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1uP-nG-lny"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbk-Jn-nRR">
-                        <rect key="frame" x="114" y="78.5" width="16" height="22"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="142" y="63.5" width="30" height="34"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kdm-24-6lX"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1006" contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHU-vj-szi">
-                        <rect key="frame" x="52" y="126.5" width="16" height="22"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="52" y="102.5" width="30" height="34"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Bvu-87-oBD"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1007" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxJ-Bw-PIo">
-                        <rect key="frame" x="83" y="126.5" width="16" height="22"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="97" y="102.5" width="30" height="34"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vBB-YG-uLa"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1008" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Og6-Ob-uYe">
-                        <rect key="frame" x="114" y="126.5" width="16" height="22"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="142" y="102.5" width="30" height="34"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dhZ-gL-Oob"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1009" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ae1-h0-eot">
-                        <rect key="frame" x="52" y="158.5" width="16" height="22"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="52" y="146.5" width="30" height="34"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PHB-Bb-sDA"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1010" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUz-ug-b5g">
-                        <rect key="frame" x="83" y="158.5" width="16" height="22"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="97" y="146.5" width="30" height="34"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="US2-xu-ojM"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1011" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxN-al-owR">
-                        <rect key="frame" x="114" y="158.5" width="16" height="22"/>
-                        <state key="normal" image="link"/>
+                        <rect key="frame" x="142" y="146.5" width="30" height="34"/>
                         <connections>
                             <action selector="jumpToWebView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Q4t-gp-qs0"/>
                         </connections>
@@ -152,6 +140,5 @@
     </objects>
     <resources>
         <image name="html" width="14" height="18"/>
-        <image name="link" width="16" height="16"/>
     </resources>
 </document>

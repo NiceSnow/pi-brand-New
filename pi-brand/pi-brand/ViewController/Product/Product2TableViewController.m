@@ -12,6 +12,7 @@
 #import "PickerView.h"
 #import "ShareView.h"
 #import "shareModel.h"
+#import "WebViewController.h"
 
 @interface Product2TableViewController ()<PickerViewDelegte>
 @property (nonatomic, strong)UILabel * titleLabel;
@@ -33,6 +34,8 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 5;
     self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.bounces = NO;
+    self.tableView.alpha = 0;
     [self getdata];
 }
 
@@ -49,6 +52,9 @@
             _dict = data;
             self.shareModel = [shareModel mj_objectWithKeyValues:[data objectForKey:@"share"]];
             [self.tableView reloadData];
+            [UIView transitionWithView:self.tableView duration:tableViewDuring options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                self.tableView.alpha = 1;
+            } completion:nil];
             
         }
     } failed:^(NSURLSessionDataTask *task, NSError *error) {
@@ -75,14 +81,20 @@
     
     
     UIImageView * logoImageView = [[UIImageView alloc]init];
-    [logoImageView sd_setImageWithURL:[_dict[@"head"][@"img"] safeUrlString] placeholderImage:[UIImage imageNamed:@"11"]];
+    
     [backView addSubview:logoImageView];
     [logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(15);
         make.width.mas_offset(screenWidth*320/750);
         make.height.mas_offset((screenWidth*320/750)*35/320);
     }];
-    
+    if ([_dict[@"head"][@"icon"] length]>0) {
+        [logoImageView sd_setImageWithURL:[_dict[@"head"][@"icon"] safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                logoImageView.alpha = 1;
+            } completion:nil];
+        }];
+    }
     
     UILabel * titleLabel = [UILabel new];
     titleLabel.text = _dict[@"head"][@"title"];

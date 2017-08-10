@@ -52,11 +52,12 @@
         }];
     
         [_mainImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.offset(10);
-            make.right.offset(-10);
-            make.height.mas_equalTo((screenWidth-20)*9/10*187/291);
+            make.width.mas_equalTo(screenWidth-50);
+            make.height.mas_equalTo((screenWidth-50)*9/10*187/291);
         }];
-        
+        _logoImageView.alpha = 0;
+        _iconImageView.alpha = 0;
+        _mainImageView.hidden = 0;
         
     }
     return self;
@@ -68,11 +69,31 @@
     companyHeaderModel* model = dataArray[0];
     
     joinMainModel* mainModel = dataArray[1];
+    if (model.icon.length>0) {
+        [_logoImageView sd_setImageWithURL:[model.icon safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_logoImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _logoImageView.alpha = 1;
+            } completion:nil];
+        }];
+    }
+    if (model.image.length>0) {
+        [_iconImageView sd_setImageWithURL:[model.image safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_iconImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _iconImageView.alpha = 1;
+            } completion:nil];
+        }];
+    }
     
-    [_logoImageView sd_setImageWithURL:[model.icon safeUrlString]];
-    [_iconImageView sd_setImageWithURL:[model.image safeUrlString]];
     _desLabel.text = model.title;
-    [_mainImageView sd_setImageWithURL:[mainModel.img safeUrlString]];
+    if (mainModel.img.length>0) {
+        
+        [_mainImageView sd_setImageWithURL:[mainModel.img safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:_mainImageView duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                _mainImageView.alpha = 1;
+            } completion:nil];
+        }];
+    }
+    
     _titleLabel.text = mainModel.title;
     _contentLabel.text = mainModel.vice_heading;
     

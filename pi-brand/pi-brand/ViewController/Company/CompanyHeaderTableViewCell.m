@@ -19,7 +19,13 @@
 @implementation CompanyHeaderTableViewCell
 
 -(void)addDataWith:(companyHeaderModel*)headerModle;{
-    [self.img sd_setImageWithURL:[headerModle.image safeUrlString] placeholderImage:nil];
+    if (headerModle.image.length>0) {
+        [self.img sd_setImageWithURL:[headerModle.image safeUrlString] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UIView transitionWithView:self.img duration:during options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                self.img.alpha = 1;
+            } completion:nil];
+        }];
+    }
     self.secTitle.text = headerModle.title;
 }
 
@@ -44,6 +50,7 @@
             make.width.mas_equalTo((screenWidth-20)/2);
             make.height.mas_equalTo((screenWidth-20)/2*77.53/180);
         }];
+        _img.alpha = 0;
     }
     return self;
 }

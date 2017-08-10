@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PVH-FJ-x7R">
                         <rect key="frame" x="10" y="0.0" width="300" height="318.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="07" translatesAutoresizingMaskIntoConstraints="NO" id="egp-Kd-SYw">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="egp-Kd-SYw">
                                 <rect key="frame" x="-7" y="40" width="314" height="185.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="FRESH,花心如莲尽享初言" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5eZ-5y-yHg">
@@ -68,7 +68,4 @@
             <point key="canvasLocation" x="-133" y="-8.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="07" width="314" height="202"/>
-    </resources>
 </document>

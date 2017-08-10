@@ -12,6 +12,11 @@
 #import "WebViewController.h"
 #import "linkModel.h"
 #import "lsitModel.h"
+#import "BaseNavigationController.h"
+#import "MainViewController.h"
+#import "CompanyViewController.h"
+#import "ProductViewController.h"
+#import "JoinusViewController.h"
 
 
 @interface MenuViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -98,44 +103,35 @@
     switch (indexPath.row) {
         case 0:
         {
-            MainViewController* manVC = [ChildViewController instance].MainVC;
-            manVC.titString = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
-            [self.sideMenuViewController setContentViewController:[ChildViewController instance].MainNavgation animated:YES];
+            [self.sideMenuViewController setContentViewController:[[BaseNavigationController alloc]initWithRootViewController:[[MainViewController alloc]init]] animated:YES];
         }
             break;
         case 1:
         {
-            CompanyViewController* companyVC = [ChildViewController instance].companyVC;
-            companyVC.titString = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
+            CompanyViewController* companyVC = [[CompanyViewController alloc]init];
             companyVC.leftCount = 1;
-            [self.sideMenuViewController setContentViewController:[ChildViewController instance].companyNavgation animated:YES];
+            [self.sideMenuViewController setContentViewController:[[BaseNavigationController alloc]initWithRootViewController:companyVC] animated:YES];
         }
             break;
         case 2:
         {
-            ProductViewController* productVC = [ChildViewController instance].productVC;
-            productVC.titString = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
+            ProductViewController* productVC = [[ProductViewController alloc]init];
             productVC.leftCount = 1;
-            [self.sideMenuViewController setContentViewController:[ChildViewController instance].productNavgation animated:YES];
+            [self.sideMenuViewController setContentViewController:[[BaseNavigationController alloc]initWithRootViewController:productVC] animated:YES];
         }
             break;
         case 3:
         {
-            JoinusViewController* joinVC = [ChildViewController instance].joinVC;
-            joinVC.titString = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
+            JoinusViewController *joinVC = [[JoinusViewController alloc]init];
             joinVC.leftCount = 1;
-            [self.sideMenuViewController setContentViewController:[ChildViewController instance].joinNavgation animated:YES];
+            [self.sideMenuViewController setContentViewController:[[BaseNavigationController alloc]initWithRootViewController:joinVC] animated:YES];
         }
             break;
         case 4:
         {
-//            shopViewController* shopVC = [ChildViewController instance].shopVC;
-//            shopVC.title = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
-//            [self.sideMenuViewController setContentViewController:[ChildViewController instance].shopNavgation animated:YES];
-            ProductViewController* productVC = [ChildViewController instance].productVC;
-            productVC.titString = [NSString stringWithFormat:@"点击了地 %ld cell",indexPath.row];
+            ProductViewController* productVC = [[ProductViewController alloc]init];
             productVC.leftCount = 1;
-            [self.sideMenuViewController setContentViewController:[ChildViewController instance].productNavgation animated:YES];
+            [self.sideMenuViewController setContentViewController:[[BaseNavigationController alloc]initWithRootViewController:productVC] animated:YES];
 
         }
             break;

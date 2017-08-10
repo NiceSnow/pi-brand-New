@@ -4,17 +4,43 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "pi-brand/ViewController/MainView/MainViewController.m"
-            timestampString = "523166255.258823"
+            filePath = "pi-brand/ViewController/Company/CompanyViewController.m"
+            timestampString = "523539636.514687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "-handleSwipeFrom:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pi-brand/ViewController/Joinus/JoinusViewController.m"
+            timestampString = "523537293.556324"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "-getdata"
             landmarkType = "7">
          </BreakpointContent>
@@ -25,13 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "pi-brand/ViewController/MainView/MainViewController.m"
-            timestampString = "523166726.537515"
+            filePath = "pi-brand/ViewController/Joinus/JoinusViewCell.m"
+            timestampString = "523536552.393955"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-getdata"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "-btn1:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "pi-brand/ViewController/MainView/MainViewController.m"
-            timestampString = "523166731.768951"
+            filePath = "pi-brand/ViewController/Active/ActiveViewController.m"
+            timestampString = "523539035.423697"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "-webViewDidFinishLoad:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,74 +83,60 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "pi-brand/ViewController/MainView/MainViewController.m"
-            timestampString = "523166750.51227"
+            filePath = "pi-brand/ViewController/Company/CompanyViewController.m"
+            timestampString = "523539379.004523"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-getdata"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "-handleSwipeFrom:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pi-brand/ViewController/Newfeature/NewFeatureVIew.m"
+            timestampString = "523766358.741001"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-handleSwipeFrom:"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__29-[MainViewController getdata]_block_invoke"
+                  symbolName = "-[NewFeatureVIew handleSwipeFrom:]"
                   moduleName = "pi-brand"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/MainView/MainViewController.m"
-                  timestampString = "523169993.879128"
+                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/Newfeature/NewFeatureVIew.m"
+                  timestampString = "523766162.8223"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "888">
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "1448">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.142"
+                  symbolName = "__34-[NewFeatureVIew handleSwipeFrom:]_block_invoke.69"
                   moduleName = "pi-brand"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/MainView/MainViewController.m"
-                  timestampString = "523169993.880279"
+                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/Newfeature/NewFeatureVIew.m"
+                  timestampString = "523766162.823513"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "64">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.143"
-                  moduleName = "pi-brand"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/MainView/MainViewController.m"
-                  timestampString = "523169993.881407"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "36">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__29-[MainViewController getdata]_block_invoke.146"
-                  moduleName = "pi-brand"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/guojinghan/Documents/pi-brand-New/pi-brand/pi-brand/ViewController/MainView/MainViewController.m"
-                  timestampString = "523169993.882537"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "88">
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
          </BreakpointContent>

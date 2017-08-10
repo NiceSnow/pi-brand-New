@@ -21,23 +21,23 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vBb-xD-bjB">
                         <rect key="frame" x="10" y="-2" width="350" height="393.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="07" translatesAutoresizingMaskIntoConstraints="NO" id="ypb-B7-T6u">
-                                <rect key="frame" x="10" y="10" width="330" height="242.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ypb-B7-T6u">
+                                <rect key="frame" x="-243.5" y="10" width="837" height="285.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="alksjflaksjdflaksjdflaksjdlakjsdlkajflaksdjfalksdjflaksjdflaksjdflkasjflkasdjflaksdfjlaksdjfalksdjfkasljdfaklsdjf" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kiy-W5-OwL">
-                                <rect key="frame" x="10" y="283.5" width="330" height="64.5"/>
+                                <rect key="frame" x="-243.5" y="326.5" width="837" height="21.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="253" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVL-h3-iqf">
-                                <rect key="frame" x="10" y="362.5" width="330" height="16"/>
+                                <rect key="frame" x="-243.5" y="362.5" width="837" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.58431372549019611" green="0.58039215686274503" blue="0.58039215686274503" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bw-s5-Gg9">
-                                <rect key="frame" x="10" y="262.5" width="330" height="16"/>
+                                <rect key="frame" x="-243.5" y="305.5" width="837" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -45,7 +45,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ypb-B7-T6u" firstAttribute="leading" secondItem="vBb-xD-bjB" secondAttribute="leading" constant="10" id="0iA-CD-kY0"/>
                             <constraint firstItem="8bw-s5-Gg9" firstAttribute="leading" secondItem="ypb-B7-T6u" secondAttribute="leading" id="0ue-vS-xz9"/>
                             <constraint firstItem="8bw-s5-Gg9" firstAttribute="trailing" secondItem="ypb-B7-T6u" secondAttribute="trailing" id="EjR-6a-F8M"/>
                             <constraint firstItem="8bw-s5-Gg9" firstAttribute="top" secondItem="ypb-B7-T6u" secondAttribute="bottom" constant="10" id="F3A-CI-pwD"/>
@@ -53,8 +52,8 @@
                             <constraint firstAttribute="bottom" secondItem="IVL-h3-iqf" secondAttribute="bottom" constant="15" id="QGC-hq-XO5"/>
                             <constraint firstItem="kiy-W5-OwL" firstAttribute="top" secondItem="8bw-s5-Gg9" secondAttribute="bottom" constant="5" id="RtX-m8-7Xc"/>
                             <constraint firstItem="kiy-W5-OwL" firstAttribute="leading" secondItem="ypb-B7-T6u" secondAttribute="leading" id="WJd-Wg-zzV"/>
+                            <constraint firstItem="ypb-B7-T6u" firstAttribute="centerX" secondItem="vBb-xD-bjB" secondAttribute="centerX" id="dlc-GH-0ZB"/>
                             <constraint firstItem="IVL-h3-iqf" firstAttribute="trailing" secondItem="ypb-B7-T6u" secondAttribute="trailing" id="eGs-4v-qLs"/>
-                            <constraint firstAttribute="trailing" secondItem="ypb-B7-T6u" secondAttribute="trailing" constant="10" id="q0X-9e-zGZ"/>
                             <constraint firstItem="ypb-B7-T6u" firstAttribute="top" secondItem="vBb-xD-bjB" secondAttribute="top" constant="10" id="uiS-Sg-XUd"/>
                             <constraint firstItem="kiy-W5-OwL" firstAttribute="trailing" secondItem="ypb-B7-T6u" secondAttribute="trailing" id="yZW-RA-JMp"/>
                             <constraint firstItem="IVL-h3-iqf" firstAttribute="top" secondItem="kiy-W5-OwL" secondAttribute="bottom" constant="15" id="ywI-AW-Iei"/>
@@ -77,7 +76,4 @@
             <point key="canvasLocation" x="59" y="277"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="07" width="314" height="202"/>
-    </resources>
 </document>
